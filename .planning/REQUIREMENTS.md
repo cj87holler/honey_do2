@@ -93,30 +93,30 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| HIVE-01 | — | Pending |
-| HIVE-02 | — | Pending |
-| HIVE-03 | — | Pending |
-| HIVE-04 | — | Pending |
-| HIVE-05 | — | Pending |
-| TASK-01 | — | Pending |
-| TASK-02 | — | Pending |
-| TASK-03 | — | Pending |
-| TASK-04 | — | Pending |
-| TASK-05 | — | Pending |
-| TASK-06 | — | Pending |
-| TASK-07 | — | Pending |
-| LEAD-01 | — | Pending |
-| THEME-01 | — | Pending |
-| THEME-02 | — | Pending |
+| AUTH-01 | Phase 1 | Pending |
+| AUTH-02 | Phase 1 | Pending |
+| AUTH-03 | Phase 1 | Pending |
+| HIVE-01 | Phase 1 | Pending |
+| HIVE-02 | Phase 1 | Pending |
+| HIVE-03 | Phase 2 | Pending |
+| HIVE-04 | Phase 2 | Pending |
+| HIVE-05 | Phase 1 | Pending |
+| TASK-01 | Phase 3 | Pending |
+| TASK-02 | Phase 3 | Pending |
+| TASK-03 | Phase 3 | Pending |
+| TASK-04 | Phase 3 | Pending |
+| TASK-05 | Phase 3 | Pending |
+| TASK-06 | Phase 3 | Pending |
+| TASK-07 | Phase 3 | Pending |
+| LEAD-01 | Phase 4 | Pending |
+| THEME-01 | Phase 5 | Pending |
+| THEME-02 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 18 total
-- Mapped to phases: 0
-- Unmapped: 18
+- Mapped to phases: 18
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-26*
-*Last updated: 2026-03-26 after initial definition*
+*Last updated: 2026-03-26 after roadmap creation*
