@@ -12,13 +12,13 @@ People in a household can assign tasks to each other and actually get them done,
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Users can sign up with email/password and log in — Validated in Phase 1: Foundation
+- [x] Queens can name the Hive — Validated in Phase 1: Foundation
 
 ### Active
 
-- [ ] Users can sign up with email/password and log in
 - [ ] A Queen creates a Hive and invites others via link
-- [ ] Roles: Queen (creates/assigns tasks), Bee (receives tasks), QueenBee (creates AND receives tasks)
+- [ ] Roles: Queen (creates/assigns tasks), Bee (receives tasks)
 - [ ] Tasks are open text (160 char limit), assigned to a Bee or QueenBee
 - [ ] Tasks have a honey value: 5, 10, 20, or custom (any number)
 - [ ] Assigned tasks appear on the assignee's Honeycomb (their to-do list)
@@ -26,7 +26,6 @@ People in a household can assign tasks to each other and actually get them done,
 - [ ] Completed tasks area visible separately
 - [ ] Playful, dynamic copy based on task load ("whoa! better get to work!" / "go play golf!")
 - [ ] Leaderboard within a Hive based on honeys earned
-- [ ] Queens can name the Hive
 - [ ] Full bee theme with puns, honeycomb UI patterns, buzzy personality
 
 ### Out of Scope
