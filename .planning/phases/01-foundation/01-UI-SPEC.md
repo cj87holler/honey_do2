@@ -32,13 +32,13 @@ created: 2026-03-28
 
 Phase 1 delivers exactly five screen contexts. All copywriting and state coverage below maps to these screens.
 
-| Screen | Route | Purpose |
-|--------|-------|---------|
-| Sign Up | `/signup` | Create account with email, password, display name |
-| Log In | `/login` | Authenticate with email and password |
-| Create Hive | `/hive/create` | Post-signup, single-field Hive naming (D-01, D-05) |
-| Hive Dashboard | `/hive/[id]` | Landing after Hive creation; shows Hive name, member list with role badges (D-02, D-13) |
-| Shared Header/Nav | — | Persistent across all `/hive/*` routes; contains logout (AUTH-03) |
+| Screen | Route | Purpose | Focal Point |
+|--------|-------|---------|-------------|
+| Sign Up | `/signup` | Create account with email, password, display name | The "Sign up" CTA button (accent fill) draws the eye first — it is the only amber element on the page. |
+| Log In | `/login` | Authenticate with email and password | The "Log in" CTA button (accent fill) is the primary visual anchor, centered below a minimal two-field form. |
+| Create Hive | `/hive/create` | Post-signup, single-field Hive naming (D-01, D-05) | The "Create Hive" CTA button (accent fill) anchors the screen; the single text input above it directs attention immediately to the one required action. |
+| Hive Dashboard | `/hive/[id]` | Landing after Hive creation; shows Hive name, member list with role badges (D-02, D-13) | The Hive name rendered in Display typography (28px, weight 600) is the primary visual anchor — it is the largest text element on the page and the first thing the eye lands on. |
+| Shared Header/Nav | — | Persistent across all `/hive/*` routes; contains logout (AUTH-03) | The app name / wordmark in the left-aligned header zone is the visual anchor; it anchors brand presence across all authenticated screens. |
 
 ---
 
@@ -195,7 +195,7 @@ Roles displayed as subtle inline badges next to user name in the member list:
 
 - **Queen:** Small badge with `#92400e` (queen) background, white text, "Queen", preceded by a `Crown` icon (Lucide, 14px)
 - **Bee:** Small badge with `stone-100` background, `#1c1917` text, "Bee", preceded by bee emoji (14px equivalent)
-- Badge height: 20px. Internal padding: 4px horizontal, 2px vertical. Border-radius: 4px.
+- Badge height: 20px. Internal padding: 4px horizontal, 4px vertical. Border-radius: 4px.
 
 ### Hive Name Rename (D-06)
 
@@ -247,3 +247,5 @@ No third-party component registries in use. shadcn not initialized.
 | Loading state: disabled button with "Loading..." text | Default — picked one; no spinner needed for Phase 1 |
 | Dashboard empty state copy | Default — explains Hive is ready, prompts toward invites |
 | Display name field copy | Default — "Your name" label, hivemates framing in placeholder |
+| Badge vertical padding 4px (not 2px) | Fixed per checker: spacing contract requires multiples of 4 |
+| Focal point declared per screen | Fixed per checker: Dimension 2 requires explicit primary visual anchor per screen |
