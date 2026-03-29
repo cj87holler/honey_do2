@@ -24,7 +24,7 @@ created: 2026-03-28
 | Icon library | Lucide React | Standard for Next.js + Tailwind projects; has `Crown` icon for Queen role badge (D-13) |
 | Font | System font stack | Phase 5 owns personality fonts; Phase 1 stays functional-first |
 
-**Note on icons:** D-13 requires a crown icon (Queen) and bee icon (Bee). Lucide has `Crown`. Lucide does not have a dedicated bee icon — use a Unicode bee emoji (🐝) rendered in a small inline `<span>` as the Bee role indicator. This is intentionally minimal; Phase 5 will replace with custom iconography.
+**Note on icons:** D-13 requires a crown icon (Queen) and bee icon (Bee). Lucide has `Crown`. Lucide does not have a dedicated bee icon — use a Unicode bee emoji rendered in a small inline `<span>` as the Bee role indicator. This is intentionally minimal; Phase 5 will replace with custom iconography.
 
 ---
 
@@ -118,6 +118,8 @@ Never apply accent to body text, secondary buttons, or decorative backgrounds.
 | Element | Copy |
 |---------|------|
 | Sign Up page heading | "Create your account" |
+| Sign Up display name label | "Your name" |
+| Sign Up display name placeholder | "How your hivemates will see you" |
 | Sign Up primary CTA | "Sign up" |
 | Sign Up footer link | "Already have an account? Log in" |
 | Log In page heading | "Welcome back" |
@@ -140,10 +142,14 @@ Never apply accent to body text, secondary buttons, or decorative backgrounds.
 | Element | Copy |
 |---------|------|
 | Hive name display | `[Hive Name]` (dynamic, 28px Display) |
+| Dashboard empty state heading | "Your Hive is ready." |
+| Dashboard empty state body | "Start by inviting your housemates. Once everyone is in, you can assign tasks and see who earns the most honeys." |
 | Member section heading | "Members" |
-| Empty member state | "Just you for now. Invite your Bees in Phase 2." |
+| Member list empty state (secondary, below Queen's own row) | "No other members yet." |
 | Role label — Queen | "Queen" (with Crown icon) |
 | Role label — Bee | "Bee" (with bee emoji) |
+
+**Dashboard empty state layout note:** After Hive creation the dashboard shows: Hive name (Display), the empty state copy block, then the Members section showing the Queen's own row. This is the only guaranteed non-empty area in Phase 1.
 
 ### Validation and Error States
 
@@ -154,6 +160,8 @@ Never apply accent to body text, secondary buttons, or decorative backgrounds.
 | Password too short | "Password must be at least 8 characters." |
 | Password required | "Enter a password." |
 | Email required | "Enter your email." |
+| Display name required | "Enter your name." |
+| Display name too long (>100 chars) | "Name must be 100 characters or fewer." |
 | Wrong email or password (log in) | "Incorrect email or password." |
 | Hive name empty | "Give your Hive a name." |
 | Hive name too long (>100 chars) | "Hive name must be 100 characters or fewer." |
@@ -177,7 +185,7 @@ All forms in Phase 1 use the same interaction pattern:
 
 1. Client-side validation runs on submit (react-hook-form + Zod)
 2. Inline error messages appear below each invalid field immediately on submit
-3. CTA button shows a loading state (disabled + spinner or "Loading…" text) while the Server Action is in flight
+3. CTA button shows a disabled loading state with the button text replaced by "Loading..." while the Server Action is in flight
 4. On server error, an inline error banner appears above the form (not a toast)
 5. On success, the browser navigates to the next screen (no success toast needed — navigation is the confirmation)
 
@@ -186,12 +194,12 @@ All forms in Phase 1 use the same interaction pattern:
 Roles displayed as subtle inline badges next to user name in the member list:
 
 - **Queen:** Small badge with `#92400e` (queen) background, white text, "Queen", preceded by a `Crown` icon (Lucide, 14px)
-- **Bee:** Small badge with `stone-100` background, `#1c1917` text, "Bee", preceded by bee emoji (🐝, 14px)
+- **Bee:** Small badge with `stone-100` background, `#1c1917` text, "Bee", preceded by bee emoji (14px equivalent)
 - Badge height: 20px. Internal padding: 4px horizontal, 2px vertical. Border-radius: 4px.
 
 ### Hive Name Rename (D-06)
 
-Inline edit — no confirmation gate, no settings page. The Hive name on the dashboard is directly editable. Implementation: click/tap on the name enters an inline text input; pressing Enter or blurring the field saves immediately via Server Action. No undo, no modal.
+Inline edit — no confirmation gate, no settings page. The Hive name on the dashboard is directly editable. Click/tap on the name enters an inline text input; pressing Enter or blurring the field saves immediately via Server Action. No undo, no modal.
 
 ---
 
@@ -236,3 +244,6 @@ No third-party component registries in use. shadcn not initialized.
 | System font stack | Default — Phase 5 owns personality font (THEME-01) |
 | 8-point spacing scale | Template default — no exceptions needed for Phase 1 screens |
 | 16px body / 400 weight / 1.5 line-height | Template default |
+| Loading state: disabled button with "Loading..." text | Default — picked one; no spinner needed for Phase 1 |
+| Dashboard empty state copy | Default — explains Hive is ready, prompts toward invites |
+| Display name field copy | Default — "Your name" label, hivemates framing in placeholder |
