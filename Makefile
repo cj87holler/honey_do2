@@ -18,7 +18,7 @@ db-generate:
 
 # Apply pending migrations to database
 db-migrate:
-	DATABASE_URL=$$DATABASE_URL npx drizzle-kit migrate
+	@set -a && . ./.env.local && set +a && npx drizzle-kit migrate
 
 # Open Drizzle Studio (visual DB browser)
 db-studio:
