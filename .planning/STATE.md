@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 1 UI-SPEC approved
-last_updated: "2026-03-29T02:03:24.170Z"
-last_activity: 2026-03-26 — Roadmap created, requirements mapped to 5 phases
+status: executing
+stopped_at: Completed 01-foundation 01-01-PLAN.md
+last_updated: "2026-03-29T02:30:17.747Z"
+last_activity: 2026-03-29
 progress:
   total_phases: 5
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 3
+  completed_plans: 1
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-26)
 
 **Core value:** People in a household can assign tasks to each other and actually get them done, because the gamified bee-themed experience makes chores feel like play rather than nagging.
-**Current focus:** Phase 1 — Foundation
+**Current focus:** Phase 01 — foundation
 
 ## Current Position
 
-Phase: 1 of 5 (Foundation)
-Plan: 0 of ? in current phase
-Status: Ready to plan
-Last activity: 2026-03-26 — Roadmap created, requirements mapped to 5 phases
+Phase: 01 (foundation) — EXECUTING
+Plan: 2 of 3
+Status: Ready to execute
+Last activity: 2026-03-29
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -52,6 +52,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 01-foundation P01 | 9min | 3 tasks | 22 files |
 
 ## Accumulated Context
 
@@ -64,6 +65,8 @@ Recent decisions affecting current work:
 - Schema: Honey counter is stored per-Hive-membership (not globally) to support future Colonies without migration
 - Invite: Show Hive name + Queen name before sign-up gate to maximize conversion
 - Leaderboard: Absolute scores only, no "last place" callout, Hive totals shown to reduce zero-sum dynamic
+- [Phase 01-foundation]: Used Better Auth 1.5.6 instead of Auth.js v5 beta — stable successor since Sep 2025 merger, Drizzle adapter included
+- [Phase 01-foundation]: emailVerified stored as boolean column (not text) — matches Better Auth's ZodBoolean schema type expectation
 
 ### Pending Todos
 
@@ -76,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-29T02:03:24.164Z
-Stopped at: Phase 1 UI-SPEC approved
-Resume file: .planning/phases/01-foundation/01-UI-SPEC.md
+Last session: 2026-03-29T02:30:17.745Z
+Stopped at: Completed 01-foundation 01-01-PLAN.md
+Resume file: None
