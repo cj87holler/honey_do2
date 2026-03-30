@@ -46,7 +46,10 @@ Plans:
   2. Following an invite link shows the Hive name and Queen name before any sign-up form appears
   3. Invited user can create an account and land inside the Hive in one flow
   4. Invite tokens are single-use and expired tokens are rejected
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 02-01-PLAN.md — Invites table schema, generateInvite/acceptInvite server actions, getInviteByToken query, unit tests
+- [ ] 02-02-PLAN.md — InvitePanel in dashboard, /invite/[token] landing page, invite-aware signup form, e2e verification
 **UI hint**: yes
 
 ### Phase 3: Task System
@@ -93,7 +96,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete   | 2026-03-29 |
-| 2. Invite Flow | 0/? | Not started | - |
+| 2. Invite Flow | 0/2 | Planned | - |
 | 3. Task System | 0/? | Not started | - |
 | 4. Leaderboard | 0/? | Not started | - |
 | 5. Theme & Copy | 0/? | Not started | - |
