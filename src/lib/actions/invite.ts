@@ -6,6 +6,8 @@ import { invites, hiveMembers } from "@/db/schema"
 import { and, eq, isNull, gt } from "drizzle-orm"
 import { requireQueen } from "@/lib/actions/hive"
 import { revalidatePath } from "next/cache"
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 
 export async function generateInvite(hiveId: string): Promise<string> {
   const { session } = await requireQueen(hiveId)
@@ -61,4 +63,10 @@ export async function acceptInvite(token: string, userId: string): Promise<strin
 
   revalidatePath(`/hive/${consumed.hiveId}`)
   return consumed.hiveId
+}
+
+export async function acceptInviteAsCurrentUser(token: string): Promise<string> {
+  const session = await auth.api.getSession({ headers: await headers() })
+  if (!session) throw new Error("Not authenticated")
+  return acceptInvite(token, session.user.id)
 }
