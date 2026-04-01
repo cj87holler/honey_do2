@@ -6,6 +6,7 @@ interface Member {
   name: string
   role: "queen" | "bee"
   honeyCount: number
+  userId?: string
 }
 
 interface HiveDashboardProps {
@@ -14,7 +15,9 @@ interface HiveDashboardProps {
   currentUserId: string
 }
 
-export function HiveDashboard({ hive, members }: HiveDashboardProps) {
+export function HiveDashboard({ hive, members, currentUserId }: HiveDashboardProps) {
+  const isQueen = members.some((m) => m.userId === currentUserId && m.role === "queen")
+
   return (
     <div className="space-y-8">
       <InlineRename hiveName={hive.name} hiveId={hive.id} />
@@ -26,7 +29,7 @@ export function HiveDashboard({ hive, members }: HiveDashboardProps) {
         </p>
       </div>
 
-      <MemberList members={members} />
+      <MemberList members={members} isQueen={isQueen} hiveId={hive.id} />
     </div>
   )
 }
