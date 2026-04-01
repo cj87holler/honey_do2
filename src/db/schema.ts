@@ -74,12 +74,24 @@ export const hiveMembers = pgTable("hive_members", {
   uniqueIndex("hive_user_idx").on(table.hiveId, table.userId),
 ])
 
+export const invites = pgTable("invites", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  hiveId: text("hive_id").notNull().references(() => hives.id),
+  token: text("token").notNull().unique(),
+  createdBy: text("created_by").notNull().references(() => user.id),
+  expiresAt: timestamp("expires_at").notNull(),
+  usedAt: timestamp("used_at"),
+  usedBy: text("used_by").references(() => user.id),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+})
+
 // -- Relations --
 
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   accounts: many(account),
   hiveMembers: many(hiveMembers),
+  createdInvites: many(invites, { relationName: "inviteCreator" }),
 }))
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -92,9 +104,15 @@ export const accountRelations = relations(account, ({ one }) => ({
 
 export const hivesRelations = relations(hives, ({ many }) => ({
   members: many(hiveMembers),
+  invites: many(invites),
 }))
 
 export const hiveMembersRelations = relations(hiveMembers, ({ one }) => ({
   hive: one(hives, { fields: [hiveMembers.hiveId], references: [hives.id] }),
   user: one(user, { fields: [hiveMembers.userId], references: [user.id] }),
+}))
+
+export const invitesRelations = relations(invites, ({ one }) => ({
+  hive: one(hives, { fields: [invites.hiveId], references: [hives.id] }),
+  creator: one(user, { fields: [invites.createdBy], references: [user.id], relationName: "inviteCreator" }),
 }))
