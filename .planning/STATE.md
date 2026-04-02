@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 plans created and verified
-last_updated: "2026-04-01T23:19:24.872Z"
-last_activity: 2026-04-01 -- Phase 02 execution started
+stopped_at: Completed 02-invite-flow 02-02-PLAN.md
+last_updated: "2026-04-02T00:26:40.524Z"
+last_activity: 2026-04-02
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 3
+  completed_plans: 5
   percent: 0
 ---
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-26)
 ## Current Position
 
 Phase: 02 (invite-flow) — EXECUTING
-Plan: 1 of 2
-Status: Executing Phase 02
-Last activity: 2026-04-01 -- Phase 02 execution started
+Plan: 2 of 2
+Status: Ready to execute
+Last activity: 2026-04-02
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -55,6 +55,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-foundation P01 | 9min | 3 tasks | 22 files |
 | Phase 01-foundation P03 | 7min | 2 tasks | 9 files |
 | Phase 01-foundation P02 | 3min | 3 tasks | 11 files |
+| Phase 02-invite-flow P02 | 15min | 4 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -72,6 +73,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: No (app)/layout.tsx in plan 03 — plan 02 creates it; Next.js falls back to root layout without it
 - [Phase 01-foundation]: InlineRename uses useState + async save rather than useActionState — simpler and sufficient for click-to-edit UX
 - [Phase 01-foundation]: Tasks 1 and 3 combined into one commit to avoid TypeScript forward reference error from AppLayout importing Header before Header file exists
+- [Phase 02-invite-flow]: acceptInviteAsCurrentUser wrapper reads session from headers server-side — avoids relying on client signUp result for userId
+- [Phase 02-invite-flow]: Invite landing page placed outside (app) route group to bypass middleware auth protection
+- [Phase 02-invite-flow]: Server component testing pattern: await async component function directly, render JSX result with testing-library
 
 ### Pending Todos
 
@@ -84,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-30T01:58:59.341Z
-Stopped at: Phase 2 plans created and verified
-Resume file: .planning/phases/02-invite-flow/02-01-PLAN.md
+Last session: 2026-04-02T00:26:40.522Z
+Stopped at: Completed 02-invite-flow 02-02-PLAN.md
+Resume file: None

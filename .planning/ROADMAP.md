@@ -48,8 +48,8 @@ Plans:
   4. Invite tokens are single-use and expired tokens are rejected
 **Plans:** 2 plans
 Plans:
-- [ ] 02-01-PLAN.md — Invites table schema, generateInvite/acceptInvite server actions, getInviteByToken query, unit tests
-- [ ] 02-02-PLAN.md — InvitePanel in dashboard, /invite/[token] landing page, invite-aware signup form, e2e verification
+- [x] 02-01-PLAN.md — Invites table schema, generateInvite/acceptInvite server actions, getInviteByToken query, unit tests
+- [x] 02-02-PLAN.md — InvitePanel in dashboard, /invite/[token] landing page, invite-aware signup form, e2e verification
 **UI hint**: yes
 
 ### Phase 3: Task System

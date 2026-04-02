@@ -17,8 +17,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **HIVE-01**: Queen can create a new Hive
 - [x] **HIVE-02**: Queen can name the Hive
-- [ ] **HIVE-03**: Queen can generate an invite link to bring Bees into the Hive
-- [ ] **HIVE-04**: Invited user can join a Hive via invite link and create an account
+- [x] **HIVE-03**: Queen can generate an invite link to bring Bees into the Hive
+- [x] **HIVE-04**: Invited user can join a Hive via invite link and create an account
 - [x] **HIVE-05**: Roles are enforced: Queen (creates/assigns tasks), Bee (receives tasks), QueenBee (creates AND receives tasks)
 
 ### Tasks
@@ -98,8 +98,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-03 | Phase 1 | Complete |
 | HIVE-01 | Phase 1 | Complete |
 | HIVE-02 | Phase 1 | Complete |
-| HIVE-03 | Phase 2 | Pending |
-| HIVE-04 | Phase 2 | Pending |
+| HIVE-03 | Phase 2 | Complete |
+| HIVE-04 | Phase 2 | Complete |
 | HIVE-05 | Phase 1 | Complete |
 | TASK-01 | Phase 3 | Pending |
 | TASK-02 | Phase 3 | Pending |
