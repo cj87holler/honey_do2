@@ -10,5 +10,5 @@ export default async function HivePage() {
   const hive = await getUserHive(session.user.id)
   if (!hive) redirect("/hive/create")
 
-  redirect(`/hive/${hive.id}`)
+  redirect(`/hive/${hive}`)
 }

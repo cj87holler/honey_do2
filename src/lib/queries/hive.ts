@@ -19,6 +19,7 @@ export async function getHiveWithMembers(hiveId: string) {
       role: hiveMembers.role,
       honeyCount: hiveMembers.honeyCount,
       joinedAt: hiveMembers.joinedAt,
+      userId: hiveMembers.userId,
     })
     .from(hiveMembers)
     .innerJoin(user, eq(hiveMembers.userId, user.id))

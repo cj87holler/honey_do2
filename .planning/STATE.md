@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Phase 2 plans created and verified
-last_updated: "2026-03-30T01:58:59.344Z"
-last_activity: 2026-03-29
+status: executing
+stopped_at: Completed 03-task-system-01-PLAN.md
+last_updated: "2026-04-02T01:52:03.115Z"
+last_activity: 2026-04-02
 progress:
   total_phases: 5
-  completed_phases: 1
-  total_plans: 5
-  completed_plans: 3
+  completed_phases: 2
+  total_plans: 7
+  completed_plans: 6
   percent: 0
 ---
 
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-26)
 
 **Core value:** People in a household can assign tasks to each other and actually get them done, because the gamified bee-themed experience makes chores feel like play rather than nagging.
-**Current focus:** Phase 01 — foundation
+**Current focus:** Phase 03 — task-system
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
-Status: Phase complete — ready for verification
-Last activity: 2026-03-29
+Phase: 03 (task-system) — EXECUTING
+Plan: 2 of 2
+Status: Ready to execute
+Last activity: 2026-04-02
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -55,6 +55,8 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01-foundation P01 | 9min | 3 tasks | 22 files |
 | Phase 01-foundation P03 | 7min | 2 tasks | 9 files |
 | Phase 01-foundation P02 | 3min | 3 tasks | 11 files |
+| Phase 02-invite-flow P02 | 15min | 4 tasks | 9 files |
+| Phase 03-task-system P01 | 3 | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -72,6 +74,11 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: No (app)/layout.tsx in plan 03 — plan 02 creates it; Next.js falls back to root layout without it
 - [Phase 01-foundation]: InlineRename uses useState + async save rather than useActionState — simpler and sufficient for click-to-edit UX
 - [Phase 01-foundation]: Tasks 1 and 3 combined into one commit to avoid TypeScript forward reference error from AppLayout importing Header before Header file exists
+- [Phase 02-invite-flow]: acceptInviteAsCurrentUser wrapper reads session from headers server-side — avoids relying on client signUp result for userId
+- [Phase 02-invite-flow]: Invite landing page placed outside (app) route group to bypass middleware auth protection
+- [Phase 02-invite-flow]: Server component testing pattern: await async component function directly, render JSX result with testing-library
+- [Phase 03-task-system]: db.transaction() wraps task completion and honeyCount increment for atomic honey accounting
+- [Phase 03-task-system]: requireAssignee helper mirrors requireQueen pattern for consistent auth guard structure
 
 ### Pending Todos
 
@@ -84,6 +91,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-30T01:58:59.341Z
-Stopped at: Phase 2 plans created and verified
-Resume file: .planning/phases/02-invite-flow/02-01-PLAN.md
+Last session: 2026-04-02T01:52:03.111Z
+Stopped at: Completed 03-task-system-01-PLAN.md
+Resume file: None

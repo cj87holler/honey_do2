@@ -14,10 +14,10 @@ People in a household can assign tasks to each other and actually get them done,
 
 - [x] Users can sign up with email/password and log in — Validated in Phase 1: Foundation
 - [x] Queens can name the Hive — Validated in Phase 1: Foundation
+- [x] A Queen creates a Hive and invites others via link — Validated in Phase 2: Invite Flow
 
 ### Active
 
-- [ ] A Queen creates a Hive and invites others via link
 - [ ] Roles: Queen (creates/assigns tasks), Bee (receives tasks)
 - [ ] Tasks are open text (160 char limit), assigned to a Bee or QueenBee
 - [ ] Tasks have a honey value: 5, 10, 20, or custom (any number)
@@ -82,4 +82,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-26 after initialization*
+*Last updated: 2026-04-02 after Phase 2 completion*

@@ -62,7 +62,7 @@ export function HiveDashboard({ hive, members, currentUserId, tasks }: HiveDashb
         />
       )}
 
-      <MemberList members={members} />
+      <MemberList members={members} isQueen={isQueen} hiveId={hive.id} />
     </div>
   )
 }

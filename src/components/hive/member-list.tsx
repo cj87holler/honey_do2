@@ -1,4 +1,5 @@
 import { RoleBadge } from "./role-badge"
+import { InvitePanel } from "@/components/invite/invite-panel"
 
 interface Member {
   id: string
@@ -9,9 +10,11 @@ interface Member {
 
 interface MemberListProps {
   members: Member[]
+  isQueen?: boolean
+  hiveId?: string
 }
 
-export function MemberList({ members }: MemberListProps) {
+export function MemberList({ members, isQueen, hiveId }: MemberListProps) {
   return (
     <section>
       <h2 className="text-xl font-semibold text-bee mb-3">Members</h2>
@@ -34,6 +37,7 @@ export function MemberList({ members }: MemberListProps) {
       {members.length <= 1 && (
         <p className="text-sm text-stone-500 mt-2">No other members yet.</p>
       )}
+      {isQueen && hiveId && <InvitePanel hiveId={hiveId} />}
     </section>
   )
 }

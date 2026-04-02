@@ -17,18 +17,18 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **HIVE-01**: Queen can create a new Hive
 - [x] **HIVE-02**: Queen can name the Hive
-- [ ] **HIVE-03**: Queen can generate an invite link to bring Bees into the Hive
-- [ ] **HIVE-04**: Invited user can join a Hive via invite link and create an account
+- [x] **HIVE-03**: Queen can generate an invite link to bring Bees into the Hive
+- [x] **HIVE-04**: Invited user can join a Hive via invite link and create an account
 - [x] **HIVE-05**: Roles are enforced: Queen (creates/assigns tasks), Bee (receives tasks), QueenBee (creates AND receives tasks)
 
 ### Tasks
 
-- [ ] **TASK-01**: Queen or QueenBee can create a task with text (160-char limit)
-- [ ] **TASK-02**: Task must be assigned a honey value (5, 10, 20, or custom number)
-- [ ] **TASK-03**: Task must be assigned to a Bee or QueenBee
+- [x] **TASK-01**: Queen or QueenBee can create a task with text (160-char limit)
+- [x] **TASK-02**: Task must be assigned a honey value (5, 10, 20, or custom number)
+- [x] **TASK-03**: Task must be assigned to a Bee or QueenBee
 - [ ] **TASK-04**: Assigned tasks appear on the assignee's Honeycomb (personal to-do list)
-- [ ] **TASK-05**: Assignee can mark a task "in progress"
-- [ ] **TASK-06**: Assignee can mark a task "done" and earn the honey value
+- [x] **TASK-05**: Assignee can mark a task "in progress"
+- [x] **TASK-06**: Assignee can mark a task "done" and earn the honey value
 - [ ] **TASK-07**: Completed tasks are visible in a separate completed area
 
 ### Leaderboard
@@ -98,15 +98,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-03 | Phase 1 | Complete |
 | HIVE-01 | Phase 1 | Complete |
 | HIVE-02 | Phase 1 | Complete |
-| HIVE-03 | Phase 2 | Pending |
-| HIVE-04 | Phase 2 | Pending |
+| HIVE-03 | Phase 2 | Complete |
+| HIVE-04 | Phase 2 | Complete |
 | HIVE-05 | Phase 1 | Complete |
-| TASK-01 | Phase 3 | Pending |
-| TASK-02 | Phase 3 | Pending |
-| TASK-03 | Phase 3 | Pending |
+| TASK-01 | Phase 3 | Complete |
+| TASK-02 | Phase 3 | Complete |
+| TASK-03 | Phase 3 | Complete |
 | TASK-04 | Phase 3 | Pending |
-| TASK-05 | Phase 3 | Pending |
-| TASK-06 | Phase 3 | Pending |
+| TASK-05 | Phase 3 | Complete |
+| TASK-06 | Phase 3 | Complete |
 | TASK-07 | Phase 3 | Pending |
 | LEAD-01 | Phase 4 | Pending |
 | THEME-01 | Phase 5 | Pending |

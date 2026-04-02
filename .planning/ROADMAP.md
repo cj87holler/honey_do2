@@ -48,8 +48,8 @@ Plans:
   4. Invite tokens are single-use and expired tokens are rejected
 **Plans:** 2 plans
 Plans:
-- [ ] 02-01-PLAN.md — Invites table schema, generateInvite/acceptInvite server actions, getInviteByToken query, unit tests
-- [ ] 02-02-PLAN.md — InvitePanel in dashboard, /invite/[token] landing page, invite-aware signup form, e2e verification
+- [x] 02-01-PLAN.md — Invites table schema, generateInvite/acceptInvite server actions, getInviteByToken query, unit tests
+- [x] 02-02-PLAN.md — InvitePanel in dashboard, /invite/[token] landing page, invite-aware signup form, e2e verification
 **UI hint**: yes
 
 ### Phase 3: Task System
@@ -62,7 +62,10 @@ Plans:
   3. Assignee can mark a task "in progress" and then "done"
   4. Completing a task awards the task's honey value to the assignee
   5. Completed tasks are visible in a separate completed area
-**Plans**: TBD
+**Plans:** 1/2 plans executed
+Plans:
+- [x] 03-01-PLAN.md — Tasks table schema, server actions (create/status/delete), query layer, unit tests
+- [ ] 03-02-PLAN.md — Honeycomb UI, task creation form, task cards, status buttons, dashboard integration
 **UI hint**: yes
 
 ### Phase 4: Leaderboard
@@ -97,6 +100,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete   | 2026-03-29 |
 | 2. Invite Flow | 0/2 | Planned | - |
-| 3. Task System | 0/? | Not started | - |
+| 3. Task System | 1/2 | In Progress|  |
 | 4. Leaderboard | 0/? | Not started | - |
 | 5. Theme & Copy | 0/? | Not started | - |
