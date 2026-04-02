@@ -23,12 +23,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Tasks
 
-- [ ] **TASK-01**: Queen or QueenBee can create a task with text (160-char limit)
-- [ ] **TASK-02**: Task must be assigned a honey value (5, 10, 20, or custom number)
-- [ ] **TASK-03**: Task must be assigned to a Bee or QueenBee
+- [x] **TASK-01**: Queen or QueenBee can create a task with text (160-char limit)
+- [x] **TASK-02**: Task must be assigned a honey value (5, 10, 20, or custom number)
+- [x] **TASK-03**: Task must be assigned to a Bee or QueenBee
 - [ ] **TASK-04**: Assigned tasks appear on the assignee's Honeycomb (personal to-do list)
-- [ ] **TASK-05**: Assignee can mark a task "in progress"
-- [ ] **TASK-06**: Assignee can mark a task "done" and earn the honey value
+- [x] **TASK-05**: Assignee can mark a task "in progress"
+- [x] **TASK-06**: Assignee can mark a task "done" and earn the honey value
 - [ ] **TASK-07**: Completed tasks are visible in a separate completed area
 
 ### Leaderboard
@@ -101,12 +101,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HIVE-03 | Phase 2 | Complete |
 | HIVE-04 | Phase 2 | Complete |
 | HIVE-05 | Phase 1 | Complete |
-| TASK-01 | Phase 3 | Pending |
-| TASK-02 | Phase 3 | Pending |
-| TASK-03 | Phase 3 | Pending |
+| TASK-01 | Phase 3 | Complete |
+| TASK-02 | Phase 3 | Complete |
+| TASK-03 | Phase 3 | Complete |
 | TASK-04 | Phase 3 | Pending |
-| TASK-05 | Phase 3 | Pending |
-| TASK-06 | Phase 3 | Pending |
+| TASK-05 | Phase 3 | Complete |
+| TASK-06 | Phase 3 | Complete |
 | TASK-07 | Phase 3 | Pending |
 | LEAD-01 | Phase 4 | Pending |
 | THEME-01 | Phase 5 | Pending |
