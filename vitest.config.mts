@@ -9,5 +9,10 @@ export default defineConfig({
     globals: true,
     setupFiles: [],
     passWithNoTests: true,
+    server: {
+      deps: {
+        inline: [/@csstools/, /@asamuzakjp/],
+      },
+    },
   },
 })
