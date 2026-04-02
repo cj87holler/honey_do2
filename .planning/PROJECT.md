@@ -15,15 +15,14 @@ People in a household can assign tasks to each other and actually get them done,
 - [x] Users can sign up with email/password and log in — Validated in Phase 1: Foundation
 - [x] Queens can name the Hive — Validated in Phase 1: Foundation
 - [x] A Queen creates a Hive and invites others via link — Validated in Phase 2: Invite Flow
+- [x] Roles: Queen (creates/assigns tasks), Bee (receives tasks) — Validated in Phase 3: Task System
+- [x] Tasks are open text (160 char limit), assigned to a Bee or QueenBee — Validated in Phase 3: Task System
+- [x] Tasks have a honey value: 5, 10, 20, or custom (any number) — Validated in Phase 3: Task System
+- [x] Assigned tasks appear on the assignee's Honeycomb (their to-do list) — Validated in Phase 3: Task System
+- [x] Tasks can be marked "in progress" or "done" — Validated in Phase 3: Task System
+- [x] Completed tasks area visible separately — Validated in Phase 3: Task System
 
 ### Active
-
-- [ ] Roles: Queen (creates/assigns tasks), Bee (receives tasks)
-- [ ] Tasks are open text (160 char limit), assigned to a Bee or QueenBee
-- [ ] Tasks have a honey value: 5, 10, 20, or custom (any number)
-- [ ] Assigned tasks appear on the assignee's Honeycomb (their to-do list)
-- [ ] Tasks can be marked "in progress" or "done"
-- [ ] Completed tasks area visible separately
 - [ ] Playful, dynamic copy based on task load ("whoa! better get to work!" / "go play golf!")
 - [ ] Leaderboard within a Hive based on honeys earned
 - [ ] Full bee theme with puns, honeycomb UI patterns, buzzy personality
@@ -82,4 +81,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-02 after Phase 2 completion*
+*Last updated: 2026-04-02 after Phase 3 completion*
