@@ -1,4 +1,4 @@
-import { pgTable, text, varchar, timestamp, pgEnum, integer, boolean, uniqueIndex } from "drizzle-orm/pg-core"
+import { pgTable, text, varchar, timestamp, pgEnum, integer, boolean, uniqueIndex, index } from "drizzle-orm/pg-core"
 import { relations } from "drizzle-orm"
 
 // -- Better Auth tables --
@@ -55,6 +55,7 @@ export const verification = pgTable("verification", {
 // -- App-specific tables --
 
 export const roleEnum = pgEnum("role", ["queen", "bee"])
+export const taskStatusEnum = pgEnum("task_status", ["open", "in_progress", "done"])
 
 export const hives = pgTable("hives", {
   id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
@@ -85,6 +86,22 @@ export const invites = pgTable("invites", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 })
 
+export const tasks = pgTable("tasks", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  hiveId: text("hive_id").notNull().references(() => hives.id),
+  assigneeId: text("assignee_id").notNull().references(() => hiveMembers.id),
+  createdBy: text("created_by").notNull().references(() => user.id),
+  text: varchar("text", { length: 160 }).notNull(),
+  honeyValue: integer("honey_value").notNull(),
+  status: taskStatusEnum("status").notNull().default("open"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  completedAt: timestamp("completed_at"),
+}, (table) => [
+  index("tasks_hive_idx").on(table.hiveId),
+  index("tasks_assignee_status_idx").on(table.assigneeId, table.status),
+])
+
 // -- Relations --
 
 export const userRelations = relations(user, ({ many }) => ({
@@ -92,6 +109,7 @@ export const userRelations = relations(user, ({ many }) => ({
   accounts: many(account),
   hiveMembers: many(hiveMembers),
   createdInvites: many(invites, { relationName: "inviteCreator" }),
+  createdTasks: many(tasks, { relationName: "taskCreator" }),
 }))
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -105,14 +123,22 @@ export const accountRelations = relations(account, ({ one }) => ({
 export const hivesRelations = relations(hives, ({ many }) => ({
   members: many(hiveMembers),
   invites: many(invites),
+  tasks: many(tasks),
 }))
 
-export const hiveMembersRelations = relations(hiveMembers, ({ one }) => ({
+export const hiveMembersRelations = relations(hiveMembers, ({ one, many }) => ({
   hive: one(hives, { fields: [hiveMembers.hiveId], references: [hives.id] }),
   user: one(user, { fields: [hiveMembers.userId], references: [user.id] }),
+  tasks: many(tasks),
 }))
 
 export const invitesRelations = relations(invites, ({ one }) => ({
   hive: one(hives, { fields: [invites.hiveId], references: [hives.id] }),
   creator: one(user, { fields: [invites.createdBy], references: [user.id], relationName: "inviteCreator" }),
+}))
+
+export const tasksRelations = relations(tasks, ({ one }) => ({
+  hive: one(hives, { fields: [tasks.hiveId], references: [hives.id] }),
+  assignee: one(hiveMembers, { fields: [tasks.assigneeId], references: [hiveMembers.id] }),
+  creator: one(user, { fields: [tasks.createdBy], references: [user.id], relationName: "taskCreator" }),
 }))
