@@ -54,12 +54,12 @@ Source: Observed from `hive-dashboard.tsx` (`space-y-8`), `member-list.tsx` (`py
 | Body | 16px (text-base) | 400 (regular) | 1.5 |
 | Label | 14px (text-sm) | 400 (regular) | 1.25 |
 | Heading | 20px (text-xl) | 600 (semibold) | 1.2 |
-| Display | 14px (text-sm) | 500 (medium) | 1.0 |
+| Display | 14px (text-sm) | 400 (regular) | 1.0 |
 
 Notes:
 - Member name in leaderboard row: 16px / weight 400 / `text-bee` — matches existing member-list pattern.
 - Honey score: 14px / weight 400 / `text-stone-500` — same as existing `member-list.tsx` honey display.
-- Rank number: 14px / weight 600 / `text-stone-400` for ranks 2+ ; `text-honey` for rank 1 — differentiates top spot without a dedicated color token.
+- Rank number: 14px / weight 400 / `text-stone-400` for ranks 2+ ; `text-honey` for rank 1 — differentiates top spot without a dedicated color token.
 - Section heading "Leaderboard": 20px / weight 600 / `text-bee` — matches existing `MemberList` heading (`text-xl font-semibold text-bee`).
 
 Source: Extracted from existing components (member-list.tsx, task-card.tsx, honeycomb.tsx).
