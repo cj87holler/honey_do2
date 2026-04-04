@@ -1,5 +1,5 @@
 import { InlineRename } from "./inline-rename"
-import { MemberList } from "./member-list"
+import { Leaderboard } from "./leaderboard"
 import { TaskCreationForm } from "@/components/tasks/task-creation-form"
 import { Honeycomb } from "@/components/tasks/honeycomb"
 import { AllTasks } from "@/components/tasks/all-tasks"
@@ -62,7 +62,7 @@ export function HiveDashboard({ hive, members, currentUserId, tasks }: HiveDashb
         />
       )}
 
-      <MemberList members={members} isQueen={isQueen} hiveId={hive.id} />
+      <Leaderboard members={members} isQueen={isQueen} hiveId={hive.id} />
     </div>
   )
 }
