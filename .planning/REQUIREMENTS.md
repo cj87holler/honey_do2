@@ -33,7 +33,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Leaderboard
 
-- [ ] **LEAD-01**: Hive shows a leaderboard ranking members by total honeys earned
+- [x] **LEAD-01**: Hive shows a leaderboard ranking members by total honeys earned
 
 ### Theme & Personality
 
@@ -108,7 +108,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TASK-05 | Phase 3 | Complete |
 | TASK-06 | Phase 3 | Complete |
 | TASK-07 | Phase 3 | Complete |
-| LEAD-01 | Phase 4 | Pending |
+| LEAD-01 | Phase 4 | Complete |
 | THEME-01 | Phase 5 | Pending |
 | THEME-02 | Phase 5 | Pending |
 

@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Database schema, email/password auth, and Hive creation with roles (completed 2026-03-29)
 - [ ] **Phase 2: Invite Flow** - Queen generates invite link, Bee joins via link and creates account
 - [x] **Phase 3: Task System** - Task creation, assignment, status transitions, honey accounting, and Honeycomb view (completed 2026-04-03)
-- [ ] **Phase 4: Leaderboard** - Hive leaderboard ranked by honeys earned
+- [x] **Phase 4: Leaderboard** - Hive leaderboard ranked by honeys earned (completed 2026-04-04)
 - [ ] **Phase 5: Theme & Copy** - Full bee theme, honeycomb UI patterns, and dynamic contextual copy engine
 
 ## Phase Details
@@ -76,9 +76,9 @@ Plans:
   1. Hive shows all members ranked by total honeys earned
   2. Scores display as absolute values ("45 honeys") with no "last place" callout
   3. Leaderboard updates immediately after a task is marked done
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
-- [ ] 04-01-PLAN.md — Leaderboard component with rank logic, crown/honey emojis, dashboard integration, MemberList removal
+- [x] 04-01-PLAN.md — Leaderboard component with rank logic, crown/honey emojis, dashboard integration, MemberList removal
 **UI hint**: yes
 
 ### Phase 5: Theme & Copy
@@ -103,5 +103,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation | 3/3 | Complete   | 2026-03-29 |
 | 2. Invite Flow | 0/2 | Planned | - |
 | 3. Task System | 2/2 | Complete | 2026-04-03 |
-| 4. Leaderboard | 0/1 | Planned | - |
+| 4. Leaderboard | 1/1 | Complete   | 2026-04-04 |
 | 5. Theme & Copy | 0/? | Not started | - |
