@@ -21,10 +21,10 @@ People in a household can assign tasks to each other and actually get them done,
 - [x] Assigned tasks appear on the assignee's Honeycomb (their to-do list) — Validated in Phase 3: Task System
 - [x] Tasks can be marked "in progress" or "done" — Validated in Phase 3: Task System
 - [x] Completed tasks area visible separately — Validated in Phase 3: Task System
+- [x] Leaderboard within a Hive based on honeys earned — Validated in Phase 4: Leaderboard
 
 ### Active
 - [ ] Playful, dynamic copy based on task load ("whoa! better get to work!" / "go play golf!")
-- [ ] Leaderboard within a Hive based on honeys earned
 - [ ] Full bee theme with puns, honeycomb UI patterns, buzzy personality
 
 ### Out of Scope
@@ -81,4 +81,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-02 after Phase 3 completion*
+*Last updated: 2026-04-04 after Phase 4 completion*
