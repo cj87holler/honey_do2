@@ -1,5 +1,5 @@
 ---
-status: partial
+status: complete
 phase: 04-leaderboard
 source: [04-01-SUMMARY.md]
 started: 2026-04-04T13:30:00.000Z
@@ -30,9 +30,7 @@ result: pass
 
 ### 5. All-Zero Nudge State
 expected: When all members in the Hive have 0 honeys, all members should appear tied at rank 1. Below the member list, a nudge message should read "No honeys yet — time to get buzzy! 🐝".
-result: blocked
-blocked_by: prior-phase
-reason: "Cannot test — only 2 bees with existing honeys. Invite link reuses previously created bee instead of generating fresh invite. Need fresh Hive or working invite to create new zero-honey members."
+result: pass
 
 ### 6. Leaderboard Updates After Task Completion
 expected: Mark a task as "done" in the Honeycomb. After the page reloads, the leaderboard should reflect the updated honey count for the member who completed the task.
@@ -45,11 +43,11 @@ result: pass
 ## Summary
 
 total: 7
-passed: 5
+passed: 6
 issues: 0
 pending: 0
 skipped: 0
-blocked: 1
+blocked: 0
 
 ## Gaps
 
