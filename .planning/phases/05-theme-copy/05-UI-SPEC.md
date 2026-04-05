@@ -54,12 +54,14 @@ Exceptions:
 |------|------|--------|-------------|-------|
 | Body | 14px (text-sm) | 400 (normal) | 1.5 | Task card text, metadata, labels, form helper text |
 | Label | 16px (text-base) | 400 (normal) | 1.5 | Nav items, button labels, standard UI copy |
-| Heading | 18–20px (text-lg / text-xl) | 600 (semibold) | 1.2 | Section headings: "Your Honeycomb", "Leaderboard" |
+| Heading | 20px (text-xl) | 700 (bold) | 1.2 | Section headings: "Your Honeycomb", "Leaderboard" |
 | Display | 24px (text-2xl) | 700 (bold) | 1.1 | Dashboard greeting banner headline only |
 
 Font stack: `ui-sans-serif, system-ui, -apple-system, sans-serif` (Tailwind default — no custom font added in Phase 5).
 
 Source: Extracted from existing components (button.tsx, task-card.tsx, leaderboard.tsx, honeycomb.tsx). No changes to existing type sizes — Phase 5 adds the Display role for the greeting banner only.
+
+Revision note: Heading collapsed from 18–20px range to 20px (text-xl) only; semibold (600) weight dropped. Resulting scale: 14/16/20/24px at weights 400/700.
 
 ---
 
@@ -118,7 +120,7 @@ Current: `border-b border-stone-200 bg-stone-50` — neutral, unthemed.
 
 Phase 5 target:
 - Background: `bg-honey` (`#f59e0b`)
-- Title: "Honey Do" in `text-queen` (`#92400e`) at `text-lg font-bold`
+- Title: "Honey Do" in `text-queen` (`#92400e`) at `text-xl font-bold`
 - Add 🐝 or 🍯 emoji before or after title text (Claude's discretion on exact placement)
 - Add a short buzzy tagline beneath title: `"Your Hive. Your Rules. Your Honey."` at `text-xs font-normal text-amber-800 opacity-80`
 - Log out button: `variant="ghost"` with `text-amber-900 hover:bg-amber-600/20` — maintains contrast on amber bg
