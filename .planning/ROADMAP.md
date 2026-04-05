@@ -17,6 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Task System** - Task creation, assignment, status transitions, honey accounting, and Honeycomb view (completed 2026-04-03)
 - [x] **Phase 4: Leaderboard** - Hive leaderboard ranked by honeys earned (completed 2026-04-04)
 - [ ] **Phase 5: Theme & Copy** - Full bee theme, honeycomb UI patterns, and dynamic contextual copy engine
+- [ ] **Phase 6: Deployment** - Vercel deploy with Neon PostgreSQL, environment config, production readiness
 
 ## Phase Details
 
@@ -93,10 +94,22 @@ Plans:
 **Plans**: TBD
 **UI hint**: yes
 
+### Phase 6: Deployment
+**Goal**: Deploy the app to Vercel with Neon PostgreSQL, environment configuration, and production readiness
+**Depends on**: Phase 5
+**Requirements**: DEPLOY-01
+**Success Criteria** (what must be TRUE):
+  1. App is deployed and accessible on a public Vercel URL
+  2. Neon PostgreSQL is provisioned and connected with production schema
+  3. Environment variables are configured for production (auth, database, app URL)
+  4. Deployment pipeline works: push to main triggers automatic deploy
+**Plans**: TBD
+**UI hint**: no
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -105,3 +118,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Task System | 2/2 | Complete | 2026-04-03 |
 | 4. Leaderboard | 1/1 | Complete   | 2026-04-04 |
 | 5. Theme & Copy | 0/? | Not started | - |
+| 6. Deployment | 0/? | Not started | - |

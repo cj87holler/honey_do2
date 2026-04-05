@@ -40,6 +40,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **THEME-01**: Full bee theme with honeycomb UI patterns, bee puns, and buzzy personality
 - [ ] **THEME-02**: Dynamic contextual copy based on task load (e.g. "whoa! better get to work!" / "go play golf!")
 
+### Deployment
+
+- [ ] **DEPLOY-01**: App deployed to Vercel with Neon PostgreSQL, accessible on a public URL with automatic deploys from main
+
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
