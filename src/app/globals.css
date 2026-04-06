@@ -5,4 +5,49 @@
   --color-honey-light: #fde68a;
   --color-queen: #92400e;
   --color-bee: #1c1917;
+  --color-honeycomb-pattern: rgba(245, 158, 11, 0.08);
+  --color-honeycomb-stroke: rgba(245, 158, 11, 0.18);
+  --color-header-bg: #f59e0b;
+  --color-header-text: #78350f;
+}
+
+/* Honeycomb SVG wallpaper pattern — seamless hex grid */
+.honeycomb-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.08)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.08)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
+
+/* Medium intensity variant for section-level emphasis */
+.honeycomb-bg-medium {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.12)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.12)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
+
+/* Reduce honeycomb pattern opacity on very small screens */
+@media (max-width: 375px) {
+  .honeycomb-bg {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.04)' stroke='rgba(245%2C158%2C11%2C0.08)' stroke-width='1'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.04)' stroke='rgba(245%2C158%2C11%2C0.08)' stroke-width='1'/%3E%3C/svg%3E");
+  }
+}
+
+/* Task completion amber flash animation */
+@keyframes completion-flash {
+  0% { background-color: transparent; }
+  50% { background-color: rgba(245, 158, 11, 0.25); }
+  100% { background-color: transparent; }
+}
+
+.animate-completion-flash {
+  animation: completion-flash 600ms ease-out;
+}
+
+/* Task card reveal animation (stagger via animation-delay inline style) */
+@keyframes card-reveal {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-card-reveal {
+  animation: card-reveal 300ms ease-out forwards;
+  opacity: 0;
 }
