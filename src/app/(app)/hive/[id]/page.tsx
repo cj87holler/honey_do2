@@ -32,6 +32,7 @@ export default async function HiveDashboardPage({ params }: HiveDashboardPagePro
         members={members}
         tasks={tasks}
         currentUserId={session.user.id}
+        currentUserName={session.user.name ?? "Bee"}
       />
     </main>
   )

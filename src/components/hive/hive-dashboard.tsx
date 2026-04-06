@@ -3,6 +3,7 @@ import { Leaderboard } from "./leaderboard"
 import { TaskCreationForm } from "@/components/tasks/task-creation-form"
 import { Honeycomb } from "@/components/tasks/honeycomb"
 import { AllTasks } from "@/components/tasks/all-tasks"
+import { DashboardGreeting } from "./dashboard-greeting"
 
 interface Member {
   id: string
@@ -28,15 +29,22 @@ interface HiveDashboardProps {
   hive: { id: string; name: string }
   members: Member[]
   currentUserId: string
+  currentUserName: string
   tasks: Task[]
 }
 
-export function HiveDashboard({ hive, members, currentUserId, tasks }: HiveDashboardProps) {
+export function HiveDashboard({ hive, members, currentUserId, currentUserName, tasks }: HiveDashboardProps) {
   const isQueen = members.some((m) => m.userId === currentUserId && m.role === "queen")
   const currentMemberId = members.find((m) => m.userId === currentUserId)?.id
 
+  const activeTaskCount = tasks.filter(
+    (t) => t.assigneeId === currentMemberId && t.status !== "done"
+  ).length
+
   return (
     <div className="space-y-8">
+      <DashboardGreeting name={currentUserName} activeTaskCount={activeTaskCount} />
+
       <InlineRename hiveName={hive.name} hiveId={hive.id} />
 
       {isQueen && (
