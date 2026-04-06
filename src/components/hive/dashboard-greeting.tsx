@@ -1,7 +1,3 @@
-"use client"
-
-import { useState } from "react"
-
 interface DashboardGreetingProps {
   name: string
   activeTaskCount: number
@@ -57,8 +53,17 @@ function getLoadState(count: number): "zero" | "light" | "moderate" | "heavy" {
   return "heavy"
 }
 
+function hashCode(str: string): number {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0
+  }
+  return Math.abs(hash)
+}
+
 export function DashboardGreeting({ name, activeTaskCount }: DashboardGreetingProps) {
-  const [variantIndex] = useState(() => Math.floor(Math.random() * 8))
+  const today = new Date().toISOString().slice(0, 10)
+  const variantIndex = hashCode(`${name}-${today}`) % 8
 
   const loadState = getLoadState(activeTaskCount)
   const template = COPY_REGISTRY[loadState][variantIndex]

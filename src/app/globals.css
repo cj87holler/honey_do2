@@ -13,20 +13,21 @@
 
 /* Honeycomb SVG wallpaper pattern — seamless hex grid */
 .honeycomb-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.08)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.08)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3C/svg%3E");
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.03)' stroke='rgba(245%2C158%2C11%2C0.06)' stroke-width='0.5'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.03)' stroke='rgba(245%2C158%2C11%2C0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
   background-size: 56px 100px;
 }
 
 /* Medium intensity variant for section-level emphasis */
 .honeycomb-bg-medium {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.12)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.12)' stroke='rgba(245%2C158%2C11%2C0.18)' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.06)' stroke='rgba(245%2C158%2C11%2C0.10)' stroke-width='0.5'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.06)' stroke='rgba(245%2C158%2C11%2C0.10)' stroke-width='0.5'/%3E%3C/svg%3E");
   background-size: 56px 100px;
 }
 
 /* Reduce honeycomb pattern opacity on very small screens */
 @media (max-width: 375px) {
   .honeycomb-bg {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.04)' stroke='rgba(245%2C158%2C11%2C0.08)' stroke-width='1'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.04)' stroke='rgba(245%2C158%2C11%2C0.08)' stroke-width='1'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100'%3E%3Cpolygon points='28,2 52,16 52,44 28,58 4,44 4,16' fill='rgba(245%2C158%2C11%2C0.02)' stroke='rgba(245%2C158%2C11%2C0.04)' stroke-width='0.5'/%3E%3Cpolygon points='28,52 52,66 52,94 28,108 4,94 4,66' fill='rgba(245%2C158%2C11%2C0.02)' stroke='rgba(245%2C158%2C11%2C0.04)' stroke-width='0.5'/%3E%3C/svg%3E");
   }
 }
 
