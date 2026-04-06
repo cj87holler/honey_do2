@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 2: Invite Flow** - Queen generates invite link, Bee joins via link and creates account
 - [x] **Phase 3: Task System** - Task creation, assignment, status transitions, honey accounting, and Honeycomb view (completed 2026-04-03)
 - [x] **Phase 4: Leaderboard** - Hive leaderboard ranked by honeys earned (completed 2026-04-04)
-- [ ] **Phase 5: Theme & Copy** - Full bee theme, honeycomb UI patterns, and dynamic contextual copy engine
+- [x] **Phase 5: Theme & Copy** - Full bee theme, honeycomb UI patterns, and dynamic contextual copy engine (completed 2026-04-06)
 - [ ] **Phase 6: Deployment** - Vercel deploy with Neon PostgreSQL, environment config, production readiness
 
 ## Phase Details
@@ -91,10 +91,10 @@ Plans:
   2. The app is fully usable on a 375px mobile screen (invite links open on phones)
   3. Dynamic contextual copy changes based on the user's current task load with at least 8 distinct variants per task-load state
   4. Theme is applied in interaction design (micro-interactions, completion moments), not only in text copy
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 Plans:
 - [x] 05-01-PLAN.md — CSS foundation: honeycomb pattern vars, SVG background, keyframes, HoneycombPattern component, header redesign, mobile touch targets
-- [ ] 05-02-PLAN.md — DashboardGreeting copy engine (32 variants), bee-themed badges, completion flash, card reveal, leaderboard rank-1, empty state copy, visual verification
+- [x] 05-02-PLAN.md — DashboardGreeting copy engine (32 variants), bee-themed badges, completion flash, card reveal, leaderboard rank-1, empty state copy, visual verification
 **UI hint**: yes
 
 ### Phase 6: Deployment
@@ -120,5 +120,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 2. Invite Flow | 0/2 | Planned | - |
 | 3. Task System | 2/2 | Complete | 2026-04-03 |
 | 4. Leaderboard | 1/1 | Complete   | 2026-04-04 |
-| 5. Theme & Copy | 1/2 | In Progress|  |
+| 5. Theme & Copy | 2/2 | Complete   | 2026-04-06 |
 | 6. Deployment | 0/? | Not started | - |
