@@ -37,7 +37,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Theme & Personality
 
-- [ ] **THEME-01**: Full bee theme with honeycomb UI patterns, bee puns, and buzzy personality
+- [x] **THEME-01**: Full bee theme with honeycomb UI patterns, bee puns, and buzzy personality
 - [ ] **THEME-02**: Dynamic contextual copy based on task load (e.g. "whoa! better get to work!" / "go play golf!")
 
 ### Deployment
@@ -113,7 +113,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TASK-06 | Phase 3 | Complete |
 | TASK-07 | Phase 3 | Complete |
 | LEAD-01 | Phase 4 | Complete |
-| THEME-01 | Phase 5 | Pending |
+| THEME-01 | Phase 5 | Complete |
 | THEME-02 | Phase 5 | Pending |
 
 **Coverage:**
