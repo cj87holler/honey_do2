@@ -37,12 +37,15 @@ export function Leaderboard({ members, isQueen, hiveId }: LeaderboardProps) {
 
   return (
     <section aria-label="Leaderboard">
-      <h2 className="text-xl font-semibold text-bee mb-3">Leaderboard</h2>
+      <h2 className="text-xl font-bold text-bee mb-3">Leaderboard</h2>
       <ol className="space-y-1">
         {ranked.map((member) => (
           <li
             key={member.id}
-            className="flex items-center justify-between py-2 px-4 bg-stone-50 rounded border-b border-stone-100 hover:bg-stone-100 transition-colors"
+            className={cn(
+              "flex items-center justify-between py-2 px-4 bg-stone-50 rounded border-b border-stone-100 hover:bg-amber-50 transition-colors",
+              member.rank === 1 && "border-l-4 border-amber-400"
+            )}
           >
             <div className="flex items-center gap-2">
               {member.rank === 1 ? (

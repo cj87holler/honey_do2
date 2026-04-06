@@ -1,6 +1,6 @@
 "use client"
 
-import { useTransition } from "react"
+import { useTransition, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { updateTaskStatus, deleteTask } from "@/lib/actions/task"
 
@@ -22,6 +22,20 @@ interface TaskCardProps {
 export function TaskCard({ task, currentMemberId, isQueen }: TaskCardProps) {
   const [isPending, startTransition] = useTransition()
   const isAssignee = currentMemberId === task.assigneeId
+  const cardRef = useRef<HTMLDivElement>(null)
+  const prevStatusRef = useRef(task.status)
+
+  useEffect(() => {
+    if (prevStatusRef.current !== "done" && task.status === "done" && cardRef.current) {
+      cardRef.current.classList.add("animate-completion-flash")
+      const timer = setTimeout(() => {
+        cardRef.current?.classList.remove("animate-completion-flash")
+      }, 600)
+      prevStatusRef.current = task.status
+      return () => clearTimeout(timer)
+    }
+    prevStatusRef.current = task.status
+  }, [task.status])
 
   function handleStart() {
     startTransition(async () => {
@@ -42,7 +56,7 @@ export function TaskCard({ task, currentMemberId, isQueen }: TaskCardProps) {
   }
 
   return (
-    <div className="flex items-start justify-between gap-3 rounded-md border border-stone-200 bg-white px-4 py-3">
+    <div ref={cardRef} className="flex items-start justify-between gap-3 rounded-md border border-stone-200 bg-white px-4 py-3">
       <div className="flex-1 min-w-0">
         <p className="text-sm text-bee leading-snug break-words">{task.text}</p>
         <div className="mt-1 flex items-center gap-2 text-xs text-stone-500">
@@ -51,13 +65,13 @@ export function TaskCard({ task, currentMemberId, isQueen }: TaskCardProps) {
             {task.honeyValue} honeys
           </span>
           {task.status === "in_progress" && (
-            <span className="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
-              In Progress
+            <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+              🐝 In Progress
             </span>
           )}
           {task.status === "done" && (
-            <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
-              Done
+            <span className="inline-flex items-center rounded-full bg-amber-200 px-2 py-0.5 text-xs font-medium text-amber-900">
+              ✅ Done
             </span>
           )}
         </div>
@@ -79,6 +93,7 @@ export function TaskCard({ task, currentMemberId, isQueen }: TaskCardProps) {
             size="sm"
             onClick={handleDone}
             disabled={isPending}
+            className="hover:scale-105"
           >
             Done!
           </Button>

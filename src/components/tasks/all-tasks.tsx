@@ -30,22 +30,27 @@ export function AllTasks({ tasks, currentMemberId, isQueen, hiveId }: AllTasksPr
 
   return (
     <section className="space-y-3">
-      <h2 className="text-lg font-semibold text-bee">All Tasks</h2>
+      <h2 className="text-xl font-bold text-bee">All Tasks</h2>
 
       {activeTasks.length === 0 ? (
         <p className="text-sm text-stone-500 italic">
-          No active tasks in the Hive yet. Assign one above!
+          No tasks assigned yet. Time to put your Bees to work! 🍯
         </p>
       ) : (
         <div className="space-y-2">
-          {activeTasks.map((task) => (
-            <TaskCard
+          {activeTasks.map((task, index) => (
+            <div
               key={task.id}
-              task={task}
-              currentMemberId={currentMemberId}
-              isQueen={isQueen}
-              hiveId={hiveId}
-            />
+              className="animate-card-reveal"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <TaskCard
+                task={task}
+                currentMemberId={currentMemberId}
+                isQueen={isQueen}
+                hiveId={hiveId}
+              />
+            </div>
           ))}
         </div>
       )}

@@ -34,22 +34,23 @@ export function Honeycomb({ tasks, currentMemberId, isQueen, hiveId }: Honeycomb
 
   return (
     <section className="space-y-3">
-      <h2 className="text-lg font-semibold text-bee">Your Honeycomb</h2>
+      <h2 className="text-xl font-bold text-bee">Your Honeycomb</h2>
 
       {activeTasks.length === 0 ? (
-        <p className="text-sm text-stone-500 italic">
-          No tasks in your Honeycomb yet. Time to relax!
-        </p>
+        <div className="text-center py-4">
+          <p className="text-base font-semibold text-bee">Your Honeycomb is empty!</p>
+          <p className="text-sm text-stone-500 mt-1">No tasks in your Honeycomb. The hive is quiet — enjoy it! 🐝</p>
+        </div>
       ) : (
         <div className="space-y-2">
-          {activeTasks.map((task) => (
-            <TaskCard
+          {activeTasks.map((task, index) => (
+            <div
               key={task.id}
-              task={task}
-              currentMemberId={currentMemberId}
-              isQueen={isQueen}
-              hiveId={hiveId}
-            />
+              className="animate-card-reveal"
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <TaskCard task={task} currentMemberId={currentMemberId} isQueen={isQueen} hiveId={hiveId} />
+            </div>
           ))}
         </div>
       )}
@@ -66,14 +67,14 @@ export function Honeycomb({ tasks, currentMemberId, isQueen, hiveId }: Honeycomb
           </button>
           {completedOpen && (
             <div className="mt-2 space-y-2">
-              {completedTasks.map((task) => (
-                <TaskCard
+              {completedTasks.map((task, index) => (
+                <div
                   key={task.id}
-                  task={task}
-                  currentMemberId={currentMemberId}
-                  isQueen={isQueen}
-                  hiveId={hiveId}
-                />
+                  className="animate-card-reveal"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <TaskCard task={task} currentMemberId={currentMemberId} isQueen={isQueen} hiveId={hiveId} />
+                </div>
               ))}
             </div>
           )}
