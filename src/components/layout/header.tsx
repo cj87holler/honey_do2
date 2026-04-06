@@ -13,10 +13,22 @@ export function Header() {
   }
 
   return (
-    <header className="border-b border-stone-200 bg-stone-50">
+    <header className="bg-honey">
       <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-4">
-        <span className="text-base font-semibold text-bee">Honey Do</span>
-        <Button variant="ghost" size="sm" onClick={handleLogout}>
+        <div>
+          <span className="text-xl font-bold text-queen">
+            🐝 Honey Do
+          </span>
+          <p className="hidden sm:block text-xs font-normal text-amber-800 opacity-80">
+            Your Hive. Your Rules. Your Honey.
+          </p>
+        </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleLogout}
+          className="text-amber-900 hover:bg-amber-600/20"
+        >
           Log out
         </Button>
       </div>
