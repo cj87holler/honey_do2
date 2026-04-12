@@ -108,7 +108,7 @@ Plans:
   4. Deployment pipeline works: push to main triggers automatic deploy
 **Plans:** 2 plans
 Plans:
-- [ ] 06-01-PLAN.md — Install Neon driver, conditional db.ts driver switch, drizzle config for unpooled migrations, build script, health check endpoint
+- [x] 06-01-PLAN.md — Install Neon driver, conditional db.ts driver switch, drizzle config for unpooled migrations, build script, health check endpoint
 - [ ] 06-02-PLAN.md — Provision Neon + Vercel, configure env vars, deploy, verify full app functionality
 **UI hint**: no
 
