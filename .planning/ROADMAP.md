@@ -106,7 +106,10 @@ Plans:
   2. Neon PostgreSQL is provisioned and connected with production schema
   3. Environment variables are configured for production (auth, database, app URL)
   4. Deployment pipeline works: push to main triggers automatic deploy
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 06-01-PLAN.md — Install Neon driver, conditional db.ts driver switch, drizzle config for unpooled migrations, build script, health check endpoint
+- [ ] 06-02-PLAN.md — Provision Neon + Vercel, configure env vars, deploy, verify full app functionality
 **UI hint**: no
 
 ## Progress
@@ -121,4 +124,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | 3. Task System | 2/2 | Complete | 2026-04-03 |
 | 4. Leaderboard | 1/1 | Complete   | 2026-04-04 |
 | 5. Theme & Copy | 2/2 | Complete   | 2026-04-06 |
-| 6. Deployment | 0/? | Not started | - |
+| 6. Deployment | 0/2 | Planned | - |
