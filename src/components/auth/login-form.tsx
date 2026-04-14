@@ -30,15 +30,20 @@ export function LoginForm() {
 
   const onSubmit = async (data: LoginValues) => {
     setServerError(null)
-    const result = await authClient.signIn.email({
-      email: data.email,
-      password: data.password,
-    })
-    if (result.error) {
-      setServerError("Incorrect email or password.")
-      return
+    try {
+      const result = await authClient.signIn.email({
+        email: data.email,
+        password: data.password,
+      })
+      if (result.error) {
+        setServerError("Incorrect email or password.")
+        return
+      }
+      router.push("/hive")
+    } catch (err) {
+      console.error("Sign-in error:", err)
+      setServerError("Something went wrong. Please try again.")
     }
-    router.push("/hive")
   }
 
   return (

@@ -6,9 +6,10 @@ const authPaths = ["/login", "/signup"]
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Get session by checking for Better Auth session token cookie
-  // Better Auth uses "better-auth.session_token" as the cookie name
-  const sessionToken = request.cookies.get("better-auth.session_token")
+  // Better Auth uses "__Secure-" prefix on HTTPS (production)
+  const sessionToken =
+    request.cookies.get("__Secure-better-auth.session_token") ||
+    request.cookies.get("better-auth.session_token")
 
   const isProtected = protectedPaths.some((p) => pathname.startsWith(p))
   const isAuthPage = authPaths.some((p) => pathname.startsWith(p))
