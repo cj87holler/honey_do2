@@ -28,6 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 7: Landing Page** - Marketing-style landing page as the public entry point with smart routing for logged-in users
 - [ ] **Phase 8: App Polish** - Leave-hive feature and optional due dates on tasks (UAT-identified gaps)
 - [ ] **Phase 9: Admin Dashboard** - Admin tool for viewing all users and hives, and resetting passwords
+- [ ] **Phase 10: Email Notifications** - Transactional emails for key user events (welcome, invite received, task assigned/completed)
 
 ## Phase Details
 
@@ -157,14 +158,32 @@ Plans:
   2. An admin can view a list of all hives with each hive's member count and creation date
   3. An admin can reset any user's password (sets a temporary password or triggers a reset mechanism)
   4. The admin area is inaccessible to non-admin users — unauthorized access is rejected
-**Plans**: TBD
+**Plans:** 4 plans
+Plans:
+- [ ] 09-01-PLAN.md — Admin identity module (isAdminEmail, requireAdmin) + (admin) route group layout gate + .env.example
+- [ ] 09-02-PLAN.md — listAllUsers + listAllHives Drizzle queries + UsersTable + HivesTable rendered on /admin
+- [ ] 09-03-PLAN.md — generateTempPassword bee-themed generator with TDD unit tests
+- [ ] 09-04-PLAN.md — resetUserPassword server action + ResetPasswordButton confirm-and-show-once modal, wired into UsersTable
 **UI hint**: yes
+
+### Phase 10: Email Notifications
+**Goal**: Users receive transactional emails for key events so they don't have to check the app to know something happened
+**Depends on**: Phase 9
+**Requirements**: TBD
+**Success Criteria** (what must be TRUE):
+  1. New users receive a welcome email when they create an account
+  2. A user receives an email when they are invited to a Hive
+  3. An assignee receives an email when a task is assigned to them
+  4. A task creator receives an email when their assigned task is marked done
+  5. Users can opt out of non-essential notifications (welcome and account emails are not opt-out)
+**Plans**: TBD
+**UI hint**: no
 
 ## Progress
 
 **Execution Order:**
 v1.0 phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
-v1.1 phases execute in numeric order: 7 -> 8 -> 9
+v1.1 phases execute in numeric order: 7 -> 8 -> 9 -> 10
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -176,4 +195,5 @@ v1.1 phases execute in numeric order: 7 -> 8 -> 9
 | 6. Deployment | 2/2 | Complete | 2026-04-14 |
 | 7. Landing Page | 0/1 | Not started | - |
 | 8. App Polish | 0/TBD | Not started | - |
-| 9. Admin Dashboard | 0/TBD | Not started | - |
+| 9. Admin Dashboard | 0/4 | Not started | - |
+| 10. Email Notifications | 0/TBD | Not started | - |
