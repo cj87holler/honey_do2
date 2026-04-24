@@ -131,7 +131,9 @@ Plans:
   2. The "how it works" section shows the core loop: create a hive, assign tasks, earn honeys
   3. A returning user can find and click an "already buzzin'? sign in here" link without scrolling through the signup flow
   4. A logged-in user who navigates to the root URL is immediately redirected to their dashboard without seeing the landing page
-**Plans**: TBD
+**Plans:** 1 plans
+Plans:
+- [ ] 07-01-PLAN.md — Session-aware root page with marketing landing page (hero, how-it-works, CTA sections)
 **UI hint**: yes
 
 ### Phase 8: App Polish
@@ -172,6 +174,6 @@ v1.1 phases execute in numeric order: 7 -> 8 -> 9
 | 4. Leaderboard | 1/1 | Complete | 2026-04-04 |
 | 5. Theme & Copy | 2/2 | Complete | 2026-04-06 |
 | 6. Deployment | 2/2 | Complete | 2026-04-14 |
-| 7. Landing Page | 0/TBD | Not started | - |
+| 7. Landing Page | 0/1 | Not started | - |
 | 8. App Polish | 0/TBD | Not started | - |
 | 9. Admin Dashboard | 0/TBD | Not started | - |
