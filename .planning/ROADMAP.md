@@ -133,7 +133,7 @@ Plans:
   4. A logged-in user who navigates to the root URL is immediately redirected to their dashboard without seeing the landing page
 **Plans:** 1 plans
 Plans:
-- [ ] 07-01-PLAN.md — Session-aware root page with marketing landing page (hero, how-it-works, CTA sections)
+- [x] 07-01-PLAN.md — Session-aware root page with marketing landing page (hero, how-it-works, CTA sections)
 **UI hint**: yes
 
 ### Phase 8: App Polish
