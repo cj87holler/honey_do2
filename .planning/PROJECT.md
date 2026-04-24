@@ -41,8 +41,8 @@ People in a household can assign tasks to each other and actually get them done,
 **Goal:** Give first-time visitors a proper introduction to Honey_Do and clean up UAT issues from v1.0.
 
 **Target features:**
-- Marketing-style landing page as the root URL (hero, how it works, signup CTA, "already buzzin'?" sign-in link)
-- Logged-in users bypass landing page and go straight to dashboard
+- ~~Marketing-style landing page as the root URL (hero, how it works, signup CTA, "already buzzin'?" sign-in link)~~ — Phase 7 complete
+- ~~Logged-in users bypass landing page and go straight to dashboard~~ — Phase 7 complete
 - Leave-hive feature (UAT blocker — users can't switch hives)
 - Other UAT fixes (admin dashboard, smaller quality-of-life items)
 
@@ -91,4 +91,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-23 — Milestone v1.1 started*
+*Last updated: 2026-04-23 — Phase 7 (Landing Page) complete*
