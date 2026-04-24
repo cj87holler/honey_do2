@@ -3,9 +3,9 @@
 **Defined:** 2026-03-26
 **Core Value:** People in a household can assign tasks to each other and actually get them done, because the gamified bee-themed experience makes chores feel like play rather than nagging.
 
-## v1 Requirements
+## v1.0 Requirements (Complete)
 
-Requirements for initial release. Each maps to roadmap phases.
+All v1.0 requirements shipped. See MILESTONES.md for details.
 
 ### Authentication
 
@@ -42,7 +42,33 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Deployment
 
-- [ ] **DEPLOY-01**: App deployed to Vercel with Neon PostgreSQL, accessible on a public URL with automatic deploys from main
+- [x] **DEPLOY-01**: App deployed to Vercel with Neon PostgreSQL, accessible on a public URL with automatic deploys from main
+
+## v1.1 Requirements
+
+Requirements for milestone v1.1: Landing Page & Polish.
+
+### Landing Page
+
+- [ ] **LAND-01**: First-time visitor sees a marketing-style landing page explaining what Honey_Do is, with a signup CTA
+- [ ] **LAND-02**: Landing page includes a "how it works" section showing the core loop (create hive, assign tasks, earn honeys)
+- [ ] **LAND-03**: Landing page has an "already buzzin'? sign in here" link for returning users
+- [ ] **LAND-04**: Logged-in user bypasses the landing page and goes straight to the dashboard
+
+### Hive Management
+
+- [ ] **HIVE-06**: User can leave a hive they belong to (with confirmation)
+
+### Tasks
+
+- [ ] **TASK-11**: Queen or QueenBee can set an optional due date when creating a task
+- [ ] **TASK-12**: Due date is displayed on task cards in the Honeycomb
+
+### Admin
+
+- [ ] **ADMIN-01**: Admin can view a list of all users with email and signup date
+- [ ] **ADMIN-02**: Admin can view a list of all hives with member count and creation date
+- [ ] **ADMIN-03**: Admin can reset a user's password
 
 ## v2 Requirements
 
@@ -86,10 +112,13 @@ Explicitly excluded. Documented to prevent scope creep.
 | Real-time updates / WebSockets | Standard request/response is fine for household scale |
 | Subtasks / task dependencies | Fights the "it's a game" positioning; 160-char limit keeps tasks atomic |
 | File / photo attachments | Storage costs and moderation surface area; not core loop |
-| Admin dashboard / analytics | The leaderboard IS the analytics for v1 |
 | Public Hive registration | Privacy risk; invite-only by design |
 | Money / real-reward economy | Legal and trust complexity; honeys are symbolic |
 | Task marketplace (browse & claim) | Fights the assignment model; Queen assigns, Bee accepts |
+| Multi-hive membership | Deferred — v1.1 adds leave-hive only; multi-hive (up to 3) is future scope |
+| Calendar integration | Due dates added in v1.1, but calendar sync (Google/Apple) deferred |
+| Task descriptions / instructions | Longer description field deferred; 160-char title sufficient for now |
+| Self-service password reset | Deferred; admin can reset passwords in v1.1 |
 
 ## Traceability
 
@@ -115,12 +144,23 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LEAD-01 | Phase 4 | Complete |
 | THEME-01 | Phase 5 | Complete |
 | THEME-02 | Phase 5 | Complete |
+| DEPLOY-01 | Phase 6 | Complete |
+| LAND-01 | — | Planned |
+| LAND-02 | — | Planned |
+| LAND-03 | — | Planned |
+| LAND-04 | — | Planned |
+| HIVE-06 | — | Planned |
+| TASK-11 | — | Planned |
+| TASK-12 | — | Planned |
+| ADMIN-01 | — | Planned |
+| ADMIN-02 | — | Planned |
+| ADMIN-03 | — | Planned |
 
 **Coverage:**
-- v1 requirements: 18 total
-- Mapped to phases: 18
-- Unmapped: 0
+- v1.0 requirements: 19 total, 19 complete
+- v1.1 requirements: 9 total, 0 complete
+- Unmapped: 9 (v1.1 — pending roadmap)
 
 ---
 *Requirements defined: 2026-03-26*
-*Last updated: 2026-03-26 after roadmap creation*
+*Last updated: 2026-04-23 — v1.1 requirements added*
