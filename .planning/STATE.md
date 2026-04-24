@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Landing Page & Polish
-status: defining-requirements
-stopped_at: Defining requirements for v1.1
+status: roadmap-ready
+stopped_at: Roadmap created — ready to plan Phase 7
 last_updated: "2026-04-23"
-last_activity: 2026-04-23 -- Milestone v1.1 started
+last_activity: 2026-04-23 -- v1.1 roadmap created (Phases 7-9)
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -25,10 +25,10 @@ See: .planning/PROJECT.md (updated 2026-04-23)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 7 (Landing Page) — not yet planned
 Plan: —
-Status: Defining requirements
-Last activity: 2026-04-23 — Milestone v1.1 started
+Status: Roadmap ready, awaiting phase planning
+Last activity: 2026-04-23 — v1.1 roadmap created (Phases 7-9)
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -45,9 +45,9 @@ Carried from v1.0:
 
 ### Pending Todos
 
-- **UAT: No leave-hive feature** — users blocked from joining partner's hive because single-hive enforcement has no exit path. See `.planning/todos/pending/uat-multi-hive-block.md`
-- **UAT: Feature requests** — due dates, welcome email, task descriptions, task categories/tags, calendar integration. See `.planning/todos/pending/uat-feature-requests.md`
-- **UAT: Admin dashboard** — See `.planning/todos/pending/uat-admin-dashboard.md`
+- **UAT: No leave-hive feature** — users blocked from joining partner's hive because single-hive enforcement has no exit path. Addressed in Phase 8. See `.planning/todos/pending/uat-multi-hive-block.md`
+- **UAT: Feature requests** — due dates (addressed in Phase 8), welcome email, task descriptions, task categories/tags, calendar integration. See `.planning/todos/pending/uat-feature-requests.md`
+- **UAT: Admin dashboard** — Addressed in Phase 9. See `.planning/todos/pending/uat-admin-dashboard.md`
 
 ### Blockers/Concerns
 
@@ -56,5 +56,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-04-23
-Stopped at: Defining requirements for milestone v1.1
+Stopped at: v1.1 roadmap created — next step is `/gsd-plan-phase 7`
 Resume file: N/A

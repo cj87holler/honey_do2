@@ -2,7 +2,9 @@
 
 ## Overview
 
-Honey_Do ships in five phases that build directly on each other. Foundation establishes the schema, auth, and Hive core — everything else depends on these being correct. The invite flow is built second, before tasks, so that multi-user testing is possible throughout the rest of development. The task system delivers the core product loop. The leaderboard layers on the honey accounting that task completion establishes. Theme and copy polish come last but are not optional — the bee theme is the competitive differentiator, not a skin.
+Honey_Do ships in phases that build directly on each other. Foundation establishes the schema, auth, and Hive core — everything else depends on these being correct. The invite flow is built second, before tasks, so that multi-user testing is possible throughout the rest of development. The task system delivers the core product loop. The leaderboard layers on the honey accounting that task completion establishes. Theme and copy polish come next — the bee theme is the competitive differentiator, not a skin. Deployment closes v1.0.
+
+v1.1 (Landing Page & Polish) adds a public marketing landing page, UAT-identified app improvements (leave-hive, due dates), and an admin dashboard for user/hive oversight.
 
 ## Phases
 
@@ -12,12 +14,20 @@ Honey_Do ships in five phases that build directly on each other. Foundation esta
 
 Decimal phases appear between their surrounding integers in numeric order.
 
+### v1.0 (Complete)
+
 - [x] **Phase 1: Foundation** - Database schema, email/password auth, and Hive creation with roles (completed 2026-03-29)
-- [ ] **Phase 2: Invite Flow** - Queen generates invite link, Bee joins via link and creates account
+- [x] **Phase 2: Invite Flow** - Queen generates invite link, Bee joins via link and creates account (completed 2026-03-31)
 - [x] **Phase 3: Task System** - Task creation, assignment, status transitions, honey accounting, and Honeycomb view (completed 2026-04-03)
 - [x] **Phase 4: Leaderboard** - Hive leaderboard ranked by honeys earned (completed 2026-04-04)
 - [x] **Phase 5: Theme & Copy** - Full bee theme, honeycomb UI patterns, and dynamic contextual copy engine (completed 2026-04-06)
-- [ ] **Phase 6: Deployment** - Vercel deploy with Neon PostgreSQL, environment config, production readiness
+- [x] **Phase 6: Deployment** - Vercel deploy with Neon PostgreSQL, environment config, production readiness (completed 2026-04-14)
+
+### v1.1 (Landing Page & Polish)
+
+- [ ] **Phase 7: Landing Page** - Marketing-style landing page as the public entry point with smart routing for logged-in users
+- [ ] **Phase 8: App Polish** - Leave-hive feature and optional due dates on tasks (UAT-identified gaps)
+- [ ] **Phase 9: Admin Dashboard** - Admin tool for viewing all users and hives, and resetting passwords
 
 ## Phase Details
 
@@ -109,19 +119,59 @@ Plans:
 **Plans:** 2 plans
 Plans:
 - [x] 06-01-PLAN.md — Install Neon driver, conditional db.ts driver switch, drizzle config for unpooled migrations, build script, health check endpoint
-- [ ] 06-02-PLAN.md — Provision Neon + Vercel, configure env vars, deploy, verify full app functionality
+- [x] 06-02-PLAN.md — Provision Neon + Vercel, configure env vars, deploy, verify full app functionality
 **UI hint**: no
+
+### Phase 7: Landing Page
+**Goal**: First-time visitors see a marketing-style landing page that explains Honey_Do and drives signups, while logged-in users are routed directly to their dashboard
+**Depends on**: Phase 6
+**Requirements**: LAND-01, LAND-02, LAND-03, LAND-04
+**Success Criteria** (what must be TRUE):
+  1. A logged-out visitor hitting the root URL sees a landing page with hero copy, a signup CTA, and a "how it works" section
+  2. The "how it works" section shows the core loop: create a hive, assign tasks, earn honeys
+  3. A returning user can find and click an "already buzzin'? sign in here" link without scrolling through the signup flow
+  4. A logged-in user who navigates to the root URL is immediately redirected to their dashboard without seeing the landing page
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 8: App Polish
+**Goal**: Users can leave a hive they no longer belong in, and task creators can attach optional due dates that are visible on task cards
+**Depends on**: Phase 7
+**Requirements**: HIVE-06, TASK-11, TASK-12
+**Success Criteria** (what must be TRUE):
+  1. A Hive member can leave their Hive from within the app after confirming a prompt — they are removed from the Hive immediately
+  2. A Queen or QueenBee can optionally set a due date when creating a task, or skip it
+  3. Tasks with a due date show that date on the task card in the Honeycomb
+  4. Tasks without a due date display normally with no empty placeholder
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 9: Admin Dashboard
+**Goal**: An admin user can audit the platform's users and hives, and can reset a user's password when needed
+**Depends on**: Phase 8
+**Requirements**: ADMIN-01, ADMIN-02, ADMIN-03
+**Success Criteria** (what must be TRUE):
+  1. An admin can view a list of all registered users with each user's email and signup date
+  2. An admin can view a list of all hives with each hive's member count and creation date
+  3. An admin can reset any user's password (sets a temporary password or triggers a reset mechanism)
+  4. The admin area is inaccessible to non-admin users — unauthorized access is rejected
+**Plans**: TBD
+**UI hint**: yes
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+v1.0 phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+v1.1 phases execute in numeric order: 7 -> 8 -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/3 | Complete   | 2026-03-29 |
-| 2. Invite Flow | 0/2 | Planned | - |
+| 1. Foundation | 3/3 | Complete | 2026-03-29 |
+| 2. Invite Flow | 2/2 | Complete | 2026-03-31 |
 | 3. Task System | 2/2 | Complete | 2026-04-03 |
-| 4. Leaderboard | 1/1 | Complete   | 2026-04-04 |
-| 5. Theme & Copy | 2/2 | Complete   | 2026-04-06 |
-| 6. Deployment | 0/2 | Planned | - |
+| 4. Leaderboard | 1/1 | Complete | 2026-04-04 |
+| 5. Theme & Copy | 2/2 | Complete | 2026-04-06 |
+| 6. Deployment | 2/2 | Complete | 2026-04-14 |
+| 7. Landing Page | 0/TBD | Not started | - |
+| 8. App Polish | 0/TBD | Not started | - |
+| 9. Admin Dashboard | 0/TBD | Not started | - |

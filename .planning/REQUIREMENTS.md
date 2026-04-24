@@ -145,22 +145,22 @@ Which phases cover which requirements. Updated during roadmap creation.
 | THEME-01 | Phase 5 | Complete |
 | THEME-02 | Phase 5 | Complete |
 | DEPLOY-01 | Phase 6 | Complete |
-| LAND-01 | — | Planned |
-| LAND-02 | — | Planned |
-| LAND-03 | — | Planned |
-| LAND-04 | — | Planned |
-| HIVE-06 | — | Planned |
-| TASK-11 | — | Planned |
-| TASK-12 | — | Planned |
-| ADMIN-01 | — | Planned |
-| ADMIN-02 | — | Planned |
-| ADMIN-03 | — | Planned |
+| LAND-01 | Phase 7 | Pending |
+| LAND-02 | Phase 7 | Pending |
+| LAND-03 | Phase 7 | Pending |
+| LAND-04 | Phase 7 | Pending |
+| HIVE-06 | Phase 8 | Pending |
+| TASK-11 | Phase 8 | Pending |
+| TASK-12 | Phase 8 | Pending |
+| ADMIN-01 | Phase 9 | Pending |
+| ADMIN-02 | Phase 9 | Pending |
+| ADMIN-03 | Phase 9 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 19 total, 19 complete
 - v1.1 requirements: 9 total, 0 complete
-- Unmapped: 9 (v1.1 — pending roadmap)
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-26*
-*Last updated: 2026-04-23 — v1.1 requirements added*
+*Last updated: 2026-04-23 — v1.1 phase mappings added (Phases 7-9)*
