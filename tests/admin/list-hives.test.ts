@@ -16,9 +16,9 @@ const {
   const selectProjection: { current: unknown } = { current: null }
 
   const mockOrderBy = vi.fn().mockResolvedValue([])
-  const mockGroupBy = vi.fn(() => ({ orderBy: mockOrderBy }))
-  const mockLeftJoin = vi.fn(() => ({ groupBy: mockGroupBy }))
-  const mockFrom = vi.fn(() => ({ leftJoin: mockLeftJoin }))
+  const mockGroupBy = vi.fn((..._cols: unknown[]) => ({ orderBy: mockOrderBy }))
+  const mockLeftJoin = vi.fn((_table: unknown, _cond: unknown) => ({ groupBy: mockGroupBy }))
+  const mockFrom = vi.fn((_table: unknown) => ({ leftJoin: mockLeftJoin }))
   const mockSelect = vi.fn((projection: unknown) => {
     selectProjection.current = projection
     return { from: mockFrom }
@@ -39,7 +39,10 @@ const {
 })
 
 vi.mock("@/lib/db", () => ({ db: { select: mockSelect } }))
-vi.mock("drizzle-orm", () => ({ eq: mockEq, count: mockCount }))
+vi.mock("drizzle-orm", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("drizzle-orm")>()
+  return { ...actual, eq: mockEq, count: mockCount }
+})
 
 import { listAllHives } from "@/lib/queries/admin"
 import { hives, hiveMembers } from "@/db/schema"

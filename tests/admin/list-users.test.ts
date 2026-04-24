@@ -28,7 +28,10 @@ const {
 })
 
 vi.mock("@/lib/db", () => ({ db: { select: mockSelect } }))
-vi.mock("drizzle-orm", () => ({ eq: mockEq, count: mockCount }))
+vi.mock("drizzle-orm", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("drizzle-orm")>()
+  return { ...actual, eq: mockEq, count: mockCount }
+})
 
 import { listAllUsers } from "@/lib/queries/admin"
 import { user } from "@/db/schema"
