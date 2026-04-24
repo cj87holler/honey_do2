@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 export function Header() {
   const router = useRouter()
@@ -23,14 +24,22 @@ export function Header() {
             Your Hive. Your Rules. Your Honey.
           </p>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleLogout}
-          className="text-amber-900 hover:bg-amber-600/20"
-        >
-          Log out
-        </Button>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/help"
+            className="text-sm font-medium text-amber-900 hover:underline"
+          >
+            Help
+          </Link>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleLogout}
+            className="text-amber-900 hover:bg-amber-600/20"
+          >
+            Log out
+          </Button>
+        </div>
       </div>
     </header>
   )
