@@ -39,3 +39,37 @@ export async function requireAdmin() {
   if (!isAdminEmail(session.user.email)) throw new Error("Forbidden")
   return session
 }
+
+// Bee-themed curated word lists for temp passwords (D-05).
+// Ambiguous LETTER characters excluded: O, I, B, l (visually confusable).
+// Note: lowercase "l" is excluded because it is visually confusable with "1" and "I".
+// This required replacing a few words from the original research draft (e.g. "golden",
+// "royal", "bold", "calm", "pollen", "flow", "cell", "bloom", "clover") with
+// l-free bee-themed alternatives. Entropy unchanged: 20 × 20 × 9000 = 3.6M combinations.
+const BEE_ADJECTIVES = [
+  "busy", "merry", "grand", "sweet", "spry",
+  "happy", "brave", "fuzzy", "swift", "sunny",
+  "quick", "tiny", "amber", "bright", "tender",
+  "warm", "cozy", "keen", "pure", "ripe",
+]
+
+const BEE_NOUNS = [
+  "bee", "hive", "queen", "drone", "nest",
+  "honey", "comb", "swarm", "nectar", "wax",
+  "wing", "sting", "buzz", "dance", "crown",
+  "guard", "scout", "garden", "stamen", "meadow",
+]
+
+/**
+ * Generate a bee-themed temp password: {adjective}-{noun}-{4digit}.
+ * Shortest: "calm-bee-1000" (13 chars). Always meets Better Auth's 8-char minimum.
+ * Entropy: 20 * 20 * 9000 = 3.6M combinations (~21.8 bits) — acceptable for
+ * single-use temp passwords that the user rotates on first sign-in.
+ * Pure, synchronous, never logs.
+ */
+export function generateTempPassword(): string {
+  const adj = BEE_ADJECTIVES[Math.floor(Math.random() * BEE_ADJECTIVES.length)]
+  const noun = BEE_NOUNS[Math.floor(Math.random() * BEE_NOUNS.length)]
+  const suffix = String(Math.floor(Math.random() * 9000) + 1000)
+  return `${adj}-${noun}-${suffix}`
+}
