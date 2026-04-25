@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { ResetPasswordButton } from "@/components/admin/reset-password-button"
 
 type UserRow = {
   id: string
@@ -10,10 +10,9 @@ type UserRow = {
 /**
  * ADMIN-01: Renders the admin users list (email + signup date + actions).
  *
- * Server component (no client-side directive). The Reset password button is
- * intentionally disabled; Plan 04 will replace this component (or wrap it in a
- * client-interactive one) to wire the reset modal. The `title` attribute
- * documents the placeholder for anyone debugging the intermediate state.
+ * Server component (no client-side directive). Each row renders a
+ * <ResetPasswordButton> client component that handles the confirm → success
+ * modal flow and calls the resetUserPassword server action (ADMIN-03, Plan 04).
  */
 export function UsersTable({ users }: { users: UserRow[] }) {
   if (users.length === 0) {
@@ -42,9 +41,7 @@ export function UsersTable({ users }: { users: UserRow[] }) {
               })}
             </td>
             <td className="py-3">
-              <Button variant="secondary" size="sm" disabled title="Wired in Plan 04">
-                Reset password
-              </Button>
+              <ResetPasswordButton userId={u.id} email={u.email} />
             </td>
           </tr>
         ))}
