@@ -160,9 +160,9 @@ Plans:
   4. The admin area is inaccessible to non-admin users — unauthorized access is rejected
 **Plans:** 4 plans
 Plans:
-- [ ] 09-01-PLAN.md — Admin identity module (isAdminEmail, requireAdmin) + (admin) route group layout gate + .env.example
-- [ ] 09-02-PLAN.md — listAllUsers + listAllHives Drizzle queries + UsersTable + HivesTable rendered on /admin
-- [ ] 09-03-PLAN.md — generateTempPassword bee-themed generator with TDD unit tests
+- [x] 09-01-PLAN.md — Admin identity module (isAdminEmail, requireAdmin) + (admin) route group layout gate + .env.example
+- [x] 09-02-PLAN.md — listAllUsers + listAllHives Drizzle queries + UsersTable + HivesTable rendered on /admin
+- [x] 09-03-PLAN.md — generateTempPassword bee-themed generator with TDD unit tests
 - [ ] 09-04-PLAN.md — resetUserPassword server action + ResetPasswordButton confirm-and-show-once modal, wired into UsersTable
 **UI hint**: yes
 
