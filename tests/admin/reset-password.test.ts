@@ -140,17 +140,17 @@ describe("resetUserPassword", () => {
     expect(mockUpdate).toHaveBeenCalledWith(account)
 
     expect(mockSet).toHaveBeenCalledTimes(1)
-    const setArg = mockSet.mock.calls[0][0] as { password: string; updatedAt: Date }
+    const setArg = (mockSet.mock.calls[0] as unknown as [{ password: string; updatedAt: Date }])[0]
     expect(setArg.password).toBe("scrypt$salt$hash")
     expect(setArg.password).not.toBe("busy-bee-1234")
     expect(setArg.updatedAt).toBeInstanceOf(Date)
 
     expect(mockUpdateWhere).toHaveBeenCalledTimes(1)
-    const whereArg = mockUpdateWhere.mock.calls[0][0]
+    const whereArg = (mockUpdateWhere.mock.calls[0] as unknown as [unknown])[0]
     expect(whereArg).toMatchObject({ __and: true })
 
     expect(mockAnd).toHaveBeenCalledTimes(1)
-    const andConds = (mockAnd.mock.calls[0] as unknown[])
+    const andConds = mockAnd.mock.calls[0] as unknown as unknown[]
     expect(andConds).toHaveLength(2)
 
     const eqCalls = mockEq.mock.calls
@@ -167,7 +167,7 @@ describe("resetUserPassword", () => {
     expect(mockDelete).toHaveBeenCalledWith(session)
 
     expect(mockDeleteWhere).toHaveBeenCalledTimes(1)
-    const deleteWhereArg = mockDeleteWhere.mock.calls[0][0]
+    const deleteWhereArg = (mockDeleteWhere.mock.calls[0] as unknown as [unknown])[0]
     expect(deleteWhereArg).toMatchObject({ __eq: true, b: "user-1" })
   })
 
