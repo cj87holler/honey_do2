@@ -163,7 +163,7 @@ Plans:
 - [x] 09-01-PLAN.md — Admin identity module (isAdminEmail, requireAdmin) + (admin) route group layout gate + .env.example
 - [x] 09-02-PLAN.md — listAllUsers + listAllHives Drizzle queries + UsersTable + HivesTable rendered on /admin
 - [x] 09-03-PLAN.md — generateTempPassword bee-themed generator with TDD unit tests
-- [ ] 09-04-PLAN.md — resetUserPassword server action + ResetPasswordButton confirm-and-show-once modal, wired into UsersTable
+- [x] 09-04-PLAN.md — resetUserPassword server action + ResetPasswordButton confirm-and-show-once modal, wired into UsersTable
 **UI hint**: yes
 
 ### Phase 10: Email Notifications
