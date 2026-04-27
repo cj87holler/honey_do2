@@ -63,7 +63,7 @@ export function ResetPasswordButton({ userId, email }: ResetPasswordButtonProps)
           role="dialog"
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
-          onClick={close}
+          onClick={state.kind === "success" ? undefined : close}
         >
           <div
             className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg"

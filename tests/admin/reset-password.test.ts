@@ -8,6 +8,7 @@ const {
   mockUpdate,
   mockSet,
   mockUpdateWhere,
+  mockReturning,
   mockDelete,
   mockDeleteWhere,
   mockTransaction,
@@ -17,9 +18,13 @@ const {
 } = vi.hoisted(() => {
   const callOrder: string[] = []
 
+  const mockReturning = vi.fn(() => {
+    callOrder.push("returning")
+    return Promise.resolve([{ id: "account-1" }])
+  })
   const mockUpdateWhere = vi.fn(() => {
     callOrder.push("update-where")
-    return Promise.resolve()
+    return { returning: mockReturning }
   })
   const mockSet = vi.fn(() => ({ where: mockUpdateWhere }))
   const mockUpdate = vi.fn(() => {
@@ -50,6 +55,7 @@ const {
     mockUpdate,
     mockSet,
     mockUpdateWhere,
+    mockReturning,
     mockDelete,
     mockDeleteWhere,
     mockTransaction,
@@ -83,6 +89,10 @@ describe("resetUserPassword", () => {
     })
     mockGenerateTempPassword.mockReturnValue("busy-bee-1234")
     mockHashPassword.mockResolvedValue("scrypt$salt$hash")
+    mockReturning.mockImplementation(() => {
+      callOrder.push("returning")
+      return Promise.resolve([{ id: "account-1" }])
+    })
   })
 
   it("rethrows when requireAdmin throws Forbidden and never mutates", async () => {
@@ -230,5 +240,20 @@ describe("resetUserPassword", () => {
     expect(caught).toBeInstanceOf(Error)
     const msg = (caught as Error).message
     expect(msg).not.toContain("busy-bee-1234")
+  })
+
+  it("WR-01: rejects and skips session delete when update affects zero rows", async () => {
+    // Simulate a user with no credential-provider account row.
+    mockReturning.mockImplementationOnce(() => {
+      callOrder.push("returning")
+      return Promise.resolve([])
+    })
+
+    await expect(resetUserPassword("user-1")).rejects.toThrow("Password reset failed")
+
+    // Update was attempted but session delete must NOT have run.
+    expect(mockUpdate).toHaveBeenCalledTimes(1)
+    expect(mockDelete).not.toHaveBeenCalled()
+    expect(mockDeleteWhere).not.toHaveBeenCalled()
   })
 })
