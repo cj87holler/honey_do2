@@ -26,6 +26,7 @@
 
 # local scripts
 scripts/reset-password.ts
+scripts/reset-local-password.mjs
 
 # personal / local-only planning docs (not for repo)
 /PRODUCTIONIZATION_ROADMAP.md
