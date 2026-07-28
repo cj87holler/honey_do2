@@ -1,36 +1,33 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: Landing Page & Polish
-status: in_progress
-stopped_at: Phase 9 complete (UAT passed); WR-01 + WR-02 fixes pending before prod
-last_updated: "2026-04-26T00:00:00Z"
-last_activity: "2026-04-26 - Phase 9 human UAT passed (3 verified, 2 accepted by tester)"
+milestone: v1.2
+milestone_name: Productionization
+status: planning
+last_updated: "2026-07-28T01:47:38.247Z"
+last_activity: 2026-07-28
 progress:
-  total_phases: 4
-  completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
-  percent: 50
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-23)
+See: .planning/PROJECT.md (updated 2026-07-27)
 
 **Core value:** People in a household can assign tasks to each other and actually get them done, because the gamified bee-themed experience makes chores feel like play rather than nagging.
-**Current focus:** Milestone v1.1 — Landing Page & Polish
+**Current focus:** Milestone v1.2 — Productionization
 
 ## Current Position
 
-Phase: 09 (complete pending review-fix commits)
-Plan: All 4 plans complete; human UAT passed
-Status: Phase 9 functionally done. Two code-review warnings (WR-01, WR-02) to fix before production push.
-Last activity: 2026-04-26 - Phase 9 human UAT completed (Tests 1-3 verified, Tests 4-5 accepted by tester)
-
-Progress (v1.1): [█████░░░░░] 50% (2/4 phases — Phase 7 + Phase 9; Phase 8 deferred, Phase 10 not started)
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-07-28 — Milestone v1.2 started
 
 ## Accumulated Context
 
@@ -52,10 +49,18 @@ Carried from v1.0:
 ### Roadmap Evolution
 
 - Phase 10 added (2026-04-24): Email Notifications — transactional emails for welcome, invite, task assigned, task completed
+- Milestone v1.2 Productionization started (2026-07-27), phases continue at 11. v1.1 parked
+  incomplete: Phase 8 (App Polish) and Phase 10 (Email Notifications) deferred, not cancelled.
+  Their ROADMAP.md entries and phase directories are intentionally left intact — do NOT run
+  `phases.clear`, there is no completed-milestone archive to restore from.
 
 ### Blockers/Concerns
 
-None.
+- **Preview deployments cannot build.** Neon-Vercel integration only injects `DATABASE_URL`
+  into Production, so preview builds fail at `drizzle-kit migrate` (`url: undefined`). Safe
+  (no preview can reach prod data) but previews are non-functional. Deferred out of v1.2.
+- **Sentry + uptime monitor need credentials.** Those phases will pause for a user-generated
+  API token before they can complete.
 
 ### Quick Tasks Completed
 
@@ -65,6 +70,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-04-26T00:00:00Z
-Stopped at: Phase 9 closed out — UAT passed, WR-01 + WR-02 fixes queued before prod deploy
-Resume file: .planning/phases/09-admin-dashboard/09-REVIEW.md (warnings to address)
+Last session: 2026-07-27
+Stopped at: Milestone v1.2 (Productionization) initialized — PROJECT.md and STATE.md updated.
+Next: define REQUIREMENTS.md, then spawn roadmapper for phases starting at 11.
+Resume file: none

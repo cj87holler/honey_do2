@@ -27,7 +27,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 7: Landing Page** - Marketing-style landing page as the public entry point with smart routing for logged-in users (completed 2026-04-23)
 - [ ] **Phase 8: App Polish** - Leave-hive feature and optional due dates on tasks (UAT-identified gaps)
-- [x] **Phase 9: Admin Dashboard** - Admin tool for viewing all users and hives, and resetting passwords (completed 2026-04-26; WR-01/WR-02 fixes pending)
+- [x] **Phase 9: Admin Dashboard** - Admin tool for viewing all users and hives, and resetting passwords (completed 2026-04-26)
 - [ ] **Phase 10: Email Notifications** - Transactional emails for key user events (welcome, invite received, task assigned/completed)
 
 ## Phase Details
@@ -195,5 +195,5 @@ v1.1 phases execute in numeric order: 7 -> 8 -> 9 -> 10
 | 6. Deployment | 2/2 | Complete | 2026-04-14 |
 | 7. Landing Page | 1/1 | Complete | 2026-04-23 |
 | 8. App Polish | 0/TBD | Not started | - |
-| 9. Admin Dashboard | 4/4 | Complete (UAT passed; WR-01/WR-02 fixes pending) | 2026-04-26 |
+| 9. Admin Dashboard | 4/4 | Complete (UAT passed) | 2026-04-26 |
 | 10. Email Notifications | 0/TBD | Not started | - |
