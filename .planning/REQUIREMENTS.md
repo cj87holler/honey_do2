@@ -207,34 +207,34 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ADMIN-01 | Phase 9 | Complete |
 | ADMIN-02 | Phase 9 | Complete |
 | ADMIN-03 | Phase 9 | Complete |
-| CI-01 | TBD | Pending |
-| CI-02 | TBD | Pending |
-| CI-03 | TBD | Pending |
-| CI-04 | TBD | Pending |
-| CI-05 | TBD | Pending |
-| SEC-01 | TBD | Pending |
-| SEC-02 | TBD | Pending |
-| SEC-03 | TBD | Pending |
-| SEC-04 | TBD | Pending |
-| SEC-05 | TBD | Pending |
-| SEC-06 | TBD | Pending |
-| LEGAL-01 | TBD | Pending |
-| LEGAL-02 | TBD | Pending |
-| LEGAL-03 | TBD | Pending |
-| LEGAL-04 | TBD | Pending |
-| OBS-01 | TBD | Pending |
-| OBS-02 | TBD | Pending |
-| OBS-03 | TBD | Pending |
-| OBS-04 | TBD | Pending |
-| OBS-05 | TBD | Pending |
-| OBS-06 | TBD | Pending |
+| CI-01 | Phase 11 | Pending |
+| CI-02 | Phase 11 | Pending |
+| CI-03 | Phase 11 | Pending |
+| CI-04 | Phase 11 | Pending |
+| CI-05 | Phase 11 | Pending |
+| SEC-01 | Phase 15 | Pending |
+| SEC-02 | Phase 15 | Pending |
+| SEC-03 | Phase 15 | Pending |
+| SEC-04 | Phase 15 | Pending |
+| SEC-05 | Phase 15 | Pending |
+| SEC-06 | Phase 13 | Pending |
+| LEGAL-01 | Phase 12 | Pending |
+| LEGAL-02 | Phase 12 | Pending |
+| LEGAL-03 | Phase 12 | Pending |
+| LEGAL-04 | Phase 16 | Pending |
+| OBS-01 | Phase 17 | Pending |
+| OBS-02 | Phase 16 | Pending |
+| OBS-03 | Phase 16 | Pending |
+| OBS-04 | Phase 16 | Pending |
+| OBS-05 | Phase 14 | Pending |
+| OBS-06 | Phase 17 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 19 total, 19 complete
 - v1.1 requirements: 10 total, 7 complete, 3 deferred (Phase 8 never started)
-- v1.2 requirements: 21 total, 0 complete — phase mapping pending roadmap creation
-- Unmapped: 21 (v1.2, awaiting roadmapper)
+- v1.2 requirements: 21 total, 0 complete — mapped to Phases 11-17
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-26*
-*Last updated: 2026-07-27 — v1.2 Productionization requirements added (21); v1.1 statuses corrected to reflect Phases 7 and 9 shipped*
+*Last updated: 2026-07-27 — v1.2 Productionization requirements added (21) and mapped to Phases 11-17; v1.1 statuses corrected to reflect Phases 7 and 9 shipped*
