@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
-status: verifying
+status: planning
 last_updated: "2026-07-28T01:47:38.247Z"
 last_activity: 2026-07-28
 progress:
   total_phases: 7
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  completed_phases: 2
+  total_plans: 3
+  completed_plans: 3
+  percent: 29
 ---
 
 # Project State
@@ -24,14 +24,13 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 12 of 17 (Legal Pages) — awaiting PR + merge
-Plan: 1/1 complete
-Status: Phase 12 work complete locally, all 3 criteria verified against the running app.
-Unpushed — needs a PR to main (which will exercise the new CI gate). Stays unchecked in
-ROADMAP until merged, so it reads In Review.
-Last activity: 2026-07-28 — Phase 12 built: /privacy + /terms live locally, awaiting PR
+Phase: 13 of 17 (Repo Visibility -> Private) — ready to plan
+Plan: — (no plans yet)
+Status: Phase 12 COMPLETE and merged (PR #4 -> main, 8324f2e). /privacy and /terms are live.
+Phase 13 (Repo Visibility -> Private) has no CONTEXT.md yet.
+Last activity: 2026-07-28 — Phase 12 merged: /privacy + /terms shipped to production
 
-Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)
+Progress (v1.2): [███░░░░░░░] 29% (2/7 phases)
 
 ## Accumulated Context
 
@@ -82,9 +81,12 @@ Carried from v1.0:
 ## Session Continuity
 
 Last session: 2026-07-28
-Stopped at: Quick task 260728-rl5 complete — GSD→Linear sync live. Linear project `Honey_Do`
-(team HON) now mirrors all 17 phases + plans; refresh with `make linear-sync`. Next action is
-still Phase 11 (CI on Pull Requests), which has no CONTEXT.md yet.
+Stopped at: Phases 11 and 12 both shipped to main. CI gate is live and required (enforce_admins
+true); /privacy and /terms are public. dev is reconciled with main. Next action is Phase 13.
+
+**PR workflow note:** main uses squash merge, so after each merge `dev` must be reconciled via
+`git merge origin/main` or the next PR re-proposes everything. Phase 11's reconcile hit an add/add
+conflict (a commit landed after the PR head); resolve to dev when dev is the superset.
 Resume file: none
 
 **Linear mirror (added 2026-07-28):** `.planning/` remains the source of truth; Linear is a

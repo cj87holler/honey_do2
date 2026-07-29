@@ -35,7 +35,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 ### v1.2 (Productionization)
 
 - [x] **Phase 11: CI on Pull Requests** - GitHub Actions gate on main: typecheck, lint, and tests must pass before merge (completed 2026-07-28)
-- [ ] **Phase 12: Legal Pages** - Public Privacy Policy and Terms of Use pages linked from the landing page
+- [x] **Phase 12: Legal Pages** - Public Privacy Policy and Terms of Use pages linked from the landing page (completed 2026-07-28)
 - [ ] **Phase 13: Repo Visibility → Private** - GitHub repository flipped from public to private
 - [ ] **Phase 14: Structured Logging** - pino-based structured JSON logging with secret redaction on server routes
 - [ ] **Phase 15: Security Headers & CSP** - Hardened HTTP headers and a Content-Security-Policy rolled out Report-Only → enforcing
