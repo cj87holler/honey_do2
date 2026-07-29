@@ -95,9 +95,9 @@ these make the app safe to run, not more capable.
 
 ### Legal Pages
 
-- [ ] **LEGAL-01**: A Privacy Policy page is publicly reachable at `/privacy` without authentication
-- [ ] **LEGAL-02**: A Terms of Use page is publicly reachable at `/terms` without authentication
-- [ ] **LEGAL-03**: Both pages are linked from the landing page
+- [x] **LEGAL-01**: A Privacy Policy page is publicly reachable at `/privacy` without authentication
+- [x] **LEGAL-02**: A Terms of Use page is publicly reachable at `/terms` without authentication
+- [x] **LEGAL-03**: Both pages are linked from the landing page
 - [ ] **LEGAL-04**: The Privacy Policy names the data collected, the sub-processors used (Vercel, Neon, Sentry), retention, and how a user requests deletion
 
 ### Observability
@@ -218,9 +218,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEC-04 | Phase 15 | Pending |
 | SEC-05 | Phase 15 | Pending |
 | SEC-06 | Phase 13 | Pending |
-| LEGAL-01 | Phase 12 | Pending |
-| LEGAL-02 | Phase 12 | Pending |
-| LEGAL-03 | Phase 12 | Pending |
+| LEGAL-01 | Phase 12 | Complete |
+| LEGAL-02 | Phase 12 | Complete |
+| LEGAL-03 | Phase 12 | Complete |
 | LEGAL-04 | Phase 16 | Pending |
 | OBS-01 | Phase 17 | Pending |
 | OBS-02 | Phase 16 | Pending |

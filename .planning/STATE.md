@@ -2,7 +2,7 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
-status: executing
+status: verifying
 last_updated: "2026-07-28T01:47:38.247Z"
 last_activity: 2026-07-28
 progress:
@@ -24,11 +24,12 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 12 of 17 (Legal Pages) — executing
-Plan: 12-01 of 1 — /privacy, /terms, footer links
-Status: Phase 11 COMPLETE and merged (PR #2 -> main, a200d36). CI gate is live on main.
-Phase 12 planned and executing.
-Last activity: 2026-07-28 — Phase 11 executed: CI gate live on main, PR #2 open awaiting merge
+Phase: 12 of 17 (Legal Pages) — awaiting PR + merge
+Plan: 1/1 complete
+Status: Phase 12 work complete locally, all 3 criteria verified against the running app.
+Unpushed — needs a PR to main (which will exercise the new CI gate). Stays unchecked in
+ROADMAP until merged, so it reads In Review.
+Last activity: 2026-07-28 — Phase 12 built: /privacy + /terms live locally, awaiting PR
 
 Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)
 
@@ -64,6 +65,11 @@ Carried from v1.0:
   (no preview can reach prod data) but previews are non-functional. Deferred out of v1.2.
 - **Sentry + uptime monitor need credentials.** Those phases will pause for a user-generated
   API token before they can complete.
+- **`honeydoapp@gmail.com` must be created.** Published on /privacy and /terms as the ONLY route
+  for account-deletion requests (there is no in-app delete feature). Must be a real monitored
+  inbox before real users see those pages. Defined in `src/lib/legal.ts` — one line to change.
+- **Legal pages have had no visual review.** Verified by HTTP content only; the browser extension
+  was unavailable. Worth a look before merging.
 
 ### Quick Tasks Completed
 
