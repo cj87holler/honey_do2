@@ -215,7 +215,9 @@ Plans:
   1. Visiting `/privacy` without being logged in shows a Privacy Policy page
   2. Visiting `/terms` without being logged in shows a Terms of Use page
   3. The landing page has visible links to both `/privacy` and `/terms`
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 12-01-PLAN.md — Legal constants, /privacy and /terms public pages, footer links, disclosure tests
 **UI hint**: yes
 
 **Note**: LEGAL-04 (naming Sentry as a sub-processor with an accurate description of what data it receives) is deliberately NOT satisfied by this phase. This phase drafts the sub-processor section with generic language ("we use an error-tracking service that may receive technical error data"). LEGAL-04 is mapped to Phase 16 and is only satisfied once Sentry's PII-scrubbing configuration (OBS-03) is locked in and the paragraph is rewritten to match it — see rationale below.

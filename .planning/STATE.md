@@ -2,7 +2,7 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
-status: verifying
+status: executing
 last_updated: "2026-07-28T01:47:38.247Z"
 last_activity: 2026-07-28
 progress:
@@ -24,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 11 of 17 (CI on Pull Requests) — awaiting merge
-Plan: 2/2 complete
-Status: All 5 success criteria met and verified. PR #2 (dev -> main) is OPEN and unmerged —
-Phase 11 stays unchecked in ROADMAP until it merges, so it reads as In Review, not Done.
+Phase: 12 of 17 (Legal Pages) — executing
+Plan: 12-01 of 1 — /privacy, /terms, footer links
+Status: Phase 11 COMPLETE and merged (PR #2 -> main, a200d36). CI gate is live on main.
+Phase 12 planned and executing.
 Last activity: 2026-07-28 — Phase 11 executed: CI gate live on main, PR #2 open awaiting merge
 
 Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)
