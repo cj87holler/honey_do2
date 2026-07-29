@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 Phase: 11 of 17 (CI on Pull Requests) — ready to plan
 Plan: — (no plans yet)
 Status: Roadmap approved. Phase 11 has no CONTEXT.md — discuss-phase or plan-phase next.
-Last activity: 2026-07-28 — Completed quick task 260728-rl5: GSD→Linear sync (`make linear-sync`)
+Last activity: 2026-07-28 — Completed quick task 260728-rvv: narrative descriptions in Linear mirror
 
 Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)
 
@@ -70,6 +70,7 @@ Carried from v1.0:
 |---|-------------|------|--------|-----------|
 | 260423-swx | Add help page for logged-in users explaining roles honeys leaderboard tasks invites | 2026-04-24 | 0efe6ac | [260423-swx](./quick/260423-swx-add-help-page-for-logged-in-users-explai/) |
 | 260728-rl5 | Build one-way GSD to Linear sync script with make target | 2026-07-28 | 544f6cc | [260728-rl5](./quick/260728-rl5-build-one-way-gsd-to-linear-sync-script-/) |
+| 260728-rvv | Add rich project and phase descriptions to Linear sync | 2026-07-28 | 6b50197 | [260728-rvv](./quick/260728-rvv-add-rich-project-and-phase-descriptions-/) |
 
 ## Session Continuity
 
@@ -84,6 +85,11 @@ read-only dashboard and hand-edits there are reverted on the next sync. Sync is 
 goes stale until someone runs `make linear-sync`. `.planning/linear-map.json` holds the issue-ID
 map (safe to commit, no secrets; safe to delete, issues re-match by title). Requires
 `LINEAR_API_KEY` in `.env.local`.
+
+Issue descriptions are generated from planning artifacts, so **the quality of a phase's Linear
+description depends on its `*-SUMMARY.md` having a `provides:` frontmatter block** — that block is
+the sole source for "what was built". Phases whose summaries omit it will sync with an empty
+"What was built" section. Worth keeping in mind when writing future summaries.
 
 **Verified baselines as of 2026-07-27** (re-check before trusting; they gate Phase 11):
 - `npx tsc --noEmit` FAILS — 4 errors, all in `tests/task/update-task-status.test.ts` (107, 108, 153, 157). Zero in `src/`.
