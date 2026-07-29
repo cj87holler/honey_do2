@@ -201,10 +201,10 @@ Plans:
   3. Opening a pull request against main automatically triggers a GitHub Actions run of typecheck, lint, and the unit test suite
   4. A pull request with a failing check is blocked from merging by required status checks on main (configured only after the workflow has run once on a real PR, so the exact check name can be selected from GitHub's dropdown rather than typed from memory)
   5. The CI workflow completes without provisioning a database and without invoking `npm run build`
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 Plans:
 - [x] 11-01-PLAN.md — Clean the typecheck/lint baseline to zero and add the GitHub Actions workflow
-- [ ] 11-02-PLAN.md — Prove the gate on a real PR, then require the check on main with enforce_admins
+- [x] 11-02-PLAN.md — Prove the gate on a real PR, then require the check on main with enforce_admins
 **UI hint**: no
 
 ### Phase 12: Legal Pages

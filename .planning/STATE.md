@@ -2,7 +2,7 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
-status: executing
+status: verifying
 last_updated: "2026-07-28T01:47:38.247Z"
 last_activity: 2026-07-28
 progress:
@@ -24,11 +24,11 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 11 of 17 (CI on Pull Requests) — executing
-Plan: 11-02 of 2 — Prove the gate on a real PR, then require the check
-Status: 11-01 complete (gate is green locally, workflow committed). 11-02 BLOCKED on a human
-checkpoint — it pushes to origin, opens a PR, and changes branch protection on main.
-Last activity: 2026-07-28 — Completed quick task 260728-rvv: narrative descriptions in Linear mirror
+Phase: 11 of 17 (CI on Pull Requests) — awaiting merge
+Plan: 2/2 complete
+Status: All 5 success criteria met and verified. PR #2 (dev -> main) is OPEN and unmerged —
+Phase 11 stays unchecked in ROADMAP until it merges, so it reads as In Review, not Done.
+Last activity: 2026-07-28 — Phase 11 executed: CI gate live on main, PR #2 open awaiting merge
 
 Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)
 
@@ -101,4 +101,7 @@ the sole source for "what was built". Phases whose summaries omit it will sync w
 - Stack is Next.js **16.2.1** / React 19.2.4 / Node v22.11.0 — CLAUDE.md's "Next.js 15.x + Auth.js v5" is STALE (app uses Better Auth 1.5.6).
 - `src/app/api/health/route.ts` returns a hardcoded 200 and never queries the DB (Phase 17 fixes).
 - `gh` + `vercel` CLIs authenticated; user has repo ADMIN. Branch protection and the private flip are scriptable.
-- main protection today: PR required, 0 approvals, enforce_admins FALSE, required_status_checks NULL.
+- main protection NOW (changed 2026-07-28 by Phase 11): PR required, 0 approvals,
+  enforce_admins TRUE, required_status_checks {strict:true, contexts:["ci"]}.
+  Only `ci` is required — the Vercel check is deliberately NOT required because previews
+  cannot build here, and requiring it would permanently block every merge.
