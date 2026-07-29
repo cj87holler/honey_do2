@@ -76,9 +76,18 @@ export function LandingPage() {
         </p>
       </section>
 
-      {/* Footer (minimal) */}
+      {/* Footer (minimal) — legal links per LEGAL-03 */}
       <footer className="text-center py-8 text-xs text-stone-400">
-        Honey Do — making chores buzz-worthy since 2026
+        <p>Honey Do — making chores buzz-worthy since 2026</p>
+        <p className="mt-2">
+          <Link href="/privacy" className="hover:underline">
+            Privacy Policy
+          </Link>
+          <span className="mx-2">·</span>
+          <Link href="/terms" className="hover:underline">
+            Terms of Use
+          </Link>
+        </p>
       </footer>
     </div>
   )

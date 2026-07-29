@@ -56,4 +56,12 @@ describe("LandingPage", () => {
     )
     expect(signupLinks.length).toBeGreaterThanOrEqual(2)
   })
+
+  it("links to the privacy policy and terms from the footer (LEGAL-03)", () => {
+    render(<LandingPage />)
+    const privacy = screen.getByRole("link", { name: /privacy policy/i })
+    const terms = screen.getByRole("link", { name: /terms of use/i })
+    expect(privacy.getAttribute("href")).toBe("/privacy")
+    expect(terms.getAttribute("href")).toBe("/terms")
+  })
 })
