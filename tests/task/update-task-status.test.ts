@@ -16,7 +16,9 @@ const {
   mockRequireQueen,
 } = vi.hoisted(() => {
   const mockUpdateWhere = vi.fn().mockResolvedValue(undefined)
-  const mockUpdateSet = vi.fn(() => ({ where: mockUpdateWhere }))
+  // Declare the argument the production code actually passes, so `mock.calls[0][0]` is typed
+  // instead of indexing an empty tuple.
+  const mockUpdateSet = vi.fn((_values: Record<string, unknown>) => ({ where: mockUpdateWhere }))
   const mockUpdate = vi.fn(() => ({ set: mockUpdateSet }))
 
   const mockDeleteWhere = vi.fn().mockResolvedValue(undefined)
@@ -150,11 +152,14 @@ describe("updateTaskStatus", () => {
     await updateTaskStatus("task-1", "done")
 
     expect(capturedTxUpdate).not.toBeNull()
-    const firstCallSetArg = (capturedTxUpdate as ReturnType<typeof vi.fn>).mock.calls[0]
+    // capturedTxUpdate is only assigned inside the transaction callback, so TS still sees its
+    // `null` initializer here. Narrow once through `unknown` and reuse.
+    const txUpdate = capturedTxUpdate as unknown as ReturnType<typeof vi.fn>
+    const firstCallSetArg = txUpdate.mock.calls[0]
     // The tx.update is called with the tasks table
     expect(firstCallSetArg).toBeDefined()
     // Verify completedAt is set (the set() call on the first update has completedAt)
-    const setCallArg = (capturedTxUpdate as ReturnType<typeof vi.fn>).mock.results[0].value.set.mock.calls[0][0]
+    const setCallArg = txUpdate.mock.results[0].value.set.mock.calls[0][0]
     expect(setCallArg.completedAt).toBeInstanceOf(Date)
     expect(setCallArg.status).toBe("done")
   })
