@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 Phase: 11 of 17 (CI on Pull Requests) — ready to plan
 Plan: — (no plans yet)
 Status: Roadmap approved. Phase 11 has no CONTEXT.md — discuss-phase or plan-phase next.
-Last activity: 2026-07-27 — Milestone v1.2 initialized: research, 21 requirements, 7-phase roadmap
+Last activity: 2026-07-28 — Completed quick task 260728-rl5: GSD→Linear sync (`make linear-sync`)
 
 Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)
 
@@ -69,13 +69,21 @@ Carried from v1.0:
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260423-swx | Add help page for logged-in users explaining roles honeys leaderboard tasks invites | 2026-04-24 | 0efe6ac | [260423-swx](./quick/260423-swx-add-help-page-for-logged-in-users-explai/) |
+| 260728-rl5 | Build one-way GSD to Linear sync script with make target | 2026-07-28 | 544f6cc | [260728-rl5](./quick/260728-rl5-build-one-way-gsd-to-linear-sync-script-/) |
 
 ## Session Continuity
 
-Last session: 2026-07-27
-Stopped at: Milestone v1.2 fully initialized — research (4 agents + synthesis), 21 requirements,
-7-phase roadmap (11-17) all committed. Next action is Phase 11 (CI on Pull Requests).
+Last session: 2026-07-28
+Stopped at: Quick task 260728-rl5 complete — GSD→Linear sync live. Linear project `Honey_Do`
+(team HON) now mirrors all 17 phases + plans; refresh with `make linear-sync`. Next action is
+still Phase 11 (CI on Pull Requests), which has no CONTEXT.md yet.
 Resume file: none
+
+**Linear mirror (added 2026-07-28):** `.planning/` remains the source of truth; Linear is a
+read-only dashboard and hand-edits there are reverted on the next sync. Sync is MANUAL — Linear
+goes stale until someone runs `make linear-sync`. `.planning/linear-map.json` holds the issue-ID
+map (safe to commit, no secrets; safe to delete, issues re-match by title). Requires
+`LINEAR_API_KEY` in `.env.local`.
 
 **Verified baselines as of 2026-07-27** (re-check before trusting; they gate Phase 11):
 - `npx tsc --noEmit` FAILS — 4 errors, all in `tests/task/update-task-status.test.ts` (107, 108, 153, 157). Zero in `src/`.
