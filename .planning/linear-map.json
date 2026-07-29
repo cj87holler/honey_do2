@@ -6,7 +6,7 @@
   "project": {
     "name": "Honey_Do",
     "id": "37d992f4-bd99-4f8c-b7f8-b3797c698987",
-    "descHash": "4333abdc854c6b9b"
+    "descHash": "2fc7685c5001d9dd"
   },
   "milestones": {
     "v1.0": "1dd4bd88-42a9-47df-a5f5-4164c3b24ca3",
@@ -152,12 +152,12 @@
     "phase-11": {
       "id": "2a662d7c-2f87-418b-9a24-57dac0bf36a8",
       "identifier": "HON-32",
-      "descHash": "b3131e3081652e86"
+      "descHash": "2fb7b78a17504bde"
     },
     "phase-12": {
       "id": "465c20d3-72d2-4abd-94b9-b7fcec8392d0",
       "identifier": "HON-33",
-      "descHash": "6059df305d690f61"
+      "descHash": "3506b6e2810391ac"
     },
     "phase-13": {
       "id": "d8c77e25-e794-4400-b04d-a784699f7b08",
@@ -192,7 +192,12 @@
     "phase-11/11-02": {
       "id": "ec092bef-6321-40ae-bd77-fc11750f8a1a",
       "identifier": "HON-40",
-      "descHash": "c01bb7f95b145433"
+      "descHash": "d48b07d323f815d9"
+    },
+    "phase-12/12-01": {
+      "id": "c71e316c-0586-4de5-8ec4-3f921f7f1697",
+      "identifier": "HON-41",
+      "descHash": "4ec09f02e900e3f0"
     }
   }
 }

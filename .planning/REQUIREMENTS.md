@@ -78,11 +78,11 @@ these make the app safe to run, not more capable.
 
 ### Continuous Integration
 
-- [ ] **CI-01**: `npm run typecheck` exists and `tsc --noEmit` reports zero errors across the repo
-- [ ] **CI-02**: `npm run lint` reports zero errors and zero warnings
-- [ ] **CI-03**: Every pull request targeting `main` automatically runs typecheck, lint, and the unit test suite
-- [ ] **CI-04**: A pull request whose checks fail cannot be merged into `main`
-- [ ] **CI-05**: CI completes without provisioning a database and without running `npm run build`
+- [x] **CI-01**: `npm run typecheck` exists and `tsc --noEmit` reports zero errors across the repo
+- [x] **CI-02**: `npm run lint` reports zero errors and zero warnings
+- [x] **CI-03**: Every pull request targeting `main` automatically runs typecheck, lint, and the unit test suite
+- [x] **CI-04**: A pull request whose checks fail cannot be merged into `main`
+- [x] **CI-05**: CI completes without provisioning a database and without running `npm run build`
 
 ### Security Hardening
 
@@ -95,9 +95,9 @@ these make the app safe to run, not more capable.
 
 ### Legal Pages
 
-- [ ] **LEGAL-01**: A Privacy Policy page is publicly reachable at `/privacy` without authentication
-- [ ] **LEGAL-02**: A Terms of Use page is publicly reachable at `/terms` without authentication
-- [ ] **LEGAL-03**: Both pages are linked from the landing page
+- [x] **LEGAL-01**: A Privacy Policy page is publicly reachable at `/privacy` without authentication
+- [x] **LEGAL-02**: A Terms of Use page is publicly reachable at `/terms` without authentication
+- [x] **LEGAL-03**: Both pages are linked from the landing page
 - [ ] **LEGAL-04**: The Privacy Policy names the data collected, the sub-processors used (Vercel, Neon, Sentry), retention, and how a user requests deletion
 
 ### Observability
@@ -207,20 +207,20 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ADMIN-01 | Phase 9 | Complete |
 | ADMIN-02 | Phase 9 | Complete |
 | ADMIN-03 | Phase 9 | Complete |
-| CI-01 | Phase 11 | Pending |
-| CI-02 | Phase 11 | Pending |
-| CI-03 | Phase 11 | Pending |
-| CI-04 | Phase 11 | Pending |
-| CI-05 | Phase 11 | Pending |
+| CI-01 | Phase 11 | Complete |
+| CI-02 | Phase 11 | Complete |
+| CI-03 | Phase 11 | Complete |
+| CI-04 | Phase 11 | Complete |
+| CI-05 | Phase 11 | Complete |
 | SEC-01 | Phase 15 | Pending |
 | SEC-02 | Phase 15 | Pending |
 | SEC-03 | Phase 15 | Pending |
 | SEC-04 | Phase 15 | Pending |
 | SEC-05 | Phase 15 | Pending |
 | SEC-06 | Phase 13 | Pending |
-| LEGAL-01 | Phase 12 | Pending |
-| LEGAL-02 | Phase 12 | Pending |
-| LEGAL-03 | Phase 12 | Pending |
+| LEGAL-01 | Phase 12 | Complete |
+| LEGAL-02 | Phase 12 | Complete |
+| LEGAL-03 | Phase 12 | Complete |
 | LEGAL-04 | Phase 16 | Pending |
 | OBS-01 | Phase 17 | Pending |
 | OBS-02 | Phase 16 | Pending |

@@ -227,6 +227,9 @@ function readState() {
   const fm = text.match(/^---\n([\s\S]*?)\n---/)
   const status = fm?.[1].match(/^status:\s*(.+)$/m)?.[1].trim().toLowerCase() ?? ""
 
+  const planLine = text.match(/^Plan:\s*(\d+-\d+)/m)
+  const activePlan = planLine?.[1] ?? null
+
   const phaseLine = text.match(/^Phase:\s*([\d.]+)\s+of\s+[\d.]+\s*(.*)$/m)
   const activePhase = phaseLine?.[1] ?? null
   const trailing = (phaseLine?.[2] ?? "").toLowerCase()
@@ -235,7 +238,7 @@ function readState() {
   const executing =
     /^(executing|in[- ]progress)$/.test(status) || /executing|in progress|in-progress/.test(trailing)
 
-  return { activePhase, executing }
+  return { activePhase, activePlan, executing }
 }
 
 function findPhaseDir(number) {
@@ -841,7 +844,9 @@ for (const { phase, dir, info, stateName } of resolved) {
     const hasSummary = info?.summaries.has(`${plan.id}-SUMMARY.md`) ?? false
     let planState = STATES.TODO
     if (phase.done || plan.done || hasSummary) planState = STATES.DONE
-    else if (stateName === STATES.IN_PROGRESS) planState = STATES.IN_PROGRESS
+    else if (stateName === STATES.IN_PROGRESS) {
+      if (!state.activePlan || state.activePlan === plan.id) planState = STATES.IN_PROGRESS
+    }
 
     const planTitle = plan.title ? `${plan.id}: ${plan.title}` : `${plan.id}`
     const planExisting = byId.get(map.issues[planKey]?.id) ?? planByIds.get(plan.id) ?? null
