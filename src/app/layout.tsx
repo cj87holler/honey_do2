@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { HoneycombPattern } from "@/components/ui/honeycomb-pattern";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Honey Do",
@@ -18,6 +19,7 @@ export default function RootLayout({
         <HoneycombPattern className="min-h-screen">
           {children}
         </HoneycombPattern>
+        <Analytics />
       </body>
     </html>
   );
