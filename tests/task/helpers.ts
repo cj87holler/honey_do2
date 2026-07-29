@@ -1,5 +1,3 @@
-import { vi } from "vitest"
-
 export function mockSession(userId = "user-1", userName = "Test Queen") {
   return {
     session: {
