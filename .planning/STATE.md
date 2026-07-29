@@ -2,7 +2,7 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
-status: planning
+status: executing
 last_updated: "2026-07-28T01:47:38.247Z"
 last_activity: 2026-07-28
 progress:
@@ -24,9 +24,10 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 11 of 17 (CI on Pull Requests) — ready to plan
-Plan: — (no plans yet)
-Status: Roadmap approved. Phase 11 has no CONTEXT.md — discuss-phase or plan-phase next.
+Phase: 11 of 17 (CI on Pull Requests) — executing
+Plan: 11-02 of 2 — Prove the gate on a real PR, then require the check
+Status: 11-01 complete (gate is green locally, workflow committed). 11-02 BLOCKED on a human
+checkpoint — it pushes to origin, opens a PR, and changes branch protection on main.
 Last activity: 2026-07-28 — Completed quick task 260728-rvv: narrative descriptions in Linear mirror
 
 Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)

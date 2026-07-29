@@ -203,7 +203,7 @@ Plans:
   5. The CI workflow completes without provisioning a database and without invoking `npm run build`
 **Plans:** 2 plans
 Plans:
-- [ ] 11-01-PLAN.md — Clean the typecheck/lint baseline to zero and add the GitHub Actions workflow
+- [x] 11-01-PLAN.md — Clean the typecheck/lint baseline to zero and add the GitHub Actions workflow
 - [ ] 11-02-PLAN.md — Prove the gate on a real PR, then require the check on main with enforce_admins
 **UI hint**: no
 
