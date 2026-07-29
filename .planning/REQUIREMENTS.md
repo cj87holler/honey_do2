@@ -78,11 +78,11 @@ these make the app safe to run, not more capable.
 
 ### Continuous Integration
 
-- [ ] **CI-01**: `npm run typecheck` exists and `tsc --noEmit` reports zero errors across the repo
-- [ ] **CI-02**: `npm run lint` reports zero errors and zero warnings
-- [ ] **CI-03**: Every pull request targeting `main` automatically runs typecheck, lint, and the unit test suite
-- [ ] **CI-04**: A pull request whose checks fail cannot be merged into `main`
-- [ ] **CI-05**: CI completes without provisioning a database and without running `npm run build`
+- [x] **CI-01**: `npm run typecheck` exists and `tsc --noEmit` reports zero errors across the repo
+- [x] **CI-02**: `npm run lint` reports zero errors and zero warnings
+- [x] **CI-03**: Every pull request targeting `main` automatically runs typecheck, lint, and the unit test suite
+- [x] **CI-04**: A pull request whose checks fail cannot be merged into `main`
+- [x] **CI-05**: CI completes without provisioning a database and without running `npm run build`
 
 ### Security Hardening
 
@@ -207,11 +207,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ADMIN-01 | Phase 9 | Complete |
 | ADMIN-02 | Phase 9 | Complete |
 | ADMIN-03 | Phase 9 | Complete |
-| CI-01 | Phase 11 | Pending |
-| CI-02 | Phase 11 | Pending |
-| CI-03 | Phase 11 | Pending |
-| CI-04 | Phase 11 | Pending |
-| CI-05 | Phase 11 | Pending |
+| CI-01 | Phase 11 | Complete |
+| CI-02 | Phase 11 | Complete |
+| CI-03 | Phase 11 | Complete |
+| CI-04 | Phase 11 | Complete |
+| CI-05 | Phase 11 | Complete |
 | SEC-01 | Phase 15 | Pending |
 | SEC-02 | Phase 15 | Pending |
 | SEC-03 | Phase 15 | Pending |
