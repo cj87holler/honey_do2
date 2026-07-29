@@ -13,6 +13,7 @@
 
 import { readFileSync, existsSync, readdirSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
+import { createHash } from "node:crypto"
 
 const API_URL = "https://api.linear.app/graphql"
 const TEAM_KEY = "HON"
@@ -294,17 +295,158 @@ function deriveState(phase, dir, info, state, handoff) {
   return info.hasContext ? STATES.TODO : STATES.BACKLOG
 }
 
-function buildDescription(phase) {
+// --- Narrative sources -----------------------------------------------------
+//
+// "What was built" comes from each plan SUMMARY.md's `provides:` frontmatter block — those
+// entries are already written as user-facing capability statements. "What will be built" comes
+// from the roadmap goal and success criteria.
+
+// Minimal indentation-aware reader for a `key:` list block in YAML frontmatter. The script has a
+// zero-dependency constraint, and the blocks we need are all simple "- item" lists.
+function readYamlListBlock(text, key) {
+  const lines = text.split("\n")
+  const start = lines.findIndex((l) => l.match(new RegExp(`^${key}:\\s*$`)))
+  if (start === -1) return []
+  const out = []
+  for (const line of lines.slice(start + 1)) {
+    if (/^\S/.test(line)) break // dedent to column 0 ends the block
+    const item = line.match(/^\s+-\s+(.*)$/)
+    if (item) out.push(item[1].trim().replace(/^["']|["']$/g, ""))
+    else if (line.trim() && !/^\s{4,}/.test(line)) break
+  }
+  return out
+}
+
+function readPlanArtifacts(dir, planId) {
+  if (!dir) return { provides: [], oneLiner: "", objective: "" }
+  const summaryPath = join(dir, `${planId}-SUMMARY.md`)
+  const planPath = join(dir, `${planId}-PLAN.md`)
+
+  let provides = []
+  let oneLiner = ""
+  if (existsSync(summaryPath)) {
+    const text = readFileSync(summaryPath, "utf8")
+    provides = readYamlListBlock(text, "provides")
+    oneLiner = text.match(/^\*\*One-liner:\*\*\s*(.+)$/m)?.[1].trim() ?? ""
+  }
+
+  let objective = ""
+  if (existsSync(planPath)) {
+    const block = readFileSync(planPath, "utf8").match(/<objective>\n([\s\S]*?)\n<\/objective>/)
+    // First paragraph only — the rest is Purpose/Output boilerplate.
+    objective = block?.[1].trim().split(/\n\s*\n/)[0].replace(/\n/g, " ").trim() ?? ""
+  }
+
+  return { provides, oneLiner, objective }
+}
+
+function phasePlanIds(phase, info) {
+  if (phase.detail.plans.length) return phase.detail.plans.map((p) => p.id)
+  return (info?.plans ?? []).map((f) => f.replace("-PLAN.md", ""))
+}
+
+function buildDescription(phase, dir, info) {
   const d = phase.detail
   const parts = []
+
   if (d.goal) parts.push(`**Goal:** ${d.goal}`)
   else if (phase.blurb) parts.push(`**Goal:** ${phase.blurb}`)
-  if (d.dependsOn) parts.push(`**Depends on:** ${d.dependsOn}`)
-  if (d.requirements) parts.push(`**Requirements:** ${d.requirements}`)
-  if (d.criteria.length) {
-    parts.push(["**Success criteria**", ...d.criteria.map((c, i) => `${i + 1}. ${c}`)].join("\n"))
+
+  const meta = []
+  if (d.dependsOn) meta.push(`**Depends on:** ${d.dependsOn}`)
+  if (d.requirements) meta.push(`**Requirements:** ${d.requirements}`)
+  if (meta.length) parts.push(meta.join(" · "))
+
+  // Aggregate everything the phase's plans actually delivered.
+  const built = []
+  for (const planId of phasePlanIds(phase, info)) {
+    built.push(...readPlanArtifacts(dir, planId).provides)
   }
+
+  if (built.length) {
+    parts.push(["## What was built", ...built.map((b) => `- ${b}`)].join("\n"))
+    if (d.criteria.length) {
+      parts.push(
+        ["## Success criteria (verified)", ...d.criteria.map((c) => `- [x] ${c}`)].join("\n"),
+      )
+    }
+  } else if (d.criteria.length) {
+    parts.push(
+      ["## What this will deliver", ...d.criteria.map((c) => `- [ ] ${c}`)].join("\n"),
+    )
+  }
+
+  if (d.plans.length) {
+    parts.push(
+      [
+        "## Plans",
+        ...d.plans.map((p) => `- [${p.done ? "x" : " "}] \`${p.id}\` — ${p.title}`),
+      ].join("\n"),
+    )
+  }
+
   return parts.join("\n\n") + FOOTER
+}
+
+function buildPlanDescription(phase, dir, plan) {
+  const { provides, oneLiner, objective } = readPlanArtifacts(dir, plan.id)
+  const parts = [`Plan \`${plan.id}-PLAN.md\` of **Phase ${phase.number}: ${phase.title}**.`]
+
+  if (objective) parts.push(["## Objective", objective].join("\n\n"))
+  if (oneLiner) parts.push(["## Outcome", oneLiner].join("\n\n"))
+  if (provides.length) {
+    parts.push(["## What it delivered", ...provides.map((p) => `- ${p}`)].join("\n"))
+  }
+  if (!objective && !oneLiner && !provides.length) {
+    parts.push("_Not yet planned — no PLAN.md on disk._")
+  }
+
+  return parts.join("\n\n") + FOOTER
+}
+
+function buildProjectContent(phases, phaseStates) {
+  const parts = []
+
+  // Pull the human description straight from PROJECT.md rather than restating it here.
+  const projectPath = join(PLANNING_DIR, "PROJECT.md")
+  if (existsSync(projectPath)) {
+    const text = readFileSync(projectPath, "utf8")
+    const what = text.match(/## What This Is\n+([\s\S]*?)\n##/)?.[1].trim()
+    const core = text.match(/## Core Value\n+([\s\S]*?)\n##/)?.[1].trim()
+    if (what) parts.push(what)
+    if (core) parts.push(`> **Core value:** ${core}`)
+  }
+
+  const milestones = [...new Set(phases.map((p) => p.milestone))]
+  for (const milestone of milestones) {
+    const inMilestone = phases.filter((p) => p.milestone === milestone)
+    const done = inMilestone.filter((p) => p.done).length
+    parts.push(
+      [
+        `## ${milestone} — ${done}/${inMilestone.length} phases complete`,
+        "",
+        "| Phase | State | Goal |",
+        "|---|---|---|",
+        ...inMilestone.map(
+          (p) =>
+            `| **${p.number}. ${p.title}** | ${phaseStates.get(p.number)} | ` +
+            `${(p.detail.goal || p.blurb).replace(/\|/g, "\\|")} |`,
+        ),
+      ].join("\n"),
+    )
+  }
+
+  parts.push(
+    "---\n\n_This project is a read-only mirror of the GSD plan in `.planning/`. " +
+      "Issue states are derived from what is on disk — phase directories, `*-PLAN.md`, and " +
+      "`*-SUMMARY.md` files. Refresh with `make linear-sync`. Edits made here are overwritten._",
+  )
+
+  return parts.join("\n\n")
+}
+
+function hash(text) {
+  return createHash("sha256").update(text).digest("hex").slice(0, 16)
 }
 
 // ---------------------------------------------------------------------------
@@ -488,20 +630,30 @@ async function fetchProjectIssues(projectId) {
 // ---------------------------------------------------------------------------
 
 async function upsertIssue({ key, existing, input, map, label }) {
+  // Hash the description we generate, never the one Linear returns: Linear normalizes markdown
+  // on write (it rewrites `_italic_` as `*italic*`), so a text comparison would report a diff on
+  // every run and rewrite every issue forever.
+  const descHash = hash(input.description)
+
   if (existing) {
+    const stored = map.issues[key]
     const changes = []
     if (existing.title !== input.title) changes.push("title")
     if (existing.state?.id !== input.stateId) {
       changes.push(`state ${existing.state?.name} -> ${input.stateName}`)
     }
+    // No stored hash means this issue was matched by the title fallback — sync its body once,
+    // after which the recorded hash keeps it quiet.
+    if (stored?.descHash !== descHash) changes.push("description")
+
     if (!changes.length) {
       console.log(`  = ${existing.identifier} ${label}`)
-      map.issues[key] = { id: existing.id, identifier: existing.identifier }
-      return existing
+      map.issues[key] = { id: existing.id, identifier: existing.identifier, descHash }
+      return { issue: existing, action: "unchanged" }
     }
     if (DRY_RUN) {
       console.log(`  ~ ${existing.identifier} ${label} (${changes.join(", ")})`)
-      return existing
+      return { issue: existing, action: "updated" }
     }
     const { title, description, stateId, projectMilestoneId } = input
     const data = await gql(
@@ -512,13 +664,13 @@ async function upsertIssue({ key, existing, input, map, label }) {
     )
     const issue = data.issueUpdate.issue
     console.log(`  ~ ${issue.identifier} ${label} (${changes.join(", ")})`)
-    map.issues[key] = { id: issue.id, identifier: issue.identifier }
-    return issue
+    map.issues[key] = { id: issue.id, identifier: issue.identifier, descHash }
+    return { issue, action: "updated" }
   }
 
   if (DRY_RUN) {
     console.log(`  + would create ${label} [${input.stateName}]`)
-    return null
+    return { issue: null, action: "created" }
   }
 
   const { stateName, ...createInput } = input
@@ -545,8 +697,38 @@ async function upsertIssue({ key, existing, input, map, label }) {
   }
   const issue = data.issueCreate.issue
   console.log(`  + ${issue.identifier} ${label} [${stateName}]`)
-  map.issues[key] = { id: issue.id, identifier: issue.identifier }
-  return issue
+  map.issues[key] = { id: issue.id, identifier: issue.identifier, descHash }
+  return { issue, action: "created" }
+}
+
+// The project carries both a short plain-text `description` and a rich markdown `content` doc.
+async function syncProject(project, phases, phaseStates, map) {
+  const core =
+    readFileSync(join(PLANNING_DIR, "PROJECT.md"), "utf8")
+      .match(/## Core Value\n+([\s\S]*?)\n##/)?.[1]
+      .trim()
+      .replace(/\s+/g, " ") ?? "Gamified household task management."
+  // Linear caps the short description; keep well inside it.
+  const description = core.length > 250 ? `${core.slice(0, 247)}...` : core
+  const content = buildProjectContent(phases, phaseStates)
+  const projectHash = hash(description + content)
+
+  if (map.project?.descHash === projectHash) {
+    console.log(`  = project overview unchanged`)
+    return
+  }
+  if (DRY_RUN) {
+    console.log(`  ~ would update project overview (${content.length} chars)`)
+    return
+  }
+  await gql(
+    `mutation UpdateProject($id: String!, $input: ProjectUpdateInput!) {
+       projectUpdate(id: $id, input: $input) { success project { id } }
+     }`,
+    { id: project.id, input: { description, content } },
+  )
+  console.log(`  ~ updated project overview (${content.length} chars)`)
+  map.project = { name: project.name, id: project.id, descHash: projectHash }
 }
 
 // ---------------------------------------------------------------------------
@@ -585,8 +767,19 @@ if (!phases.length) {
   process.exit(1)
 }
 
+// Resolve every phase's on-disk state up front — the project overview table needs them all
+// before the first issue is touched.
+const resolved = phases.map((phase) => {
+  const dir = findPhaseDir(phase.number)
+  const info = inspectPhaseDir(dir)
+  return { phase, dir, info, stateName: deriveState(phase, dir, info, state, handoff) }
+})
+const phaseStates = new Map(resolved.map((r) => [r.phase.number, r.stateName]))
+
 const milestoneNames = [...new Set(phases.map((p) => p.milestone))]
 const milestones = await resolveMilestones(project.id, milestoneNames, map)
+
+if (project.id !== "(dry-run)") await syncProject(project, phases, phaseStates, map)
 
 const issues = await fetchProjectIssues(project.id)
 const byId = new Map(issues.map((i) => [i.id, i]))
@@ -608,16 +801,12 @@ console.log(
 let created = 0
 let updated = 0
 
-for (const phase of phases) {
-  const dir = findPhaseDir(phase.number)
-  const info = inspectPhaseDir(dir)
-  const stateName = deriveState(phase, dir, info, state, handoff)
+for (const { phase, dir, info, stateName } of resolved) {
   const key = `phase-${phase.number}`
 
   const existing = byId.get(map.issues[key]?.id) ?? phaseByNumber.get(phase.number) ?? null
   const title = `Phase ${phase.number}: ${phase.title}`
 
-  const before = existing?.state?.name
   const result = await upsertIssue({
     key,
     existing,
@@ -628,14 +817,14 @@ for (const phase of phases) {
       projectId: project.id,
       projectMilestoneId: milestones[phase.milestone],
       title,
-      description: buildDescription(phase),
+      description: buildDescription(phase, dir, info),
       stateId: states[stateName].id,
       stateName,
       sortOrder: Number(phase.number) * 100,
     },
   })
-  if (!existing) created++
-  else if (before !== stateName) updated++
+  if (result.action === "created") created++
+  else if (result.action === "updated") updated++
 
   // Sub-issues, one per plan. Prefer the roadmap's one-line plan description; fall back to
   // whatever PLAN.md files are actually on disk when the roadmap says "TBD".
@@ -656,9 +845,7 @@ for (const phase of phases) {
 
     const planTitle = plan.title ? `${plan.id}: ${plan.title}` : `${plan.id}`
     const planExisting = byId.get(map.issues[planKey]?.id) ?? planByIds.get(plan.id) ?? null
-    const planBefore = planExisting?.state?.name
-
-    await upsertIssue({
+    const planResult = await upsertIssue({
       key: planKey,
       existing: planExisting,
       map,
@@ -667,22 +854,24 @@ for (const phase of phases) {
         teamId: team.id,
         projectId: project.id,
         projectMilestoneId: milestones[phase.milestone],
-        parentId: result?.id,
+        parentId: result.issue?.id,
         title: planTitle,
-        description: `Plan \`${plan.id}-PLAN.md\` of Phase ${phase.number}.${FOOTER}`,
+        description: buildPlanDescription(phase, dir, plan),
         stateId: states[planState].id,
         stateName: planState,
         sortOrder: Number(phase.number) * 100 + Number(plan.id.split("-")[1] ?? 0),
       },
     })
-    if (!planExisting) created++
-    else if (planBefore !== planState) updated++
+    if (planResult.action === "created") created++
+    else if (planResult.action === "updated") updated++
   }
 }
 
 if (!DRY_RUN) {
   map.team = { key: team.key, id: team.id }
-  map.project = { name: project.name, id: project.id }
+  // syncProject already recorded the project entry (including its content hash) — only fill in
+  // the shape here if it somehow did not run.
+  map.project ??= { name: project.name, id: project.id }
   map.milestones = milestones
   saveMap(map)
   console.log(`\nWrote ${MAP_PATH}`)
@@ -690,6 +879,6 @@ if (!DRY_RUN) {
 
 console.log(
   `\n${DRY_RUN ? "Dry run complete" : "Sync complete"} — ` +
-    `${created} created, ${updated} state changes.` +
+    `${created} created, ${updated} updated.` +
     (project.url ? `\n${project.url}` : ""),
 )
