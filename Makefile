@@ -1,4 +1,4 @@
-.PHONY: dev up down db-generate db-migrate db-studio start install db-reset test test-ci
+.PHONY: dev up down db-generate db-migrate db-studio start install db-reset test test-ci linear-sync linear-sync-dry
 
 # Start Next.js dev server (requires DB running)
 dev:
@@ -50,3 +50,11 @@ test:
 # Run tests once (CI mode)
 test-ci:
 	npx vitest run
+
+# Mirror .planning/ phases and plans into Linear (one-way, GSD is the source of truth)
+linear-sync:
+	@set -a && . ./.env.local && set +a && node scripts/linear-sync.mjs
+
+# Show what linear-sync would change without touching Linear
+linear-sync-dry:
+	@set -a && . ./.env.local && set +a && node scripts/linear-sync.mjs --dry-run

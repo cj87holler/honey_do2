@@ -1,36 +1,36 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: Landing Page & Polish
-status: in_progress
-stopped_at: Phase 9 complete (UAT passed); WR-01 + WR-02 fixes pending before prod
-last_updated: "2026-04-26T00:00:00Z"
-last_activity: "2026-04-26 - Phase 9 human UAT passed (3 verified, 2 accepted by tester)"
+milestone: v1.2
+milestone_name: Productionization
+status: verifying
+last_updated: "2026-07-28T01:47:38.247Z"
+last_activity: 2026-07-28
 progress:
-  total_phases: 4
-  completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
-  percent: 50
+  total_phases: 7
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-23)
+See: .planning/PROJECT.md (updated 2026-07-27)
 
 **Core value:** People in a household can assign tasks to each other and actually get them done, because the gamified bee-themed experience makes chores feel like play rather than nagging.
-**Current focus:** Milestone v1.1 — Landing Page & Polish
+**Current focus:** Milestone v1.2 — Productionization
 
 ## Current Position
 
-Phase: 09 (complete pending review-fix commits)
-Plan: All 4 plans complete; human UAT passed
-Status: Phase 9 functionally done. Two code-review warnings (WR-01, WR-02) to fix before production push.
-Last activity: 2026-04-26 - Phase 9 human UAT completed (Tests 1-3 verified, Tests 4-5 accepted by tester)
+Phase: 11 of 17 (CI on Pull Requests) — awaiting merge
+Plan: 2/2 complete
+Status: All 5 success criteria met and verified. PR #2 (dev -> main) is OPEN and unmerged —
+Phase 11 stays unchecked in ROADMAP until it merges, so it reads as In Review, not Done.
+Last activity: 2026-07-28 — Phase 11 executed: CI gate live on main, PR #2 open awaiting merge
 
-Progress (v1.1): [█████░░░░░] 50% (2/4 phases — Phase 7 + Phase 9; Phase 8 deferred, Phase 10 not started)
+Progress (v1.2): [░░░░░░░░░░] 0% (0/7 phases)
 
 ## Accumulated Context
 
@@ -52,19 +52,56 @@ Carried from v1.0:
 ### Roadmap Evolution
 
 - Phase 10 added (2026-04-24): Email Notifications — transactional emails for welcome, invite, task assigned, task completed
+- Milestone v1.2 Productionization started (2026-07-27), phases continue at 11. v1.1 parked
+  incomplete: Phase 8 (App Polish) and Phase 10 (Email Notifications) deferred, not cancelled.
+  Their ROADMAP.md entries and phase directories are intentionally left intact — do NOT run
+  `phases.clear`, there is no completed-milestone archive to restore from.
 
 ### Blockers/Concerns
 
-None.
+- **Preview deployments cannot build.** Neon-Vercel integration only injects `DATABASE_URL`
+  into Production, so preview builds fail at `drizzle-kit migrate` (`url: undefined`). Safe
+  (no preview can reach prod data) but previews are non-functional. Deferred out of v1.2.
+- **Sentry + uptime monitor need credentials.** Those phases will pause for a user-generated
+  API token before they can complete.
 
 ### Quick Tasks Completed
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260423-swx | Add help page for logged-in users explaining roles honeys leaderboard tasks invites | 2026-04-24 | 0efe6ac | [260423-swx](./quick/260423-swx-add-help-page-for-logged-in-users-explai/) |
+| 260728-rl5 | Build one-way GSD to Linear sync script with make target | 2026-07-28 | 544f6cc | [260728-rl5](./quick/260728-rl5-build-one-way-gsd-to-linear-sync-script-/) |
+| 260728-rvv | Add rich project and phase descriptions to Linear sync | 2026-07-28 | 6b50197 | [260728-rvv](./quick/260728-rvv-add-rich-project-and-phase-descriptions-/) |
 
 ## Session Continuity
 
-Last session: 2026-04-26T00:00:00Z
-Stopped at: Phase 9 closed out — UAT passed, WR-01 + WR-02 fixes queued before prod deploy
-Resume file: .planning/phases/09-admin-dashboard/09-REVIEW.md (warnings to address)
+Last session: 2026-07-28
+Stopped at: Quick task 260728-rl5 complete — GSD→Linear sync live. Linear project `Honey_Do`
+(team HON) now mirrors all 17 phases + plans; refresh with `make linear-sync`. Next action is
+still Phase 11 (CI on Pull Requests), which has no CONTEXT.md yet.
+Resume file: none
+
+**Linear mirror (added 2026-07-28):** `.planning/` remains the source of truth; Linear is a
+read-only dashboard and hand-edits there are reverted on the next sync. Sync is MANUAL — Linear
+goes stale until someone runs `make linear-sync`. `.planning/linear-map.json` holds the issue-ID
+map (safe to commit, no secrets; safe to delete, issues re-match by title). Requires
+`LINEAR_API_KEY` in `.env.local`.
+
+Issue descriptions are generated from planning artifacts, so **the quality of a phase's Linear
+description depends on its `*-SUMMARY.md` having a `provides:` frontmatter block** — that block is
+the sole source for "what was built". Phases whose summaries omit it will sync with an empty
+"What was built" section. Worth keeping in mind when writing future summaries.
+
+**Verified baselines as of 2026-07-27** (re-check before trusting; they gate Phase 11):
+- `npx tsc --noEmit` FAILS — 4 errors, all in `tests/task/update-task-status.test.ts` (107, 108, 153, 157). Zero in `src/`.
+- `npx vitest run` PASSES — 13 files, 89 tests.
+- `npx eslint .` — 8 warnings, 0 errors. CI will use `--max-warnings 0`, so these must be fixed.
+- CI needs NO Postgres container: every DB-touching test mocks `vi.mock("@/lib/db", ...)`.
+- CI must NOT run `npm run build` (it is `drizzle-kit migrate && next build`).
+- Stack is Next.js **16.2.1** / React 19.2.4 / Node v22.11.0 — CLAUDE.md's "Next.js 15.x + Auth.js v5" is STALE (app uses Better Auth 1.5.6).
+- `src/app/api/health/route.ts` returns a hardcoded 200 and never queries the DB (Phase 17 fixes).
+- `gh` + `vercel` CLIs authenticated; user has repo ADMIN. Branch protection and the private flip are scriptable.
+- main protection NOW (changed 2026-07-28 by Phase 11): PR required, 0 approvals,
+  enforce_admins TRUE, required_status_checks {strict:true, contexts:["ci"]}.
+  Only `ci` is required — the Vercel check is deliberately NOT required because previews
+  cannot build here, and requiring it would permanently block every merge.

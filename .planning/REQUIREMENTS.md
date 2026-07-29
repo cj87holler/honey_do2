@@ -44,31 +44,70 @@ All v1.0 requirements shipped. See MILESTONES.md for details.
 
 - [x] **DEPLOY-01**: App deployed to Vercel with Neon PostgreSQL, accessible on a public URL with automatic deploys from main
 
-## v1.1 Requirements
+## v1.1 Requirements (Partially complete — Phases 8 and 10 deferred)
 
-Requirements for milestone v1.1: Landing Page & Polish.
+Requirements for milestone v1.1: Landing Page & Polish. Phases 7 and 9 shipped; Phase 8 was never
+started and is deferred, not cancelled.
 
 ### Landing Page
 
-- [ ] **LAND-01**: First-time visitor sees a marketing-style landing page explaining what Honey_Do is, with a signup CTA
-- [ ] **LAND-02**: Landing page includes a "how it works" section showing the core loop (create hive, assign tasks, earn honeys)
-- [ ] **LAND-03**: Landing page has an "already buzzin'? sign in here" link for returning users
-- [ ] **LAND-04**: Logged-in user bypasses the landing page and goes straight to the dashboard
+- [x] **LAND-01**: First-time visitor sees a marketing-style landing page explaining what Honey_Do is, with a signup CTA
+- [x] **LAND-02**: Landing page includes a "how it works" section showing the core loop (create hive, assign tasks, earn honeys)
+- [x] **LAND-03**: Landing page has an "already buzzin'? sign in here" link for returning users
+- [x] **LAND-04**: Logged-in user bypasses the landing page and goes straight to the dashboard
 
 ### Hive Management
 
-- [ ] **HIVE-06**: User can leave a hive they belong to (with confirmation)
+- [ ] **HIVE-06**: User can leave a hive they belong to (with confirmation) — *deferred, Phase 8 not started*
 
 ### Tasks
 
-- [ ] **TASK-11**: Queen or QueenBee can set an optional due date when creating a task
-- [ ] **TASK-12**: Due date is displayed on task cards in the Honeycomb
+- [ ] **TASK-11**: Queen or QueenBee can set an optional due date when creating a task — *deferred, Phase 8 not started*
+- [ ] **TASK-12**: Due date is displayed on task cards in the Honeycomb — *deferred, Phase 8 not started*
 
 ### Admin
 
-- [ ] **ADMIN-01**: Admin can view a list of all users with email and signup date
-- [ ] **ADMIN-02**: Admin can view a list of all hives with member count and creation date
-- [ ] **ADMIN-03**: Admin can reset a user's password
+- [x] **ADMIN-01**: Admin can view a list of all users with email and signup date
+- [x] **ADMIN-02**: Admin can view a list of all hives with member count and creation date
+- [x] **ADMIN-03**: Admin can reset a user's password
+
+## v1.2 Requirements
+
+Requirements for milestone v1.2: Productionization. Operator-facing rather than end-user-facing —
+these make the app safe to run, not more capable.
+
+### Continuous Integration
+
+- [ ] **CI-01**: `npm run typecheck` exists and `tsc --noEmit` reports zero errors across the repo
+- [ ] **CI-02**: `npm run lint` reports zero errors and zero warnings
+- [ ] **CI-03**: Every pull request targeting `main` automatically runs typecheck, lint, and the unit test suite
+- [ ] **CI-04**: A pull request whose checks fail cannot be merged into `main`
+- [ ] **CI-05**: CI completes without provisioning a database and without running `npm run build`
+
+### Security Hardening
+
+- [ ] **SEC-01**: Every response carries X-Frame-Options, X-Content-Type-Options, Referrer-Policy, and Permissions-Policy
+- [ ] **SEC-02**: Every response carries a Strict-Transport-Security header
+- [ ] **SEC-03**: A Content-Security-Policy is served in Report-Only mode and verified to produce zero violations across every route
+- [ ] **SEC-04**: The Content-Security-Policy is promoted from Report-Only to enforcing
+- [ ] **SEC-05**: Security headers are present on redirect responses from the auth middleware, not only on normal responses
+- [ ] **SEC-06**: The GitHub repository is private
+
+### Legal Pages
+
+- [ ] **LEGAL-01**: A Privacy Policy page is publicly reachable at `/privacy` without authentication
+- [ ] **LEGAL-02**: A Terms of Use page is publicly reachable at `/terms` without authentication
+- [ ] **LEGAL-03**: Both pages are linked from the landing page
+- [ ] **LEGAL-04**: The Privacy Policy names the data collected, the sub-processors used (Vercel, Neon, Sentry), retention, and how a user requests deletion
+
+### Observability
+
+- [ ] **OBS-01**: `/api/health` queries the database and returns a 500 status when the database is unreachable
+- [ ] **OBS-02**: Unhandled client-side and server-side errors are captured in Sentry
+- [ ] **OBS-03**: Sentry is configured not to transmit PII — user emails and task text are scrubbed before send
+- [ ] **OBS-04**: Sentry receives source maps so production stack traces resolve to original source
+- [ ] **OBS-05**: Server routes and Server Actions emit structured JSON logs with secrets redacted
+- [ ] **OBS-06**: An uptime monitor polls `/api/health` and alerts on repeated failure
 
 ## v2 Requirements
 
@@ -119,6 +158,19 @@ Explicitly excluded. Documented to prevent scope creep.
 | Calendar integration | Due dates added in v1.1, but calendar sync (Google/Apple) deferred |
 | Task descriptions / instructions | Longer description field deferred; 160-char title sufficient for now |
 | Self-service password reset | Deferred; admin can reset passwords in v1.1 |
+| Self-service account deletion | Deferred; Privacy Policy directs users to email a deletion request instead |
+| Neon preview database branching | Deferred past v1.2; previews cannot build today, but they also cannot reach prod data, so it is safe to leave |
+| Custom domain | Deferred past v1.2; the Vercel URL is adequate for household-scale use |
+| Vercel spend caps / cost alerts | Deferred past v1.2; dashboard-only config with no CLI or API surface |
+| Playwright E2E tests | Deferred past v1.2; 89 passing unit tests cover business logic, and no preview environment exists to run E2E against |
+| README / ARCHITECTURE.md rewrite | Deferred past v1.2; documentation pass belongs with a later milestone |
+| Nonce-based CSP with strict-dynamic | Forces every page into dynamic rendering, which would kill static generation for the landing page. A `'self'`-based CSP gets most of the benefit at no rendering cost |
+| Sentry Session Replay | Would capture typed task text, which for a household app can be genuinely personal. Privacy cost outweighs debugging value |
+| Sentry performance tracing / profiling | Burns free-tier quota for insight this app's traffic does not justify |
+| pino log drains / transports in production | Open Next 16 + Turbopack bugs break worker-thread transports; plain JSON to stdout avoids the failure mode entirely |
+| CI matrix builds across Node versions | Single deployment target (Vercel, Node 22) makes a matrix pure cost |
+| Coverage thresholds in CI | Encourages gaming the metric; the suite already covers the paths that matter |
+| `middleware.ts` → `proxy.ts` codemod | Deferred; CSP lands in `next.config.ts` and does not require touching the auth-critical middleware file |
 
 ## Traceability
 
@@ -145,22 +197,44 @@ Which phases cover which requirements. Updated during roadmap creation.
 | THEME-01 | Phase 5 | Complete |
 | THEME-02 | Phase 5 | Complete |
 | DEPLOY-01 | Phase 6 | Complete |
-| LAND-01 | Phase 7 | Pending |
-| LAND-02 | Phase 7 | Pending |
-| LAND-03 | Phase 7 | Pending |
-| LAND-04 | Phase 7 | Pending |
-| HIVE-06 | Phase 8 | Pending |
-| TASK-11 | Phase 8 | Pending |
-| TASK-12 | Phase 8 | Pending |
-| ADMIN-01 | Phase 9 | Pending |
-| ADMIN-02 | Phase 9 | Pending |
-| ADMIN-03 | Phase 9 | Pending |
+| LAND-01 | Phase 7 | Complete |
+| LAND-02 | Phase 7 | Complete |
+| LAND-03 | Phase 7 | Complete |
+| LAND-04 | Phase 7 | Complete |
+| HIVE-06 | Phase 8 | Deferred |
+| TASK-11 | Phase 8 | Deferred |
+| TASK-12 | Phase 8 | Deferred |
+| ADMIN-01 | Phase 9 | Complete |
+| ADMIN-02 | Phase 9 | Complete |
+| ADMIN-03 | Phase 9 | Complete |
+| CI-01 | Phase 11 | Pending |
+| CI-02 | Phase 11 | Pending |
+| CI-03 | Phase 11 | Pending |
+| CI-04 | Phase 11 | Pending |
+| CI-05 | Phase 11 | Pending |
+| SEC-01 | Phase 15 | Pending |
+| SEC-02 | Phase 15 | Pending |
+| SEC-03 | Phase 15 | Pending |
+| SEC-04 | Phase 15 | Pending |
+| SEC-05 | Phase 15 | Pending |
+| SEC-06 | Phase 13 | Pending |
+| LEGAL-01 | Phase 12 | Pending |
+| LEGAL-02 | Phase 12 | Pending |
+| LEGAL-03 | Phase 12 | Pending |
+| LEGAL-04 | Phase 16 | Pending |
+| OBS-01 | Phase 17 | Pending |
+| OBS-02 | Phase 16 | Pending |
+| OBS-03 | Phase 16 | Pending |
+| OBS-04 | Phase 16 | Pending |
+| OBS-05 | Phase 14 | Pending |
+| OBS-06 | Phase 17 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 19 total, 19 complete
-- v1.1 requirements: 9 total, 0 complete
+- v1.1 requirements: 10 total, 7 complete, 3 deferred (Phase 8 never started)
+- v1.2 requirements: 21 total, 0 complete — mapped to Phases 11-17
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-26*
-*Last updated: 2026-04-23 — v1.1 phase mappings added (Phases 7-9)*
+*Last updated: 2026-07-27 — v1.2 Productionization requirements added (21) and mapped to Phases 11-17; v1.1 statuses corrected to reflect Phases 7 and 9 shipped*

@@ -37,6 +37,10 @@ export function TaskCreationForm({ hiveId, members }: TaskCreationFormProps) {
     },
   })
 
+  // react-hook-form's watch() returns a function React Compiler cannot memoize. The compiler is
+  // not enabled in next.config.ts, so this is advisory only and has no runtime effect. Revisit
+  // (likely by switching to useWatch) if we ever turn the compiler on.
+  // eslint-disable-next-line react-hooks/incompatible-library
   const watchedText = watch("text") ?? ""
   const charCount = watchedText.length
 

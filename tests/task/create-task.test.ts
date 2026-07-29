@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, it, expect, vi, beforeEach } from "vitest"
-import { mockSession, mockTask } from "./helpers"
+import { mockSession } from "./helpers"
 
 // Use vi.hoisted so mock functions are available inside vi.mock factories
 const {

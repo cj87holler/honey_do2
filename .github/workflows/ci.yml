@@ -1,0 +1,41 @@
+name: CI
+
+# Gates every pull request into main. Deliberately does NOT run `npm run build`:
+# build is `drizzle-kit migrate && next build`, which requires a live database.
+# No Postgres service is needed either — every DB-touching test mocks @/lib/db.
+on:
+  pull_request:
+    branches: [main]
+  # Also run on main so the check has history on the default branch, which is what
+  # makes it selectable as a required status check in branch protection settings.
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Three separate steps so a failure names itself in the GitHub UI.
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint -- --max-warnings 0
+
+      - name: Test
+        run: npx vitest run

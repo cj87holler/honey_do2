@@ -36,15 +36,33 @@ People in a household can assign tasks to each other and actually get them done,
 - Native mobile app — web app first
 - Real-time updates / WebSockets — standard request/response is fine for v1
 
-## Current Milestone: v1.1 Landing Page & Polish
+## Current Milestone: v1.2 Productionization
 
-**Goal:** Give first-time visitors a proper introduction to Honey_Do and clean up UAT issues from v1.0.
+**Goal:** Move Honey_Do from a working hobby deployment to a properly-run small production app — CI that actually gates `main`, a hardened HTTP surface, legal pages, and real visibility into errors and uptime.
 
 **Target features:**
-- ~~Marketing-style landing page as the root URL (hero, how it works, signup CTA, "already buzzin'?" sign-in link)~~ — Phase 7 complete
-- ~~Logged-in users bypass landing page and go straight to dashboard~~ — Phase 7 complete
-- Leave-hive feature (UAT blocker — users can't switch hives)
-- Other UAT fixes (admin dashboard, smaller quality-of-life items)
+- CI on pull requests — `typecheck`, `lint`, `test` via GitHub Actions, wired as required status checks on `main`
+- Security headers in `next.config.ts` (CSP, X-Frame-Options, HSTS, Referrer-Policy)
+- Privacy Policy and Terms of Use pages
+- Repo visibility flipped to private
+- Sentry error tracking (client + server)
+- Structured logging with `pino` on server routes
+- Uptime monitoring pointed at the existing `/api/health`
+
+**Source checklist:** `PRODUCTIONIZATION_ROADMAP.md` (repo root, gitignored — personal planning doc)
+
+**Deferred to a later milestone:** Neon preview branching, custom domain, Vercel spend caps, Playwright E2E, README/ARCHITECTURE.md
+
+### Parked: v1.1 Landing Page & Polish (incomplete)
+
+v1.1 shipped Phase 7 (Landing Page) and Phase 9 (Admin Dashboard). Two phases were never
+started and are **deferred, not cancelled** — their ROADMAP.md entries and phase directories
+remain intact:
+
+- **Phase 8: App Polish** — leave-hive feature and optional task due dates (UAT-identified gaps)
+- **Phase 10: Email Notifications** — welcome, invite, task-assigned, task-completed emails
+
+Productionization was prioritized ahead of these at the user's direction (2026-07-27).
 
 ## Context
 
@@ -91,4 +109,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-23 — Phase 7 (Landing Page) complete*
+*Last updated: 2026-07-27 — Milestone v1.2 (Productionization) started; v1.1 parked with Phases 8 and 10 deferred*
