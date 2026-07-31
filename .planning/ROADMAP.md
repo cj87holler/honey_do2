@@ -229,7 +229,9 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. The repository's visibility is set to Private, confirmed via `gh repo view`
   2. A trivial commit pushed after the flip still triggers an automatic Vercel deploy, confirming the GitHub-Vercel integration survived the visibility change
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 13-01-PLAN.md — Capture pre-flip baseline, gate on the GitHub account plan, flip to private, then verify SC1 and the merge-to-main deploy tripwire
 **UI hint**: no
 
 ### Phase 14: Structured Logging
