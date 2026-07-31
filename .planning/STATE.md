@@ -25,14 +25,10 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 13 of 17 (Repo Visibility -> Private) — planned
-Plan: 13-01 of 1 (wave 1, autonomous: false)
-Status: Ready to execute
-Phase 13 was planned directly from RESEARCH.md — no CONTEXT.md (discuss-phase deliberately skipped).
-Execution WILL pause at task 2: the flip can silently drop Phase 11's branch protection if this
-GitHub account is on Free rather than Pro. Resolve with `gh auth refresh -h github.com -s user`
-then `gh api user --jq '.plan.name'`.
-Last activity: 2026-07-31 -- Phase 13 planning complete
+Phase: 14 of 17 (Structured Logging) — ready to plan
+Plan: — (no plans yet)
+Status: Phase 13 planned but DEFERRED (see Blockers). Phase 14 has no CONTEXT.md yet.
+Last activity: 2026-07-30 -- Phase 13 planned and verified, then deferred on the GitHub Free finding
 
 Progress (v1.2): [███░░░░░░░] 29% (2/7 phases)
 
@@ -63,6 +59,15 @@ Carried from v1.0:
 
 ### Blockers/Concerns
 
+- **SEC-06 (repo → private) is blocked on GitHub plan, not on effort.** Phase 13 is fully planned
+  and checker-verified but deliberately NOT executed. On **GitHub Free**, personal-account private
+  repos get neither classic branch protection nor rulesets — both are public-repo-only. Flipping
+  to private would therefore silently delete Phase 11's merge gate (`enforce_admins: true`,
+  required `ci` check) with no error. User chose (2026-07-30) to keep the repo public AND
+  protected rather than private AND unprotected. Un-defer by upgrading to GitHub Pro (~$4/mo) and
+  running `/gsd:execute-phase 13` — the plan's Task 2 gate already handles the Pro path. Do NOT
+  re-plan Phase 13; its artifacts are current. Full rationale in the ROADMAP Phase 13 section.
+
 - **Preview deployments cannot build.** Neon-Vercel integration only injects `DATABASE_URL`
   into Production, so preview builds fail at `drizzle-kit migrate` (`url: undefined`). Safe
   (no preview can reach prod data) but previews are non-functional. Deferred out of v1.2.
@@ -88,10 +93,10 @@ Carried from v1.0:
 ## Session Continuity
 
 Last session: 2026-07-30
-Stopped at: Session resumed 2026-07-30 — clean tree on `dev`, no checkpoints or incomplete plans.
-Phases 11 and 12 both shipped to main. CI gate is live and required (enforce_admins
-true); /privacy and /terms are public. dev is reconciled with main. Next action is Phase 13
-(Repo Visibility → Private) — no phase directory or CONTEXT.md yet.
+Stopped at: Phase 13 planned (research → plan → checker PASSED), then deferred without executing
+— the flip would drop Phase 11's merge gate on GitHub Free. Nothing was flipped; no GitHub state
+was touched. Next action is Phase 14 (Structured Logging). Phases 11 and 12 remain shipped to
+main; CI gate is live and required (enforce_admins true); /privacy and /terms are public.
 
 **PR workflow note:** main uses squash merge, so after each merge `dev` must be reconciled via
 `git merge origin/main` or the next PR re-proposes everything. Phase 11's reconcile hit an add/add

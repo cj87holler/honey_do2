@@ -222,17 +222,38 @@ Plans:
 
 **Note**: LEGAL-04 (naming Sentry as a sub-processor with an accurate description of what data it receives) is deliberately NOT satisfied by this phase. This phase drafts the sub-processor section with generic language ("we use an error-tracking service that may receive technical error data"). LEGAL-04 is mapped to Phase 16 and is only satisfied once Sentry's PII-scrubbing configuration (OBS-03) is locked in and the paragraph is rewritten to match it — see rationale below.
 
-### Phase 13: Repo Visibility → Private
+### Phase 13: Repo Visibility → Private — DEFERRED (2026-07-30)
 **Goal**: The GitHub repository is no longer publicly visible
-**Depends on**: Phase 11 (CI must already be gating merges before this low-risk, independent change lands)
+**Depends on**: Phase 11 (CI must already be gating merges before this change lands) — **and now also on a paid GitHub plan, see below**
 **Requirements**: SEC-06
 **Success Criteria** (what must be TRUE):
   1. The repository's visibility is set to Private, confirmed via `gh repo view`
   2. A trivial commit pushed after the flip still triggers an automatic Vercel deploy, confirming the GitHub-Vercel integration survived the visibility change
-**Plans:** 1 plan
+**Plans:** 1 plan (planned and verified, not executed)
 Plans:
 - [ ] 13-01-PLAN.md — Capture pre-flip baseline, gate on the GitHub account plan, flip to private, then verify SC1 and the merge-to-main deploy tripwire
 **UI hint**: no
+
+**DEFERRAL — this phase is NOT low-risk.** The original "low-risk, independent change" framing above
+was wrong and is retained only to show what changed. Phase 13 planning (2026-07-30) established:
+
+- The account is on **GitHub Free**. On Free, for personal accounts, **both** classic branch
+  protection and rulesets are enforced on public repositories only. Private repos require
+  GitHub Pro or higher.
+- Therefore flipping to private **silently drops Phase 11's merge gate** (`enforce_admins: true`,
+  required `ci` status check) with no error message. There is no free migration path — rulesets
+  do not help.
+- Cost of proceeding anyway: CI still runs on private repos (2,000 free Linux minutes/month; this
+  workflow takes ~43s) and still reports failures, but nothing blocks a merge past a red check.
+
+**Decision (user, 2026-07-30):** defer. Keeping the repo public AND protected is worth more right
+now than making it private and unprotected. Phases 14–17 harden the running app more than repo
+privacy does. Revisit SEC-06 at the end of the milestone.
+
+**To un-defer:** either upgrade to GitHub Pro (~$4/mo) and execute `13-01-PLAN.md` as written —
+its Task 2 gate already handles the Pro path — or consciously accept losing the merge gate.
+`13-RESEARCH.md`, `13-VALIDATION.md`, and `13-01-PLAN.md` are complete, checker-verified, and
+still valid; only the account-plan answer changes.
 
 ### Phase 14: Structured Logging
 **Goal**: Server routes and Server Actions emit structured, secret-redacted JSON logs instead of ad hoc console statements
