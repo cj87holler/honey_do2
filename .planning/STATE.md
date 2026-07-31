@@ -2,15 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
-status: planning
-last_updated: "2026-07-28T01:47:38.247Z"
-last_activity: 2026-07-28
+status: executing
+stopped_at: Session resumed 2026-07-30 — clean tree on `dev`, no checkpoints or incomplete plans.
+last_updated: "2026-07-31T02:47:55.956Z"
+last_activity: 2026-07-31 -- Phase 13 planning complete
 progress:
-  total_phases: 7
-  completed_phases: 2
-  total_plans: 3
-  completed_plans: 3
-  percent: 29
+  total_phases: 17
+  completed_phases: 4
+  total_plans: 9
+  completed_plans: 8
+  percent: 24
 ---
 
 # Project State
@@ -24,11 +25,14 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 13 of 17 (Repo Visibility -> Private) — ready to plan
-Plan: — (no plans yet)
-Status: Phase 12 COMPLETE and merged (PR #4 -> main, 8324f2e). /privacy and /terms are live.
-Phase 13 (Repo Visibility -> Private) has no CONTEXT.md yet.
-Last activity: 2026-07-28 — Phase 12 merged: /privacy + /terms shipped to production
+Phase: 13 of 17 (Repo Visibility -> Private) — planned
+Plan: 13-01 of 1 (wave 1, autonomous: false)
+Status: Ready to execute
+Phase 13 was planned directly from RESEARCH.md — no CONTEXT.md (discuss-phase deliberately skipped).
+Execution WILL pause at task 2: the flip can silently drop Phase 11's branch protection if this
+GitHub account is on Free rather than Pro. Resolve with `gh auth refresh -h github.com -s user`
+then `gh api user --jq '.plan.name'`.
+Last activity: 2026-07-31 -- Phase 13 planning complete
 
 Progress (v1.2): [███░░░░░░░] 29% (2/7 phases)
 
@@ -62,11 +66,14 @@ Carried from v1.0:
 - **Preview deployments cannot build.** Neon-Vercel integration only injects `DATABASE_URL`
   into Production, so preview builds fail at `drizzle-kit migrate` (`url: undefined`). Safe
   (no preview can reach prod data) but previews are non-functional. Deferred out of v1.2.
+
 - **Sentry + uptime monitor need credentials.** Those phases will pause for a user-generated
   API token before they can complete.
+
 - **`honeydoapp@gmail.com` must be created.** Published on /privacy and /terms as the ONLY route
   for account-deletion requests (there is no in-app delete feature). Must be a real monitored
   inbox before real users see those pages. Defined in `src/lib/legal.ts` — one line to change.
+
 - **Legal pages have had no visual review.** Verified by HTTP content only; the browser extension
   was unavailable. Worth a look before merging.
 
@@ -103,6 +110,7 @@ the sole source for "what was built". Phases whose summaries omit it will sync w
 "What was built" section. Worth keeping in mind when writing future summaries.
 
 **Verified baselines as of 2026-07-27** (re-check before trusting; they gate Phase 11):
+
 - `npx tsc --noEmit` FAILS — 4 errors, all in `tests/task/update-task-status.test.ts` (107, 108, 153, 157). Zero in `src/`.
 - `npx vitest run` PASSES — 13 files, 89 tests.
 - `npx eslint .` — 8 warnings, 0 errors. CI will use `--max-warnings 0`, so these must be fixed.
