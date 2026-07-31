@@ -80,9 +80,11 @@ Carried from v1.0:
 
 ## Session Continuity
 
-Last session: 2026-07-28
-Stopped at: Phases 11 and 12 both shipped to main. CI gate is live and required (enforce_admins
-true); /privacy and /terms are public. dev is reconciled with main. Next action is Phase 13.
+Last session: 2026-07-30
+Stopped at: Session resumed 2026-07-30 — clean tree on `dev`, no checkpoints or incomplete plans.
+Phases 11 and 12 both shipped to main. CI gate is live and required (enforce_admins
+true); /privacy and /terms are public. dev is reconciled with main. Next action is Phase 13
+(Repo Visibility → Private) — no phase directory or CONTEXT.md yet.
 
 **PR workflow note:** main uses squash merge, so after each merge `dev` must be reconciled via
 `git merge origin/main` or the next PR re-proposes everything. Phase 11's reconcile hit an add/add
