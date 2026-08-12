@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
 status: executing
-stopped_at: Session resumed 2026-07-30 — clean tree on `dev`, no checkpoints or incomplete plans.
-last_updated: "2026-07-31T02:47:55.956Z"
-last_activity: 2026-07-31 -- Phase 13 planning complete
+stopped_at: Phase 14 plan-phase interrupted mid-run — RESEARCH/VALIDATION/PATTERNS all written and committed; planner was stopped before writing any PLAN.md. Re-run `/gsd:plan-phase 14 --skip-research` to resume.
+last_updated: "2026-08-12T01:45:00.000Z"
+last_activity: 2026-08-11 -- Phase 14 research + pattern mapping complete, planning not started
 progress:
   total_phases: 17
   completed_phases: 4
@@ -25,10 +25,12 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 14 of 17 (Structured Logging) — ready to plan
-Plan: — (no plans yet)
-Status: Phase 13 planned but DEFERRED (see Blockers). Phase 14 has no CONTEXT.md yet.
-Last activity: 2026-07-30 -- Phase 13 planned and verified, then deferred on the GitHub Free finding
+Phase: 14 of 17 (Structured Logging) — research done, planning in progress
+Plan: — (no PLAN.md written yet)
+Status: Phase 14 upstream artifacts complete (RESEARCH, VALIDATION, PATTERNS). Planner spawn was
+interrupted before writing any plan. Phase 14 has no CONTEXT.md — planning deliberately proceeded
+without discuss-phase (user choice 2026-08-11). Phase 13 planned but DEFERRED (see Blockers).
+Last activity: 2026-08-11 -- Phase 14 research + pattern mapping complete
 
 Progress (v1.2): [███░░░░░░░] 29% (2/7 phases)
 
@@ -92,11 +94,39 @@ Carried from v1.0:
 
 ## Session Continuity
 
-Last session: 2026-07-30
-Stopped at: Phase 13 planned (research → plan → checker PASSED), then deferred without executing
-— the flip would drop Phase 11's merge gate on GitHub Free. Nothing was flipped; no GitHub state
-was touched. Next action is Phase 14 (Structured Logging). Phases 11 and 12 remain shipped to
-main; CI gate is live and required (enforce_admins true); /privacy and /terms are public.
+Last session: 2026-08-11 (previous working session 2026-07-30)
+Stopped at: **Phase 14 `/gsd:plan-phase` interrupted mid-run, deliberately.** Completed and
+committed: `14-RESEARCH.md`, `14-VALIDATION.md`, `14-PATTERNS.md`. The `gsd-planner` spawn was
+stopped before it wrote a single PLAN.md, so there are NO partial plan artifacts — the phase
+directory is consistent, not half-written.
+
+**To resume:** `/gsd:plan-phase 14 --skip-research` (research and patterns already exist; without
+the flag it will offer to re-research). No CONTEXT.md exists and that is intentional — user chose
+to skip discuss-phase. Everything the planner needs is in the three committed artifacts.
+
+**Phase 14 findings worth remembering (full detail in 14-RESEARCH.md / 14-PATTERNS.md):**
+- The phase is **additive, not a migration**. Exactly one `console.*` call exists in `src/`, in a
+  client component (`src/components/auth/login-form.tsx:44`), which is out of scope. The
+  auth/task/invite/admin paths log nothing today — they just `throw`.
+- **`next.config.ts` needs no change** — pino and pino-pretty are already on Next.js's built-in
+  `serverExternalPackages` list. Good news for Phase 15 (`headers()`) and Phase 16
+  (`withSentryConfig` wrapping), which both touch that file.
+- **Three open decisions were handed to the planner and are still unresolved:** (1) whether
+  `src/lib/logger.ts` exports a `createLogger(options, stream?)` factory so tests can inject a
+  capture stream; (2) how to log "auth" given there is no auth server-action file — wrap Better
+  Auth's `toNextJsHandler` route exports (no in-repo precedent) or use its `logger.log` hook
+  (documented upstream coverage gap); (3) the custom `err` serializer needed because
+  `redact.paths` matches object paths, not substrings, so a Postgres error's `.message` can echo
+  `DATABASE_URL` as free text.
+- **Landmine:** `admin.ts` `resetUserPassword` holds the repo's only existing `try/catch`, and it
+  intentionally discards the real error so secrets never reach the client message. Any added
+  `logger.error({ err })` must log server-side while leaving that generic re-throw intact.
+- **CI cannot catch a pino bundling regression** — CI never runs `npm run build`. A manual
+  `NODE_ENV=production npm run build && npm run start` smoke test is specified in
+  `14-VALIDATION.md` under Manual-Only Verifications.
+
+Phases 11 and 12 remain shipped to main; CI gate is live and required (enforce_admins true);
+/privacy and /terms are public.
 
 **PR workflow note:** main uses squash merge, so after each merge `dev` must be reconciled via
 `git merge origin/main` or the next PR re-proposes everything. Phase 11's reconcile hit an add/add
