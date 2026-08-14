@@ -264,7 +264,12 @@ still valid; only the account-plan answer changes.
   2. Logging a request/session object through the shared logger redacts cookies, passwords, session tokens, and `DATABASE_URL` rather than printing them in the clear
   3. In production (`NODE_ENV=production`) the logger emits plain JSON to stdout with no `transport` configured; `pino-pretty` is used only in development
   4. `src/middleware.ts` does not import the logger (it runs on the Edge runtime by default, where pino's transport machinery fails to import)
-**Plans**: TBD
+**Plans**: 4 plans (3 waves)
+Plans:
+- [ ] 14-01-PLAN.md — Shared pino logger module with redaction, dev-only pino-pretty, and unit tests (wave 1)
+- [ ] 14-02-PLAN.md — Instrument task, invite, admin, and hive server actions (wave 2)
+- [ ] 14-03-PLAN.md — Wrap the Better Auth route handler with secret-safe request logging (wave 2)
+- [ ] 14-04-PLAN.md — Instrumentation coverage gate, full-suite gate, production-build smoke test (wave 3)
 **UI hint**: no
 
 ### Phase 15: Security Headers & CSP
