@@ -356,19 +356,34 @@ export async function createTask(hiveId: string, formData: FormData) {
 | A2 | Better Auth's `logger.log` hook can be wired to the shared pino instance to satisfy "auth ... uses the shared logger" for criterion 1 | Common Pitfalls (Pitfall 1) | If Better Auth's internal logger hook doesn't fire for the events that matter (per the linked open issue #3250), the plan may need to fall back to wrapping the Route Handler's `GET`/`POST` exports instead — flagged explicitly as an open question, not assumed to work |
 | A3 | A local `NODE_ENV=production npm run build && npm run start` smoke test is a meaningful substitute for testing on Vercel's actual Turbopack-externalized-package runtime behavior | Common Pitfalls (Pitfall 3) | The reported failure mode (vercel/next.js#93849) is specifically about Vercel's deployed runtime artifact differing from the local build output — a local test may pass while Vercel still fails. This is called out explicitly; the plan should not treat a passing local smoke test as full proof of correctness on Vercel |
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+> All three resolved during planning on 2026-08-13. Full rationale lives in
+> `14-01-PLAN.md`'s `<resolved_decisions>` block; one-line resolutions are inline below.
 
 1. **Which of the two "auth" logging approaches should the plan choose?**
+   - **RESOLVED (D-14-B): wrap the Route Handler exports.** Better Auth's `logger.log` hook was
+     explicitly declined — better-auth#3250 means it cannot be relied on to emit anything for
+     sign-in/sign-up/sign-out, and a success criterion cannot rest on an unverifiable mechanism.
+     Implemented in `14-03-PLAN.md` (`src/lib/auth-log.ts` + `src/app/api/auth/[...all]/route.ts`);
+     `src/lib/auth.ts` stays untouched.
    - What we know: No dedicated auth server-action file exists; auth logic lives in Better Auth's `toNextJsHandler` route wrapper and the `betterAuth({...})` config.
    - What's unclear: Whether wrapping the Route Handler exports or wiring Better Auth's `logger.log` hook (or both) best satisfies "auth ... server actions/routes ... uses [the shared logger]" — and whether Better Auth's internal logger hook actually fires for the events worth logging (sign-in, sign-up, sign-out).
    - Recommendation: Plan should pick one approach explicitly and verify empirically (trigger a real sign-in in dev, confirm a structured log line appears) rather than assuming the hook works from documentation alone.
 
-2. **Is `src/lib/actions/hive.ts` in scope?**
+2. **RESOLVED: yes — `hive.ts` is in scope.** `14-02-PLAN.md` instruments it, including the
+   `requireQueen` failure path, which gives authorization-failure visibility across task, invite,
+   and hive actions from one choke point.
+
+   **Is `src/lib/actions/hive.ts` in scope?**
    - What we know: The roadmap names "task-mutation" as one of the four areas, and `hive.ts` contains `createHive`, `renameHive`, and `requireQueen` (an auth-guard helper used by nearly every other action file).
    - What's unclear: Whether "task-mutation" narrowly means `task.ts` only, or should extend to `hive.ts` since hive creation/rename are also mutations and `requireQueen` is a shared choke point that every other action calls through.
    - Recommendation: Planner's discretion — logging inside `requireQueen`'s failure path (`throw new Error("Forbidden")`) would give free authorization-failure visibility across task, invite, and hive actions with one change. Worth considering even if `hive.ts` isn't literally named.
 
-3. **Should `/api/health` (currently a hardcoded 200, Phase 17 territory) get a logger import in this phase?**
+3. **RESOLVED: no — leave `/api/health` untouched.** No Phase 14 plan modifies
+   `src/app/api/health/route.ts`; Phase 17 adds logging there alongside the real DB check.
+
+   **Should `/api/health` (currently a hardcoded 200, Phase 17 territory) get a logger import in this phase?**
    - What we know: It's a Route Handler under `src/app/api/`, technically eligible, but not named in the four roadmap areas and its current implementation (`src/app/api/health/route.ts`) does nothing worth logging yet (Phase 17 adds the real DB check).
    - What's unclear: Nothing — this is almost certainly out of scope.
    - Recommendation: Leave untouched; Phase 17 will add logging naturally when it adds real logic.

@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Productionization
 status: executing
-stopped_at: Phase 14 plan-phase interrupted mid-run — RESEARCH/VALIDATION/PATTERNS all written and committed; planner was stopped before writing any PLAN.md. Re-run `/gsd:plan-phase 14 --skip-research` to resume.
-last_updated: "2026-08-12T01:45:00.000Z"
-last_activity: 2026-08-11 -- Phase 14 research + pattern mapping complete, planning not started
+stopped_at: "Phase 14 planned — 4 plans in 3 waves, checker passed, both warnings fixed. Ready for `/gsd-execute-phase 14`."
+last_updated: "2026-08-14T02:30:51.948Z"
+last_activity: 2026-08-14 -- Phase 14 planning complete
 progress:
   total_phases: 17
   completed_phases: 4
-  total_plans: 9
+  total_plans: 13
   completed_plans: 8
   percent: 24
 ---
@@ -25,12 +25,13 @@ See: .planning/PROJECT.md (updated 2026-07-27)
 
 ## Current Position
 
-Phase: 14 of 17 (Structured Logging) — research done, planning in progress
-Plan: — (no PLAN.md written yet)
-Status: Phase 14 upstream artifacts complete (RESEARCH, VALIDATION, PATTERNS). Planner spawn was
-interrupted before writing any plan. Phase 14 has no CONTEXT.md — planning deliberately proceeded
-without discuss-phase (user choice 2026-08-11). Phase 13 planned but DEFERRED (see Blockers).
-Last activity: 2026-08-11 -- Phase 14 research + pattern mapping complete
+Phase: 14 of 17 (Structured Logging) — planned, not yet executed
+Plan: 0 of 4 executed (14-01 · 14-02 · 14-03 · 14-04, across 3 waves)
+Status: Ready to execute. Plan-checker returned VERIFICATION PASSED with zero blockers; its two
+warnings were both fixed before commit. Phase 14 has no CONTEXT.md — planning deliberately
+proceeded without discuss-phase (user choice 2026-08-11, reaffirmed 2026-08-13). Phase 13 planned
+but DEFERRED (see Blockers).
+Last activity: 2026-08-13 -- Phase 14 planning complete
 
 Progress (v1.2): [███░░░░░░░] 29% (2/7 phases)
 
@@ -41,7 +42,8 @@ Progress (v1.2): [███░░░░░░░] 29% (2/7 phases)
 Decisions are logged in PROJECT.md Key Decisions table.
 Carried from v1.0:
 
-- Stack: Next.js 15 App Router + Drizzle ORM + Better Auth 1.5.6 + PostgreSQL (Neon for deploy)
+- Stack: Next.js App Router (**16.2.1** as built — the v1.0 decision said 15.x) + Drizzle ORM +
+  Better Auth 1.5.6 + PostgreSQL (Neon for deploy)
 - Schema: Honey counter is stored per-Hive-membership (not globally) to support future Colonies without migration
 - Deployment: Neon-Vercel integration, conditional driver switching for local/prod
 
@@ -94,33 +96,60 @@ Carried from v1.0:
 
 ## Session Continuity
 
-Last session: 2026-08-11 (previous working session 2026-07-30)
-Stopped at: **Phase 14 `/gsd:plan-phase` interrupted mid-run, deliberately.** Completed and
-committed: `14-RESEARCH.md`, `14-VALIDATION.md`, `14-PATTERNS.md`. The `gsd-planner` spawn was
-stopped before it wrote a single PLAN.md, so there are NO partial plan artifacts — the phase
-directory is consistent, not half-written.
+Last session: 2026-08-13 (session resumed; previous working sessions 2026-08-11, 2026-07-30)
+Stopped at: **Phase 14 planning complete.** 4 plans in 3 waves, committed. Plan-checker returned
+VERIFICATION PASSED (no blockers); both of its warnings were fixed before handoff.
 
-**To resume:** `/gsd:plan-phase 14 --skip-research` (research and patterns already exist; without
-the flag it will offer to re-research). No CONTEXT.md exists and that is intentional — user chose
-to skip discuss-phase. Everything the planner needs is in the three committed artifacts.
+**To resume:** `/gsd-execute-phase 14`. Note the slash-command form on this machine is
+**dash-separated** (`/gsd-execute-phase`), not colon-separated — `/gsd:execute-phase` is not
+recognized here, though GSD's own docs and prior STATE.md entries use the colon form.
+
+**Wave structure:** W1 = 14-01 (logger module + redaction/config tests) → W2 = 14-02 (task, invite,
+admin, hive actions) ∥ 14-03 (Better Auth route wrapper), file-disjoint → W3 = 14-04 (coverage
+gate + full-suite gate + production-build smoke test). **14-04 is `autonomous: false`** — it
+carries a blocking human-verify checkpoint that needs a local DB up (`make up`) and a human
+eyeball on JSON-vs-colorized output.
 
 **Phase 14 findings worth remembering (full detail in 14-RESEARCH.md / 14-PATTERNS.md):**
+
 - The phase is **additive, not a migration**. Exactly one `console.*` call exists in `src/`, in a
   client component (`src/components/auth/login-form.tsx:44`), which is out of scope. The
   auth/task/invite/admin paths log nothing today — they just `throw`.
+
 - **`next.config.ts` needs no change** — pino and pino-pretty are already on Next.js's built-in
   `serverExternalPackages` list. Good news for Phase 15 (`headers()`) and Phase 16
   (`withSentryConfig` wrapping), which both touch that file.
-- **Three open decisions were handed to the planner and are still unresolved:** (1) whether
-  `src/lib/logger.ts` exports a `createLogger(options, stream?)` factory so tests can inject a
-  capture stream; (2) how to log "auth" given there is no auth server-action file — wrap Better
-  Auth's `toNextJsHandler` route exports (no in-repo precedent) or use its `logger.log` hook
-  (documented upstream coverage gap); (3) the custom `err` serializer needed because
-  `redact.paths` matches object paths, not substrings, so a Postgres error's `.message` can echo
-  `DATABASE_URL` as free text.
+
+- **All three formerly-open decisions are now RESOLVED** (rationale in `14-01-PLAN.md`'s
+  `<resolved_decisions>` block; `14-RESEARCH.md`'s Open Questions section is marked resolved):
+  (1) **D-14-A — factory.** `logger.ts` exports `buildLoggerOptions()`, `makeErrSerializer()`,
+  `createLogger(options?, destination?)`, and a `logger` singleton built through that same
+  constructor, so tests exercise shipped wiring rather than a parallel throwaway pino.
+  (2) **D-14-B — wrap the Better Auth route handler exports.** Its `logger.log` hook was declined:
+  better-auth#3250 means it can't be relied on to fire for sign-in/sign-up/sign-out, and a success
+  criterion can't rest on an unverifiable mechanism. `src/lib/auth.ts` stays untouched.
+  (3) **D-14-C — `makeErrSerializer(databaseUrl)`** scrubs the connection string *and* its parsed
+  password out of `.message` and `.stack`, registered for both `err` and `error`, and can never
+  throw.
+
+- **Two planner additions beyond the brief, both security-driven.** (a) The transport branch is
+  `NODE_ENV === "development"` rather than the research's `!== "production"` — vitest sets
+  `NODE_ENV=test`, so the original would spawn a thread-stream worker in every test file that
+  transitively imports an instrumented action. (b) A new `authRouteLabel` helper keeps at most two
+  path segments (second from a fixed allowlist) and never reads `url.search`, because Better Auth
+  serves `/api/auth/reset-password/<token>` and `/api/auth/verify-email?token=...` — logging
+  `req.url` or even `pathname` would write a live account-takeover credential to stdout.
+
+- **Three threats accepted with rationale** across the four `<threat_model>` blocks (28 registered
+  total): T-14-22 (Better Auth's own internal logs stay unstructured), T-14-27 (the local smoke
+  test is not proof of Vercel's Turbopack-externalized runtime behavior — watch the first
+  production deploy's Runtime Logs), T-14-28 (Vercel's dashboard severity filter ignores pino's
+  JSON `level` field).
+
 - **Landmine:** `admin.ts` `resetUserPassword` holds the repo's only existing `try/catch`, and it
   intentionally discards the real error so secrets never reach the client message. Any added
   `logger.error({ err })` must log server-side while leaving that generic re-throw intact.
+
 - **CI cannot catch a pino bundling regression** — CI never runs `npm run build`. A manual
   `NODE_ENV=production npm run build && npm run start` smoke test is specified in
   `14-VALIDATION.md` under Manual-Only Verifications.
@@ -144,11 +173,16 @@ description depends on its `*-SUMMARY.md` having a `provides:` frontmatter block
 the sole source for "what was built". Phases whose summaries omit it will sync with an empty
 "What was built" section. Worth keeping in mind when writing future summaries.
 
-**Verified baselines as of 2026-07-27** (re-check before trusting; they gate Phase 11):
+**Verified baselines — tree state re-measured 2026-08-13; environment facts as of 2026-07-27**
+(re-check before trusting):
 
-- `npx tsc --noEmit` FAILS — 4 errors, all in `tests/task/update-task-status.test.ts` (107, 108, 153, 157). Zero in `src/`.
-- `npx vitest run` PASSES — 13 files, 89 tests.
-- `npx eslint .` — 8 warnings, 0 errors. CI will use `--max-warnings 0`, so these must be fixed.
+- `npx tsc --noEmit` **PASSES, exit 0.** (Was 4 errors in `tests/task/update-task-status.test.ts`
+  on 2026-07-27; fixed sometime between then and 2026-08-13 without the note being updated.)
+- `npx vitest run` **PASSES — 14 files, 102 tests.** (Was 13 files / 89 tests on 2026-07-27.)
+- `npx eslint . --max-warnings 0` **PASSES, exit 0.** (Was 8 warnings on 2026-07-27; CI uses
+  `--max-warnings 0` and is green, which is the independent confirmation.)
+- ⚠ The three lines above went stale for ~2 weeks and read as RED while the tree was GREEN.
+  Re-measure them at the start of any phase that treats them as a gate rather than trusting the date.
 - CI needs NO Postgres container: every DB-touching test mocks `vi.mock("@/lib/db", ...)`.
 - CI must NOT run `npm run build` (it is `drizzle-kit migrate && next build`).
 - Stack is Next.js **16.2.1** / React 19.2.4 / Node v22.11.0 — CLAUDE.md's "Next.js 15.x + Auth.js v5" is STALE (app uses Better Auth 1.5.6).
